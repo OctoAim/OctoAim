@@ -2587,7 +2587,7 @@
            font-weight: bold;
        }
 
-       /* Hidden admin access button */
+/* Hidden admin access button */
        .admin-access-link {
            position: fixed;
            bottom: 10px;
@@ -2601,6 +2601,319 @@
 
        .admin-access-link:hover {
            opacity: 1;
+       }
+
+       /* Settings Button */
+       .header-auth .settings-btn {
+           width: 40px;
+           height: 40px;
+           border-radius: 50%;
+           overflow: hidden;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           background: linear-gradient(135deg, #ffaa00, #ff8800);
+           cursor: pointer;
+           transition: all 0.3s;
+           border: none;
+           font-size: 18px;
+       }
+
+       .header-auth .settings-btn:hover {
+           transform: scale(1.1);
+           box-shadow: 0 0 15px #ffaa00;
+       }
+
+       /* Settings Modal */
+       .settings-modal {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background: rgba(0, 0, 0, 0.85);
+           backdrop-filter: blur(20px);
+           display: none;
+           align-items: center;
+           justify-content: center;
+           z-index: 2500;
+           padding: 20px;
+       }
+
+       .settings-modal.active {
+           display: flex;
+       }
+
+       .settings-box {
+           background: linear-gradient(165deg, rgba(26, 26, 46, 0.95) 0%, rgba(15, 15, 26, 0.9) 50%, rgba(22, 33, 62, 0.95) 100%);
+           border: 2px solid rgba(0, 255, 136, 0.3);
+           border-radius: 24px;
+           padding: 40px;
+           width: 100%;
+           max-width: 520px;
+           max-height: 85vh;
+           overflow-y: auto;
+           box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 255, 136, 0.1);
+       }
+
+       .settings-box:hover {
+           border-color: rgba(0, 255, 136, 0.6);
+       }
+
+       .settings-section {
+           margin-bottom: 32px;
+       }
+
+       .settings-section h3 {
+           color: #888;
+           font-size: 12px;
+           font-weight: 600;
+           text-transform: uppercase;
+           letter-spacing: 2px;
+           margin-bottom: 16px;
+       }
+
+       .theme-grid {
+           display: grid;
+           grid-template-columns: repeat(2, 1fr);
+           gap: 12px;
+       }
+
+       .theme-option {
+           background: rgba(255, 255, 255, 0.05);
+           border: 2px solid rgba(255, 255, 255, 0.1);
+           border-radius: 16px;
+           padding: 16px;
+           cursor: pointer;
+           text-align: center;
+           transition: all 0.3s;
+       }
+
+       .theme-option:hover {
+           border-color: rgba(255, 255, 255, 0.3);
+           transform: translateY(-2px);
+       }
+
+       .theme-option.active {
+           border-color: #00ff88;
+           box-shadow: 0 0 25px rgba(0, 255, 136, 0.25);
+       }
+
+       .theme-name {
+           color: #fff;
+           font-size: 13px;
+           font-weight: 500;
+           display: block;
+           margin-top: 8px;
+       }
+
+       /* 1V1 Tab Styles */
+       .onevone-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+           gap: 25px;
+           width: 100%;
+           max-width: 1000px;
+       }
+
+       .onevone-card {
+           background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.9));
+           border: 2px solid #333;
+           border-radius: 16px;
+           padding: 30px;
+           transition: all 0.3s;
+       }
+
+       .onevone-card:hover {
+           transform: translateY(-5px);
+       }
+
+       .onevone-card.private-room {
+           border-color: #64ffda;
+       }
+
+       .onevone-card.private-room:hover {
+           box-shadow: 0 10px 30px rgba(100, 255, 218, 0.3);
+       }
+
+       .onevone-card.quick-match {
+           border-color: #ff6b6b;
+       }
+
+       .onevone-card.quick-match:hover {
+           box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+       }
+
+       .onevone-card h3 {
+           font-size: 22px;
+           margin-bottom: 10px;
+           display: flex;
+           align-items: center;
+           gap: 10px;
+       }
+
+       .onevone-card.private-room h3 {
+           color: #64ffda;
+       }
+
+       .onevone-card.quick-match h3 {
+           color: #ff6b6b;
+       }
+
+       .onevone-card p {
+           color: #888;
+           font-size: 14px;
+           margin-bottom: 20px;
+       }
+
+       .onevone-card select {
+           width: 100%;
+           padding: 14px;
+           background: rgba(0, 0, 0, 0.4);
+           border: 1px solid rgba(255, 255, 255, 0.15);
+           border-radius: 10px;
+           color: #fff;
+           font-size: 14px;
+           margin-bottom: 12px;
+           cursor: pointer;
+       }
+
+       .onevone-card select:focus {
+           outline: none;
+           border-color: #00ff88;
+       }
+
+       .onevone-card button {
+           width: 100%;
+           padding: 16px;
+           border: none;
+           border-radius: 12px;
+           font-size: 16px;
+           font-weight: 700;
+           cursor: pointer;
+           transition: all 0.3s;
+           text-transform: uppercase;
+           letter-spacing: 1px;
+       }
+
+       .onevone-card.private-room button {
+           background: linear-gradient(135deg, #64ffda, #4fd1c5);
+           color: #0a0a0f;
+       }
+
+       .onevone-card.private-room button:hover {
+           box-shadow: 0 8px 25px rgba(100, 255, 218, 0.4);
+           transform: translateY(-2px);
+       }
+
+       .onevone-card.quick-match button {
+           background: linear-gradient(135deg, #ff6b6b, #ff4444);
+           color: #fff;
+       }
+
+       .onevone-card.quick-match button:hover {
+           box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+           transform: translateY(-2px);
+       }
+
+       .room-code-display {
+           font-size: 42px;
+           font-weight: 800;
+           color: #64ffda;
+           letter-spacing: 6px;
+           background: rgba(0, 0, 0, 0.4);
+           border: 2px solid #64ffda;
+           border-radius: 16px;
+           padding: 28px;
+           margin: 20px 0;
+           text-align: center;
+           font-family: 'Courier New', monospace;
+       }
+
+       /* 1v1 Live Score UI */
+       .onevone-live-score {
+           position: fixed;
+           top: 20px;
+           left: 50%;
+           transform: translateX(-50%);
+           background: linear-gradient(165deg, rgba(26, 26, 46, 0.95) 0%, rgba(15, 15, 26, 0.95) 100%);
+           border: 2px solid rgba(0, 255, 136, 0.3);
+           border-radius: 20px;
+           padding: 20px 40px;
+           display: none;
+           align-items: center;
+           gap: 40px;
+           z-index: 2000;
+           box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+       }
+
+       .onevone-live-score.active {
+           display: flex;
+       }
+
+       .onevone-live-score .score-section {
+           text-align: center;
+       }
+
+       .onevone-live-score .player-name {
+           font-size: 14px;
+           color: #888;
+           margin-bottom: 5px;
+       }
+
+       .onevone-live-score .score-value {
+           font-size: 36px;
+           font-weight: 800;
+       }
+
+       .onevone-live-score .player-you .score-value {
+           color: #00ff88;
+           text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+       }
+
+       .onevone-live-score .player-their .score-value {
+           color: #ff4444;
+           text-shadow: 0 0 20px rgba(255, 68, 68, 0.5);
+       }
+
+       .onevone-live-score .vs-divider {
+           font-size: 24px;
+           color: #666;
+           font-weight: bold;
+       }
+
+       .onevone-live-score .match-info {
+           font-size: 12px;
+           color: #666;
+       }
+
+       .onevone-live-score .close-match {
+           position: absolute;
+           top: 10px;
+           right: 10px;
+           background: none;
+           border: none;
+           color: #666;
+           font-size: 20px;
+           cursor: pointer;
+       }
+
+       .onevone-live-score .close-match:hover {
+           color: #ff4444;
+       }
+
+       @media (max-width: 600px) {
+           .onevone-grid {
+               grid-template-columns: 1fr;
+           }
+           .onevone-live-score {
+               width: 90%;
+               padding: 15px 20px;
+               gap: 20px;
+           }
+           .onevone-live-score .score-value {
+               font-size: 28px;
+           }
        }
    </style>
 <body>
@@ -2705,7 +3018,8 @@
     </div>
 
     <!-- Header Auth Section -->
-    <div class="header-auth" id="auth-section">
+<div class="header-auth" id="auth-section">
+        <button class="settings-btn" onclick="showSettingsModal()" title="Settings">⚙️</button>
         <button class="social-btn" onclick="showSocialModal()" title="Friends">👥</button>
         <button class="auth-btn" onclick="showAuthModal()">Sign In</button>
     </div>
@@ -2759,7 +3073,7 @@
         </div>
     </div>
 
-    <!-- Admin Panel Modal -->
+<!-- Admin Panel Modal -->
     <div class="admin-modal" id="admin-panel-modal">
         <div class="admin-box">
             <h2>🔧 Admin Panel</h2>
@@ -2768,6 +3082,63 @@
             <div id="admin-dashboard-content">
                 <p>Loading admin dashboard...</p>
             </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="settings-modal" id="settings-modal">
+        <div class="settings-box">
+            <button class="modal-close" onclick="closeSettingsModal()" aria-label="Close settings" style="position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #888; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s ease;">×</button>
+            
+            <div class="modal-header" style="text-align: center; margin-bottom: 30px;">
+                <h2 style="color: #00ff88; font-size: 32px; font-weight: 700;">⚙️ Settings</h2>
+            </div>
+            
+            <!-- Theme Selection -->
+            <div class="settings-section">
+                <h3>🎨 Theme</h3>
+                <div class="theme-grid" id="theme-options" role="radiogroup" aria-label="Select theme">
+                </div>
+            </div>
+            
+            <!-- Sensitivity Converter -->
+            <div class="settings-section">
+                <h3>🎯 Sensitivity Converter</h3>
+                <div id="sens-converter">
+                </div>
+            </div>
+            
+            <!-- Account Settings -->
+            <div class="settings-section">
+                <h3>👤 Account</h3>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <button onclick="showProfileCard()" style="flex: 1; min-width: 140px; padding: 14px 24px; background: linear-gradient(135deg, #00ff88, #00cc6a); border: none; border-radius: 12px; color: #0a0a0f; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <span>👤</span> View Profile
+                    </button>
+                    <button onclick="handleLogout()" style="flex: 1; min-width: 140px; padding: 14px 24px; background: linear-gradient(135deg, #ff4444, #cc3333); border: none; border-radius: 12px; color: white; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <span>🚪</span> Sign Out
+                    </button>
+                </div>
+            </div>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 1v1 Live Score UI -->
+    <div class="onevone-live-score" id="onevone-live-score">
+        <button class="close-match" onclick="hideLiveScoreUI()">×</button>
+        <div class="score-section player-you">
+            <div class="player-name">YOU</div>
+            <div class="score-value" id="your-live-score">0</div>
+        </div>
+        <div class="vs-divider">VS</div>
+        <div class="score-section player-their">
+            <div class="player-name" id="opponent-live-name">THEM</div>
+            <div class="score-value" id="their-live-score">0</div>
+        </div>
+        <div class="match-info">
+            <div id="match-timer">60s</div>
         </div>
     </div>
 
@@ -2782,7 +3153,7 @@
         <h1>AIM TRAINER</h1>
         <p class="subtitle">Choose your training module</p>
       
-        <!-- Tabs -->
+<!-- Tabs -->
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab('scenarios')">SCENARIOS</button>
             <button class="tab-btn" onclick="switchTab('bests')">PERSONAL BESTS</button>
@@ -2790,9 +3161,10 @@
             <button class="tab-btn" onclick="switchTab('leaderboard')">LEADERBOARD</button>
             <button class="tab-btn" onclick="switchTab('skins')">SKINS</button>
             <button class="tab-btn" onclick="switchTab('stats')">STATS</button>
+            <button class="tab-btn" onclick="switchTab('onevone')">⚔️ 1V1</button>
             <a href="analytics.html" class="tab-btn" style="text-decoration: none; display: inline-flex; align-items: center;">📊 ANALYTICS</a>
             
-        </div> 
+        </div>
       
        <!-- Scenarios Tab -->
        <div id="scenarios" class="tab-content active">
@@ -3097,7 +3469,7 @@
            </div>
        </div>
        
-       <!-- Stats Tab -->
+<!-- Stats Tab -->
        <div id="stats" class="tab-content">
            <!-- Session Stats -->
            <div class="session-stats">
@@ -3130,7 +3502,7 @@
                    </div>
                </div>
            </div>
-          
+         
            <!-- Stats Dashboard -->
            <div class="stats-dashboard">
                <div class="stat-box">
@@ -3154,7 +3526,7 @@
                    <div class="stat-label">Rank</div>
                </div>
            </div>
-          
+         
            <!-- Achievements -->
            <h3 style="color: #888; text-align: center; margin: 30px 0 20px; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;">Achievements</h3>
            <div class="achievements-grid">
@@ -3189,8 +3561,83 @@
                    <div class="achievement-desc">Score over 10,000 in any game</div>
                </div>
            </div>
-          
+         
            <button class="clear-data-btn" onclick="clearAllData()">Clear All Data</button>
+       </div>
+
+       <!-- 1V1 Tab -->
+       <div id="onevone" class="tab-content">
+           <div class="onevone-grid">
+               <!-- Private Room Card -->
+               <div class="onevone-card private-room">
+                   <h3>🔒 Private Room</h3>
+                   <p>Create a private room and share the code with a friend to play together!</p>
+                   
+                   <div id="private-room-content">
+                       <select id="private-game-select">
+                           <option value="360Aim">360° Aim Tracker</option>
+                           <option value="flick">360° Flick Trainer</option>
+                           <option value="bounceTracker">Bounce Tracker</option>
+                           <option value="reactionTrainer">Reaction Trainer</option>
+                           <option value="microflick">Micro Flick Trainer</option>
+                           <option value="staticPrecision">Static Precision</option>
+                       </select>
+                       
+                       <select id="private-difficulty-select">
+                           <option value="easy">Easy</option>
+                           <option value="medium">Medium</option>
+                           <option value="hard" selected>Hard</option>
+                       </select>
+                       
+                       <button onclick="createPrivateRoom()">Create Room</button>
+                   </div>
+               </div>
+               
+               <!-- Quick Match Card -->
+               <div class="onevone-card quick-match">
+                   <h3>⚔️ Quick Match</h3>
+                   <p>Find a random opponent and compete in a 1v1 match!</p>
+                   
+                   <select id="quick-match-game">
+                       <option value="360Aim">360° Aim Tracker</option>
+                       <option value="flick">360° Flick Trainer</option>
+                       <option value="bounceTracker">Bounce Tracker</option>
+                       <option value="reactionTrainer">Reaction Trainer</option>
+                       <option value="staticPrecision">Static Precision</option>
+                   </select>
+                   
+                   <button onclick="startQuickMatch()">Find Match</button>
+               </div>
+           </div>
+           
+<!-- Active Match Display -->
+           <div id="active-match-display" style="display: none; margin-top: 30px;">
+               <div class="onevone-card" style="border-color: #00ff88;">
+                   <h3>⚔️ Live 1v1 Match</h3>
+                   <p id="match-opponent">Playing against: Opponent</p>
+                   
+                   <!-- Live Score Display -->
+                   <div style="display: flex; justify-content: center; align-items: center; gap: 30px; margin: 20px 0;">
+                       <div style="text-align: center;">
+                           <div style="font-size: 14px; color: #888; margin-bottom: 5px;">YOU</div>
+                           <div id="your-live-score" style="font-size: 48px; font-weight: 800; color: #00ff88; text-shadow: 0 0 20px rgba(0,255,136,0.5);">0</div>
+                       </div>
+                       <div style="font-size: 24px; color: #666; font-weight: bold;">VS</div>
+                       <div style="text-align: center;">
+                           <div id="opponent-live-name" style="font-size: 14px; color: #888; margin-bottom: 5px;">THEM</div>
+                           <div id="their-live-score" style="font-size: 48px; font-weight: 800; color: #ff4444; text-shadow: 0 0 20px rgba(255,68,68,0.5);">0</div>
+                       </div>
+                   </div>
+                   
+                   <div style="display: flex; justify-content: center; gap: 10px;">
+                       <div id="match-timer" style="font-size: 18px; color: #ffaa00; font-weight: bold;">60s</div>
+                   </div>
+                   
+                   <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
+                       <button onclick="endCurrentMatch()" style="background: #ff4444; color: #fff; width: auto; padding: 12px 30px; border: none; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer;">End Match</button>
+                   </div>
+               </div>
+           </div>
        </div>
       
       <div class="footer">
@@ -4475,11 +4922,306 @@
           });
       }
 
-      function escapeHtml(text) {
+function escapeHtml(text) {
           const div = document.createElement('div');
           div.textContent = text;
           return div.innerHTML;
       }
+
+      // ==================== SETTINGS FUNCTIONS ====================
+      function showSettingsModal() {
+          const modal = document.getElementById('settings-modal');
+          if (modal) {
+              modal.classList.add('active');
+              renderThemeOptions();
+              renderSensitivityConverter();
+          }
+      }
+
+      function closeSettingsModal() {
+          const modal = document.getElementById('settings-modal');
+          if (modal) {
+              modal.classList.remove('active');
+          }
+      }
+
+      function renderThemeOptions() {
+          const container = document.getElementById('theme-options');
+          if (!container) return;
+          
+          const themes = [
+              { id: 'default', name: 'Default Dark', colors: ['#0a0a0f', '#1a1a2e', '#00ff88'] },
+              { id: 'ocean', name: 'Ocean Blue', colors: ['#0a192f', '#112240', '#64ffda'] },
+              { id: 'sunset', name: 'Sunset', colors: ['#1a0a0f', '#2d1124', '#ff6b6b'] },
+              { id: 'forest', name: 'Forest', colors: ['#0a1f0a', '#1a2d1a', '#4ade80'] }
+          ];
+          
+          const currentTheme = localStorage.getItem('aimtrainer_theme') || 'default';
+          
+          container.innerHTML = themes.map(theme => `
+              <div class="theme-option ${theme.id === currentTheme ? 'active' : ''}" onclick="selectTheme('${theme.id}')">
+                  <div style="display: flex; gap: 5px; justify-content: center; margin-bottom: 8px;">
+                      ${theme.colors.map(c => `<div style="width: 20px; height: 20px; background: ${c}; border-radius: 4px;"></div>`).join('')}
+                  </div>
+                  <span class="theme-name">${theme.name}</span>
+              </div>
+          `).join('');
+      }
+
+      function selectTheme(themeId) {
+          localStorage.setItem('aimtrainer_theme', themeId);
+          renderThemeOptions();
+          applyTheme(themeId);
+      }
+
+      function applyTheme(themeId) {
+          const themes = {
+              default: { bg: '#0a0a0f', card: '#1a1a2e', accent: '#00ff88' },
+              ocean: { bg: '#0a192f', card: '#112240', accent: '#64ffda' },
+              sunset: { bg: '#1a0a0f', card: '#2d1124', accent: '#ff6b6b' },
+              forest: { bg: '#0a1f0a', card: '#1a2d1a', accent: '#4ade80' }
+          };
+          
+          const theme = themes[themeId] || themes.default;
+          document.body.style.background = theme.bg;
+          document.documentElement.style.setProperty('--theme-bg', theme.bg);
+          document.documentElement.style.setProperty('--theme-card', theme.card);
+          document.documentElement.style.setProperty('--theme-accent', theme.accent);
+      }
+
+      function renderSensitivityConverter() {
+          const container = document.getElementById('sens-converter');
+          if (!container) return;
+          
+          container.innerHTML = `
+              <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 24px;">
+                  <div style="margin-bottom: 16px;">
+                      <select id="sens-from-game" onchange="convertSensitivity()" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-size: 14px; margin-bottom: 12px;">
+                          <option value="valorant">Valorant</option>
+                          <option value="csgo">CS:GO</option>
+                          <option value="aimlab">Aim Lab</option>
+                          <option value="kovaaks">KovaaK's</option>
+                      </select>
+                      <input type="number" id="sens-from-value" placeholder="Sensitivity" value="0.5" oninput="convertSensitivity()" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-size: 14px;">
+                  </div>
+                  <div style="margin-bottom: 16px;">
+                      <select id="sens-to-game" onchange="convertSensitivity()" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-size: 14px; margin-bottom: 12px;">
+                          <option value="valorant">Valorant</option>
+                          <option value="csgo" selected>CS:GO</option>
+                          <option value="aimlab">Aim Lab</option>
+                          <option value="kovaaks">KovaaK's</option>
+                      </select>
+                      <input type="number" id="sens-to-value" placeholder="Result" readonly style="width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-size: 14px;">
+                  </div>
+                  <div style="text-align: center; color: #00ff88; font-size: 18px; font-weight: 700; padding: 16px; background: rgba(0,255,136,0.1); border-radius: 12px;" id="sens-result">CM/360: 0.00</div>
+              </div>
+          `;
+      }
+
+      function convertSensitivity() {
+          const conversionFactors = {
+              valorant: { csgo: 3.18181818, aimlab: 1.0, kovaaks: 1.0 },
+              csgo: { valorant: 0.314, aimlab: 0.314, kovaaks: 0.314 },
+              aimlab: { valorant: 1.0, csgo: 3.18181818, kovaaks: 1.0 },
+              kovaaks: { valorant: 1.0, csgo: 3.18181818, aimlab: 1.0 }
+          };
+          
+          const fromGame = document.getElementById('sens-from-game')?.value || 'valorant';
+          const toGame = document.getElementById('sens-to-game')?.value || 'csgo';
+          const value = parseFloat(document.getElementById('sens-from-value')?.value) || 0;
+          
+          const factor = conversionFactors[fromGame]?.[toGame] || 1;
+          const result = value * factor;
+          
+          const toValueEl = document.getElementById('sens-to-value');
+          if (toValueEl) toValueEl.value = result.toFixed(3);
+          
+          const sensResultEl = document.getElementById('sens-result');
+          if (sensResultEl) {
+              const cmPer360 = value > 0 ? (3.18181818 / value).toFixed(2) : '0.00';
+              sensResultEl.textContent = `CM/360: ${cmPer360}`;
+          }
+      }
+
+      // ==================== 1V1 FUNCTIONS ====================
+      function createPrivateRoom() {
+          const game = document.getElementById('private-game-select').value;
+          const difficulty = document.getElementById('private-difficulty-select').value;
+          
+          const code = 'P' + Math.random().toString(36).substr(2, 5).toUpperCase();
+          
+          localStorage.setItem('aimtrainer_private_room', code);
+          localStorage.setItem('aimtrainer_private_room_game', game);
+          localStorage.setItem('aimtrainer_private_room_difficulty', difficulty);
+          
+          renderPrivateRoomContent();
+          alert(`Private room created! Code: ${code}\nShare this code with your friend!`);
+      }
+
+      function renderPrivateRoomContent() {
+          const container = document.getElementById('private-room-content');
+          if (!container) return;
+          
+          const roomCode = localStorage.getItem('aimtrainer_private_room');
+          
+          if (roomCode) {
+              const game = localStorage.getItem('aimtrainer_private_room_game') || 'Custom';
+              container.innerHTML = `
+                  <div class="room-code-display">${roomCode}</div>
+                  <p style="color: #888; margin-bottom: 15px;">Game: ${game}</p>
+                  <button onclick="startPrivateMatch()" style="background: linear-gradient(135deg, #64ffda, #4fd1c5); color: #0a0a0f; width: 100%; padding: 16px; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;">Start Match</button>
+                  <button onclick="closePrivateRoom()" style="background: #ff4444; color: #fff; width: 100%; padding: 14px; border: none; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 10px;">Close Room</button>
+              `;
+          } else {
+              container.innerHTML = `
+                  <select id="private-game-select">
+                      <option value="360Aim">360° Aim Tracker</option>
+                      <option value="flick">360° Flick Trainer</option>
+                      <option value="bounceTracker">Bounce Tracker</option>
+                      <option value="reactionTrainer">Reaction Trainer</option>
+                      <option value="microflick">Micro Flick Trainer</option>
+                      <option value="staticPrecision">Static Precision</option>
+                  </select>
+                  <select id="private-difficulty-select">
+                      <option value="easy">Easy</option>
+                      <option value="medium">Medium</option>
+                      <option value="hard" selected>Hard</option>
+                  </select>
+                  <button onclick="createPrivateRoom()">Create Room</button>
+              `;
+          }
+      }
+
+      function closePrivateRoom() {
+          localStorage.removeItem('aimtrainer_private_room');
+          localStorage.removeItem('aimtrainer_private_room_game');
+          localStorage.removeItem('aimtrainer_private_room_difficulty');
+          renderPrivateRoomContent();
+      }
+
+      function startPrivateMatch() {
+          const game = localStorage.getItem('aimtrainer_private_room_game');
+          const roomCode = localStorage.getItem('aimtrainer_private_room');
+          
+          if (!game) {
+              alert('Please select a game first!');
+              return;
+          }
+          
+          // Show active match
+          const matchDisplay = document.getElementById('active-match-display');
+          if (matchDisplay) {
+              matchDisplay.style.display = 'block';
+          }
+          
+          // Open the game
+          window.open(game + '.html', '_blank');
+          
+          // Show live score UI
+          showLiveScoreUI();
+      }
+
+      function startQuickMatch() {
+          const game = document.getElementById('quick-match-game').value;
+          
+          alert('Searching for opponent... (Demo mode)');
+          
+          // Simulate finding a match
+          setTimeout(() => {
+              const opponents = ['ProGamer123', 'AimLord', 'NightOwl', 'SpeedShot'];
+              const opponent = opponents[Math.floor(Math.random() * opponents.length)];
+              
+              document.getElementById('match-opponent').textContent = 'Playing against: ' + opponent;
+              document.getElementById('opponent-live-name').textContent = opponent.substring(0, 4).toUpperCase();
+              
+              const matchDisplay = document.getElementById('active-match-display');
+              if (matchDisplay) {
+                  matchDisplay.style.display = 'block';
+              }
+              
+              // Open the game
+              window.open(game + '.html', '_blank');
+              
+              // Show live score UI
+              showLiveScoreUI();
+              
+              alert(`Match found! Playing against ${opponent}!`);
+          }, 2000);
+      }
+
+      let liveScoreInterval = null;
+
+      function showLiveScoreUI() {
+          const liveScoreEl = document.getElementById('onevone-live-score');
+          if (liveScoreEl) {
+              liveScoreEl.classList.add('active');
+          }
+          
+          // Start score simulation
+          if (liveScoreInterval) clearInterval(liveScoreInterval);
+          
+          let yourScore = 0;
+          let theirScore = 0;
+          let timeLeft = 60;
+          
+          liveScoreInterval = setInterval(() => {
+              yourScore += Math.floor(Math.random() * 3);
+              theirScore += Math.floor(Math.random() * 3);
+              timeLeft--;
+              
+              const yourScoreEl = document.getElementById('your-live-score');
+              const theirScoreEl = document.getElementById('their-live-score');
+              const timerEl = document.getElementById('match-timer');
+              
+              if (yourScoreEl) yourScoreEl.textContent = yourScore;
+              if (theirScoreEl) theirScoreEl.textContent = theirScore;
+              if (timerEl) timerEl.textContent = timeLeft + 's';
+              
+              if (timeLeft <= 0) {
+                  endCurrentMatch();
+              }
+          }, 1000);
+      }
+
+      function hideLiveScoreUI() {
+          const liveScoreEl = document.getElementById('onevone-live-score');
+          if (liveScoreEl) {
+              liveScoreEl.classList.remove('active');
+          }
+      }
+
+      function endCurrentMatch() {
+          if (liveScoreInterval) {
+              clearInterval(liveScoreInterval);
+              liveScoreInterval = null;
+          }
+          
+          hideLiveScoreUI();
+          
+          const matchDisplay = document.getElementById('active-match-display');
+          if (matchDisplay) {
+              matchDisplay.style.display = 'none';
+          }
+          
+          const yourScore = parseInt(document.getElementById('your-live-score')?.textContent || '0');
+          const theirScore = parseInt(document.getElementById('their-live-score')?.textContent || '0');
+          
+          if (yourScore > theirScore) {
+              alert(`🎉 You won!\nYour score: ${yourScore}\nOpponent: ${theirScore}\n+50 coins!`);
+              const coins = parseInt(localStorage.getItem('aimtrainer_coins') || '0');
+              localStorage.setItem('aimtrainer_coins', coins + 50);
+              updateCoinsDisplay(coins + 50);
+          } else if (yourScore < theirScore) {
+              alert(`💔 You lost!\nYour score: ${yourScore}\nOpponent: ${theirScore}`);
+          } else {
+              alert(`🤝 It's a tie!\nYour score: ${yourScore}\nOpponent: ${theirScore}`);
+          }
+      }
+
+      // Initialize private room content on load
+      document.addEventListener('DOMContentLoaded', () => {
+          renderPrivateRoomContent();
+      });
    </script>
 </body>
 </html>

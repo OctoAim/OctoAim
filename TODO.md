@@ -1,32 +1,36 @@
-# Analytics Page Fixes TODO
+# TODO - Implementation Plan
 
-## Issues to Fix:
-1. ✓ Check if friend exists in database before adding
-2. ✓ Don't make up random stats - fetch real stats from Firebase
-3. ✓ Fix accuracy showing 0% bug
-4. ✓ Fix tournament - show loading state, proper rank/participants
+## Task: Integrate Settings from modals.html to index.html + Add 1v1 Features
 
-## Implementation Steps:
-- [x] 1. Fix accuracy 0% bug in loadAnalytics() function
-- [x] 2. Add Firebase user lookup in addFriend() function
-- [x] 3. Replace mock stats with real Firebase data
-- [x] 4. Fix tournament - add loading state and real data from Firebase
+### Steps:
+1. [x] Add Settings button to header area in index.html
+2. [x] Add Settings modal HTML to index.html (from modals.html)
+3. [x] Add Settings modal CSS styles to index.html
+4. [x] Add new "1V1" tab in index.html
+5. [x] Add Private Rooms section with Start button in 1V1 tab
+6. [x] Add Matchmaking/ score UI
+7. [x]Quick Match section with Add 1v1 Score display UI for live matches
+8. [x] Add JavaScript functions for Settings and 1v1 features
+9. [x] Test the implementation
 
-## Summary of Changes:
-1. **Accuracy Fix**: Changed from using basic history (which had no accuracy data) to using detailedHistory which stores accuracy per game session.
+### Progress: 9/9 - COMPLETED
 
-2. **Friend System**: 
-   - Now verifies user exists in Firebase Firestore before adding
-   - Shows "Searching..." loading state while checking
-   - Fetches real stats (total games, best score, avg score) from leaderboard_alltime collection
-   - Displays loading spinner when viewing friend profile
-   - Gets detailed game-by-game scores from Firebase
+## Summary of Changes Made:
 
-3. **Tournament Fixes**:
-   - Shows "..." as loading state while fetching data
-   - Gets real participant count from Firebase
-   - Gets user's real rank when in tournament
-   - Saves user to Firebase tournament collection when joining
-   - Shows "Already Joined" button state when previously joined
-   - Uses week-based tournament ID for proper weekly tournaments
+1. **Settings Button Added**: Added a ⚙️ settings button in the header next to the Social button
+2. **Settings Modal**: Created a full Settings modal with:
+   - Theme selection (4 themes: Default Dark, Ocean Blue, Sunset, Forest)
+   - Sensitiivity Converter (supports Valorant, CS:GO, Aim Lab, KovaaK's)
+   - Account section with View Profile and Sign Out buttons
+3. **1V1 Tab**: Added a new "⚔️ 1V1" tab with:
+   - **Private Room Card**: Create private rooms with game/difficulty selection and room code display
+   - **Quick Match Card**: Find random opponents for 1v1 matches
+4. **Live Score UI**: Added a floating score display that shows:
+   - Your score vs Opponent score
+   - VS divider
+   - Match timer
+   - Close button
+5. **JavaScript Functions**:
+   - Settings: showSettingsModal, closeSettingsModal, renderThemeOptions, selectTheme, applyTheme, renderSensitivityConverter, convertSensitivity
+   - 1V1: createPrivateRoom, renderPrivateRoomContent, closePrivateRoom, startPrivateMatch, startQuickMatch, showLiveScoreUI, hideLiveScoreUI, endCurrentMatch
 
