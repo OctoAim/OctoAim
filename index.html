@@ -1750,7 +1750,7 @@
            color: #000;
        }
 
-       .skin-card .buy-btn {
+.skin-card .buy-btn {
            background: #ffaa00;
            color: #000;
        }
@@ -1767,6 +1767,202 @@
            text-align: center;
            color: #666;
            padding: 40px;
+       }
+
+       /* Monthly Leaderboard Styles */
+       .monthly-lb-header {
+           text-align: center;
+           margin-bottom: 30px;
+       }
+       
+       .monthly-lb-header h2 {
+           color: #00ff88;
+           font-size: 32px;
+           margin-bottom: 10px;
+           text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+       }
+       
+       .monthly-subtitle {
+           color: #888;
+           font-size: 16px;
+       }
+       
+       .monthly-prizes-info {
+           background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.9));
+           border: 2px solid #ffaa00;
+           border-radius: 16px;
+           padding: 20px;
+           margin-bottom: 25px;
+           text-align: center;
+       }
+       
+       .monthly-prizes-info h3 {
+           color: #ffaa00;
+           font-size: 18px;
+           margin-bottom: 15px;
+       }
+       
+.prizes-grid {
+           display: flex;
+           justify-content: center;
+           gap: 15px;
+           flex-wrap: wrap;
+       }
+       
+       .prize-item {
+           background: rgba(0, 0, 0, 0.5);
+           border: 1px solid #333;
+           border-radius: 10px;
+           padding: 12px 20px;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           gap: 5px;
+       }
+       
+       .prize-item.gold { border-color: #ffd700; }
+       .prize-item.silver { border-color: #c0c0c0; }
+       .prize-item.bronze { border-color: #cd7f32; }
+       
+       .prize-rank {
+           font-weight: bold;
+           font-size: 14px;
+           color: #fff;
+       }
+       
+       .prize-item.gold .prize-rank { color: #ffd700; }
+       .prize-item.silver .prize-rank { color: #c0c0c0; }
+       .prize-item.bronze .prize-rank { color: #cd7f32; }
+       
+       .prize-amount {
+           color: #ffaa00;
+           font-size: 13px;
+           font-weight: bold;
+       }
+       
+       .your-monthly-stats {
+           display: flex;
+           justify-content: center;
+           gap: 40px;
+           margin-bottom: 25px;
+       }
+       
+       .monthly-stat {
+           background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.9));
+           border: 2px solid #333;
+           border-radius: 12px;
+           padding: 20px 40px;
+           text-align: center;
+       }
+       
+       .monthly-stat-label {
+           color: #888;
+           font-size: 13px;
+           margin-bottom: 8px;
+           text-transform: uppercase;
+           letter-spacing: 1px;
+       }
+       
+       .monthly-stat-value {
+           color: #00ff88;
+           font-size: 36px;
+           font-weight: bold;
+       }
+       
+       .monthly-stat-value.top-10 {
+           color: #ffaa00;
+           text-shadow: 0 0 15px rgba(255, 170, 0, 0.5);
+       }
+       
+       .claim-prize-btn {
+           width: 100%;
+           max-width: 400px;
+           display: block;
+           margin: 0 auto 25px;
+           padding: 16px;
+           background: linear-gradient(135deg, #ffaa00, #ff8800);
+           border: none;
+           border-radius: 12px;
+           color: #000;
+           font-size: 16px;
+           font-weight: bold;
+           cursor: pointer;
+           transition: all 0.3s;
+       }
+       
+       .claim-prize-btn:hover {
+           transform: scale(1.02);
+           box-shadow: 0 0 25px rgba(255, 170, 0, 0.5);
+       }
+       
+       .monthly-lb-list {
+           background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.9));
+           border: 2px solid #333;
+           border-radius: 12px;
+           padding: 20px;
+       }
+       
+       .monthly-lb-list h3 {
+           color: #888;
+           font-size: 14px;
+           text-transform: uppercase;
+           letter-spacing: 2px;
+           margin-bottom: 15px;
+           text-align: center;
+       }
+       
+       .monthly-lb-row {
+           display: flex;
+           align-items: center;
+           padding: 12px 15px;
+           border-bottom: 1px solid #333;
+           transition: all 0.2s;
+       }
+       
+       .monthly-lb-row:last-child {
+           border-bottom: none;
+       }
+       
+       .monthly-lb-row:hover {
+           background: rgba(0, 255, 136, 0.1);
+       }
+       
+       .monthly-lb-row.current-user {
+           background: rgba(0, 255, 136, 0.15);
+           border: 1px solid #00ff88;
+       }
+       
+       .monthly-lb-row.top-3 {
+           background: rgba(255, 170, 0, 0.1);
+       }
+       
+       .monthly-rank {
+           width: 50px;
+           font-size: 18px;
+           font-weight: bold;
+       }
+       
+       .monthly-rank.gold { color: #ffd700; }
+       .monthly-rank.silver { color: #c0c0c0; }
+       .monthly-rank.bronze { color: #cd7f32; }
+       
+       .monthly-username {
+           flex: 1;
+           color: #fff;
+           font-size: 15px;
+       }
+       
+       .monthly-score {
+           color: #00ff88;
+           font-size: 18px;
+           font-weight: bold;
+           margin-right: 15px;
+       }
+       
+       .monthly-prize {
+           color: #ffaa00;
+           font-size: 12px;
+           font-weight: bold;
        }
 
        /* Profile Modal */
@@ -3157,11 +3353,11 @@
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab('scenarios')">SCENARIOS</button>
             <button class="tab-btn" onclick="switchTab('bests')">PERSONAL BESTS</button>
-            <button class="tab-btn" onclick="switchTab('challenges')">CHALLENGES</button>
-            <button class="tab-btn" onclick="switchTab('leaderboard')">LEADERBOARD</button>
-            <button class="tab-btn" onclick="switchTab('skins')">SKINS</button>
+<button class="tab-btn" onclick="switchTab('challenges')">CHALLENGES</button>
+<button class="tab-btn" onclick="switchTab('leaderboard')">LEADERBOARD</button>
+<button class="tab-btn" onclick="switchTab('skins')">SKINS</button>
             <button class="tab-btn" onclick="switchTab('stats')">STATS</button>
-            <button class="tab-btn" onclick="switchTab('onevone')">⚔️ 1V1</button>
+            <button class="tab-btn" onclick="switchTab('monthly')">🏆 MONTHLY</button>
             <a href="analytics.html" class="tab-btn" style="text-decoration: none; display: inline-flex; align-items: center;">📊 ANALYTICS</a>
             
         </div>
@@ -3565,78 +3761,11 @@
            <button class="clear-data-btn" onclick="clearAllData()">Clear All Data</button>
        </div>
 
-       <!-- 1V1 Tab -->
-       <div id="onevone" class="tab-content">
-           <div class="onevone-grid">
-               <!-- Private Room Card -->
-               <div class="onevone-card private-room">
-                   <h3>🔒 Private Room</h3>
-                   <p>Create a private room and share the code with a friend to play together!</p>
-                   
-                   <div id="private-room-content">
-                       <select id="private-game-select">
-                           <option value="360Aim">360° Aim Tracker</option>
-                           <option value="flick">360° Flick Trainer</option>
-                           <option value="bounceTracker">Bounce Tracker</option>
-                           <option value="reactionTrainer">Reaction Trainer</option>
-                           <option value="microflick">Micro Flick Trainer</option>
-                           <option value="staticPrecision">Static Precision</option>
-                       </select>
-                       
-                       <select id="private-difficulty-select">
-                           <option value="easy">Easy</option>
-                           <option value="medium">Medium</option>
-                           <option value="hard" selected>Hard</option>
-                       </select>
-                       
-                       <button onclick="createPrivateRoom()">Create Room</button>
-                   </div>
-               </div>
-               
-               <!-- Quick Match Card -->
-               <div class="onevone-card quick-match">
-                   <h3>⚔️ Quick Match</h3>
-                   <p>Find a random opponent and compete in a 1v1 match!</p>
-                   
-                   <select id="quick-match-game">
-                       <option value="360Aim">360° Aim Tracker</option>
-                       <option value="flick">360° Flick Trainer</option>
-                       <option value="bounceTracker">Bounce Tracker</option>
-                       <option value="reactionTrainer">Reaction Trainer</option>
-                       <option value="staticPrecision">Static Precision</option>
-                   </select>
-                   
-                   <button onclick="startQuickMatch()">Find Match</button>
-               </div>
-           </div>
-           
-<!-- Active Match Display -->
-           <div id="active-match-display" style="display: none; margin-top: 30px;">
-               <div class="onevone-card" style="border-color: #00ff88;">
-                   <h3>⚔️ Live 1v1 Match</h3>
-                   <p id="match-opponent">Playing against: Opponent</p>
-                   
-                   <!-- Live Score Display -->
-                   <div style="display: flex; justify-content: center; align-items: center; gap: 30px; margin: 20px 0;">
-                       <div style="text-align: center;">
-                           <div style="font-size: 14px; color: #888; margin-bottom: 5px;">YOU</div>
-                           <div id="your-live-score" style="font-size: 48px; font-weight: 800; color: #00ff88; text-shadow: 0 0 20px rgba(0,255,136,0.5);">0</div>
-                       </div>
-                       <div style="font-size: 24px; color: #666; font-weight: bold;">VS</div>
-                       <div style="text-align: center;">
-                           <div id="opponent-live-name" style="font-size: 14px; color: #888; margin-bottom: 5px;">THEM</div>
-                           <div id="their-live-score" style="font-size: 48px; font-weight: 800; color: #ff4444; text-shadow: 0 0 20px rgba(255,68,68,0.5);">0</div>
-                       </div>
-                   </div>
-                   
-                   <div style="display: flex; justify-content: center; gap: 10px;">
-                       <div id="match-timer" style="font-size: 18px; color: #ffaa00; font-weight: bold;">60s</div>
-                   </div>
-                   
-                   <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
-                       <button onclick="endCurrentMatch()" style="background: #ff4444; color: #fff; width: auto; padding: 12px 30px; border: none; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer;">End Match</button>
-                   </div>
-               </div>
+       <!-- Monthly Leaderboard Tab -->
+       <div id="monthly" class="tab-content">
+           <div id="monthly-leaderboard-content">
+               <!-- Monthly leaderboard will be rendered by JavaScript -->
+               <p style="text-align: center; color: #666; padding: 40px;">Loading monthly leaderboard...</p>
            </div>
        </div>
       
@@ -3666,12 +3795,26 @@
    <script src="firebase-auth.js"></script>
    <script src="firebase-leaderboard.js"></script>
    <script src="admin-system.js"></script>
+   <script src="feature-systems.js"></script>
+   <script src="monthly-leaderboard.js"></script>
    <script>
       // Session state
       let sessionGames = 0;
       let sessionHardRuns = 0;
       let sessionRecords = 0;
       let sessionCoins = 0;
+
+      // 1v1 match state
+      let onevoneMatchState = {
+          isHost: false,
+          opponentName: 'Friend',
+          roomCode: '',
+          game: '',
+          yourScore: 0,
+          theirScore: 0,
+          timeLeft: 60,
+          isPlaying: false
+      };
 
       // Auth tab state
       let authMode = 'login';
@@ -3947,6 +4090,7 @@
            }
            
            authSection.innerHTML = `
+               <button class="settings-btn" onclick="showSettingsModal()" title="Settings">⚙️</button>
                <button class="social-btn" onclick="showSocialModal()" title="Friends">👥</button>
                <div class="user-avatar" onclick="showProfileCard()" title="Click to view profile: ${displayName}">
                    ${avatarHTML}
@@ -4588,17 +4732,22 @@
 
 
 
-       // Tab switching
+// Tab switching
        function switchTab(tabId) {
            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-          
+
            document.querySelector(`[onclick="switchTab('${tabId}')"]`).classList.add('active');
            document.getElementById(tabId).classList.add('active');
-          
+
            // Refresh stats when switching to stats tab
            if (tabId === 'stats') {
                initStats();
+           }
+           
+           // Render monthly leaderboard when switching to monthly tab
+           if (tabId === 'monthly' && typeof renderMonthlyLeaderboard === 'function') {
+               renderMonthlyLeaderboard();
            }
        }
 
@@ -5040,6 +5189,120 @@ function escapeHtml(text) {
           if (sensResultEl) {
               const cmPer360 = value > 0 ? (3.18181818 / value).toFixed(2) : '0.00';
               sensResultEl.textContent = `CM/360: ${cmPer360}`;
+          }
+      }
+
+      // ==================== 1V1 HELPER FUNCTIONS ====================
+      function getGameDisplayName(gameId) {
+          const names = {'360Aim':'360° Aim Tracker','flick':'360° Flick Trainer','bounceTracker':'Bounce Tracker','reactionTrainer':'Reaction Trainer','microflick':'Micro Flick Trainer','staticPrecision':'Static Precision'};
+          return names[gameId] || gameId;
+      }
+
+      // Countdown overlay
+      function showCountdownOverlay() {
+          const existing = document.getElementById('countdown-overlay');
+          if (existing) existing.remove();
+          const overlay = document.createElement('div');
+          overlay.id = 'countdown-overlay';
+          overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;';
+          overlay.innerHTML = '<h1 style="color:#00ff88;font-size:120px;text-shadow:0 0 50px #00ff88;">3</h1><p style="color:#888;font-size:24px;margin-top:20px;">Get Ready!</p>';
+          document.body.appendChild(overlay);
+          return overlay;
+      }
+
+      function startCountdown(callback) {
+          const overlay = showCountdownOverlay();
+          let count = 3;
+          const countInterval = setInterval(() => {
+              count--;
+              if (count > 0) overlay.querySelector('h1').textContent = count;
+              else if (count === 0) { overlay.querySelector('h1').textContent = 'GO!'; overlay.querySelector('h1').style.color = '#ffaa00'; }
+              else { clearInterval(countInterval); overlay.remove(); if (callback) callback(); }
+          }, 1000);
+      }
+
+      // Mini leaderboard during gameplay
+      function showMiniLeaderboard() {
+          let miniLb = document.getElementById('mini-leaderboard');
+          if (!miniLb) {
+              miniLb = document.createElement('div');
+              miniLb.id = 'mini-leaderboard';
+              miniLb.style.cssText = 'position:fixed;top:80px;left:50%;transform:translateX(-50%);background:linear-gradient(165deg,rgba(26,26,46,0.95),rgba(15,15,26,0.95));border:2px solid rgba(0,255,136,0.3);border-radius:16px;padding:15px 30px;display:flex;align-items:center;gap:30px;z-index:1500;';
+              const username = localStorage.getItem('aimtrainer_username') || 'You';
+              miniLb.innerHTML = '<div style="text-align:center;"><div style="color:#888;font-size:12px;">YOU</div><div id="mini-your-score" style="color:#00ff88;font-size:28px;font-weight:800;">0</div></div><div style="color:#666;font-size:20px;font-weight:bold;">VS</div><div style="text-align:center;"><div style="color:#888;font-size:12px;">FRIEND</div><div id="mini-their-score" style="color:#ff4444;font-size:28px;font-weight:800;">0</div></div><div style="color:#ffaa00;font-size:14px;font-weight:bold;margin-left:10px;" id="mini-timer">60s</div>';
+              document.body.appendChild(miniLb);
+          }
+          miniLb.style.display = 'flex';
+          window.addEventListener('message', handleScoreUpdate);
+      }
+
+      function hideMiniLeaderboard() {
+          const miniLb = document.getElementById('mini-leaderboard');
+          if (miniLb) miniLb.style.display = 'none';
+          window.removeEventListener('message', handleScoreUpdate);
+      }
+
+      function handleScoreUpdate(event) {
+          if (event.data && event.data.type === 'gameScore') {
+              onevoneMatchState.yourScore = event.data.score;
+              const miniYourScore = document.getElementById('mini-your-score');
+              if (miniYourScore) miniYourScore.textContent = event.data.score;
+              const liveYourScore = document.getElementById('your-live-score');
+              if (liveYourScore) liveYourScore.textContent = event.data.score;
+          }
+      }
+
+      let matchTimerInterval = null;
+      
+      function startMatchTimer() {
+          if (matchTimerInterval) clearInterval(matchTimerInterval);
+          let timeLeft = 60;
+          onevoneMatchState.timeLeft = timeLeft;
+          matchTimerInterval = setInterval(() => {
+              timeLeft--;
+              onevoneMatchState.timeLeft = timeLeft;
+              const miniTimer = document.getElementById('mini-timer');
+              const mainTimer = document.getElementById('match-timer');
+              if (miniTimer) miniTimer.textContent = timeLeft + 's';
+              if (mainTimer) mainTimer.textContent = timeLeft + 's';
+              if (timeLeft <= 0) { clearInterval(matchTimerInterval); matchTimerInterval = null; endMatchAndShowResults(); }
+          }, 1000);
+      }
+
+      // Final leaderboard after match
+      function showFinalLeaderboard() {
+          hideMiniLeaderboard();
+          const finalLb = document.createElement('div');
+          finalLb.id = 'final-leaderboard';
+          finalLb.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;';
+          const username = localStorage.getItem('aimtrainer_username') || 'You';
+          const yourScore = onevoneMatchState.yourScore;
+          const theirScore = onevoneMatchState.theirScore;
+          let resultText = '', resultColor = '';
+          if (yourScore > theirScore) { resultText = '🎉 YOU WIN!'; resultColor = '#00ff88'; }
+          else if (yourScore < theirScore) { resultText = '💔 YOU LOST'; resultColor = '#ff4444'; }
+          else { resultText = '🤝 IT\'S A TIE!'; resultColor = '#ffaa00'; }
+          finalLb.innerHTML = `<h1 style="color:${resultColor};font-size:48px;margin-bottom:30px;text-shadow:0 0 30px ${resultColor};">${resultText}</h1><div style="background:linear-gradient(145deg,rgba(26,26,46,0.9),rgba(15,15,26,0.9));border:2px solid #333;border-radius:16px;padding:30px 50px;margin-bottom:30px;"><h2 style="color:#888;font-size:14px;text-transform:uppercase;margin-bottom:20px;text-align:center;">Final Scores</h2><div style="display:flex;align-items:center;gap:40px;"><div style="text-align:center;"><div style="color:#888;font-size:14px;">${escapeHtml(username)}</div><div style="color:#00ff88;font-size:48px;font-weight:800;">${yourScore}</div></div><div style="color:#666;font-size:24px;font-weight:bold;">VS</div><div style="text-align:center;"><div style="color:#888;font-size:14px;">Friend</div><div style="color:#ff4444;font-size:48px;font-weight:800;">${theirScore}</div></div></div></div><button onclick="closeFinalLeaderboard()" style="padding:16px 50px;background:linear-gradient(135deg,#00ff88,#00cc6a);border:none;border-radius:12px;color:#000;font-size:18px;font-weight:bold;cursor:pointer;">Return to Home</button>`;
+          document.body.appendChild(finalLb);
+      }
+
+      function closeFinalLeaderboard() {
+          const finalLb = document.getElementById('final-leaderboard');
+          if (finalLb) finalLb.remove();
+          const matchDisplay = document.getElementById('active-match-display');
+          if (matchDisplay) matchDisplay.style.display = 'none';
+          hideLiveScoreUI();
+          window.location.href = 'index.html';
+      }
+
+      function endMatchAndShowResults() {
+          if (matchTimerInterval) { clearInterval(matchTimerInterval); matchTimerInterval = null; }
+          onevoneMatchState.isPlaying = false;
+          onevoneMatchState.theirScore = Math.floor(Math.random() * (onevoneMatchState.yourScore + 500));
+          showFinalLeaderboard();
+          if (onevoneMatchState.yourScore > onevoneMatchState.theirScore) {
+              const coins = parseInt(localStorage.getItem('aimtrainer_coins') || '0');
+              localStorage.setItem('aimtrainer_coins', coins + 50);
           }
       }
 
