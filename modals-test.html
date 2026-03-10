@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modals Test - Aim Trainer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #0a0a0f;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 48px;
+            color: #00ff88;
+            text-shadow: 0 0 30px #00ff88;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            color: #888;
+            margin-bottom: 40px;
+        }
+        
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 500px;
+        }
+        
+        .test-btn {
+            padding: 20px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .test-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-settings {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            color: #0a0a0f;
+        }
+        
+        .btn-clans {
+            background: linear-gradient(135deg, #ffaa00, #ff8800);
+            color: #0a0a0f;
+        }
+        
+        .btn-rooms {
+            background: linear-gradient(135deg, #64ffda, #4fd1c5);
+            color: #0a0a0f;
+        }
+        
+        .btn-matchmaking {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎮 Aim Trainer</h1>
+    <p>Click a button to test each modal</p>
+    
+    <div class="button-grid">
+        <button class="test-btn btn-settings" onclick="showSettingsModal()">
+            ⚙️ Settings
+        </button>
+        <button class="test-btn btn-clans" onclick="showClansModal()">
+            ⚔️ Clans
+        </button>
+        <button class="test-btn btn-rooms" onclick="showPrivateRoomsModal()">
+            🔒 Private Rooms
+        </button>
+        <button class="test-btn btn-matchmaking" onclick="showMatchmakingModal()">
+            🎯 1v1 Matchmaking
+        </button>
+    </div>
+
+    <!-- Include the modals -->
+    <div id="modals-container"></div>
+    <script>
+        // Load modals.html content
+        fetch('modals.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('modals-container').innerHTML = html;
+            })
+            .catch(err => console.error('Error loading modals:', err));
+    </script>
+</body>
+</html>
+

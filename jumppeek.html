@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jump Peek Trainer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            overflow: hidden;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #0a0a0f;
+            cursor: crosshair;
+        }
+        
+        #game-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        
+        canvas {
+            display: block;
+        }
+        
+        /* Menu Screen */
+        #menu-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0f1a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        
+        #menu-screen h1 {
+            font-size: 56px;
+            color: #00ff88;
+            text-shadow: 0 0 30px #00ff88, 0 0 60px #00ff8855;
+            margin-bottom: 10px;
+            letter-spacing: 4px;
+        }
+        
+        #menu-screen .subtitle {
+            color: #888;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        #menu-screen .instructions {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 40px;
+            text-align: center;
+            line-height: 1.8;
+            max-width: 500px;
+        }
+        
+        /* Difficulty Buttons */
+        #difficulty-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .diff-btn {
+            width: 200px;
+            padding: 30px 20px;
+            background: linear-gradient(145deg, #1a1a2e, #0f0f1a);
+            border: 2px solid #333;
+            border-radius: 12px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .diff-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,255,136,0.3);
+        }
+        
+        .diff-btn.selected {
+            border-color: #00ff88;
+            box-shadow: 0 0 20px rgba(0,255,136,0.4);
+        }
+        
+        .diff-btn .diff-name {
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .diff-btn .diff-desc {
+            font-size: 13px;
+            color: #888;
+        }
+        
+        .diff-btn.easy .diff-name { color: #00ff88; }
+        .diff-btn.medium .diff-name { color: #ffaa00; }
+        .diff-btn.hard .diff-name { color: #ff4444; }
+        
+        /* Start Button */
+        #start-btn {
+            padding: 18px 70px;
+            font-size: 22px;
+            background: #00ff88;
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: none;
+        }
+        
+        #start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #00ff88;
+        }
+        
+        /* Crosshair */
+        #crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 50;
+            display: none;
+        }
+        
+        #crosshair .dot {
+            width: 6px;
+            height: 6px;
+            background: #00ff88;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px #00ff88;
+        }
+        
+        #crosshair .line {
+            position: absolute;
+            background: #00ff88;
+            box-shadow: 0 0 8px #00ff88;
+        }
+        
+        #crosshair .line.top {
+            width: 2px;
+            height: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 50%;
+        }
+        
+        #crosshair .line.bottom {
+            width: 2px;
+            height: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 50%;
+        }
+        
+        #crosshair .line.left {
+            height: 2px;
+            width: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 50%;
+        }
+        
+        #crosshair .line.right {
+            height: 2px;
+            width: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 50%;
+        }
+        
+        /* Countdown */
+        #countdown {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 120px;
+            font-weight: bold;
+            color: #00ff88;
+            text-shadow: 0 0 50px #00ff88;
+            z-index: 60;
+            display: none;
+        }
+        
+        /* Countdown GO */
+        #countdown.go {
+            color: #ff4444;
+            text-shadow: 0 0 50px #ff4444;
+        }
+        
+        /* HUD */
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 30px;
+            color: #00ff88;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00ff88;
+            display: none;
+            z-index: 50;
+        }
+        
+        #hud div {
+            background: rgba(0,0,0,0.7);
+            padding: 12px 25px;
+            border-radius: 8px;
+            border: 1px solid #00ff8844;
+        }
+        
+        /* Results Screen */
+        #results-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        
+        #results-screen h2 {
+            font-size: 48px;
+            color: #00ff88;
+            text-shadow: 0 0 20px #00ff88;
+            margin-bottom: 30px;
+        }
+        
+        #results-screen .stats {
+            display: flex;
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+        
+        #results-screen .stat {
+            text-align: center;
+        }
+        
+        #results-screen .stat-value {
+            font-size: 48px;
+            color: #fff;
+            font-weight: bold;
+        }
+        
+        #results-screen .stat-label {
+            font-size: 16px;
+            color: #888;
+            margin-top: 5px;
+        }
+        
+        #results-screen button {
+            padding: 15px 50px;
+            font-size: 20px;
+            background: #00ff88;
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        #results-screen button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #00ff88;
+        }
+        
+        /* Instructions */
+        .instructions {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+            display: none;
+            z-index: 50;
+        }
+        
+        /* Click to start overlay */
+        #click-to-start {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 80;
+            cursor: pointer;
+        }
+        
+        #click-to-start h2 {
+            color: #00ff88;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        #click-to-start p {
+            color: #888;
+            font-size: 18px;
+        }
+        
+        /* Hit marker */
+        .hit-marker {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+            z-index: 55;
+            opacity: 0;
+            transition: opacity 0.1s;
+        }
+        
+        .hit-marker.show {
+            opacity: 1;
+        }
+        
+        .hit-marker::before,
+        .hit-marker::after {
+            content: '';
+            position: absolute;
+            background: #fff;
+            box-shadow: 0 0 10px #fff;
+        }
+        
+        .hit-marker::before {
+            width: 2px;
+            height: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .hit-marker::after {
+            width: 100%;
+            height: 2px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        /* Home Button */
+        .home-btn { position: fixed; top: 20px; right: 20px; padding: 12px 24px; background: linear-gradient(145deg, #1a1a2e, #0f0f1a); border: 2px solid #ff4444; border-radius: 8px; color: #ff4444; font-size: 14px; font-weight: bold; cursor: pointer; z-index: 300; transition: all 0.3s ease; }
+        .home-btn:hover { background: #ff4444; color: #000; box-shadow: 0 0 20px rgba(255, 68, 68, 0.5); }
+        
+        /* Pause Button */
+        .pause-btn { position: fixed; top: 20px; right: 140px; padding: 12px 24px; background: linear-gradient(145deg, #1a1a2e, #0f0f1a); border: 2px solid #ffaa00; border-radius: 8px; color: #ffaa00; font-size: 14px; font-weight: bold; cursor: pointer; z-index: 300; transition: all 0.3s ease; display: none; }
+        .pause-btn:hover { background: #ffaa00; color: #000; box-shadow: 0 0 20px rgba(255, 170, 0, 0.5); }
+        
+        /* Pause Menu */
+        #pause-menu { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 250; }
+        #pause-menu h2 { font-size: 48px; color: #ffaa00; text-shadow: 0 0 20px #ffaa00; margin-bottom: 40px; }
+        #pause-menu button { padding: 15px 50px; font-size: 20px; margin: 10px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+        #pause-menu .resume-btn { background: #00ff88; color: #000; }
+        #pause-menu .menu-btn { background: #4488ff; color: #fff; }
+        #pause-menu .home-btn-pause { background: #ff4444; color: #fff; }
+        #pause-menu button:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
+    </style>
+</head>
+<body>
+    <!-- Home Button -->
+    <button class="home-btn" onclick="goHome()">🏠 HOME</button>
+    <!-- Pause Button -->
+    <button class="pause-btn" id="pause-btn" onclick="showPauseMenu()">⏸ PAUSE</button>
+    <!-- Pause Menu -->
+    <div id="pause-menu">
+        <h2>PAUSED</h2>
+        <button class="resume-btn" onclick="resumeGame()">▶ RESUME</button>
+        <button class="restart-btn" onclick="restartGame()" style="background: #ffaa00; color: #000;">🔄 RESTART</button>
+        <button class="menu-btn" onclick="returnToMenu()">📋 MENU</button>
+        <button class="home-btn-pause" onclick="goHome()">🏠 HOME</button>
+    </div>
+    <div id="game-container">
+        <!-- Menu Screen -->
+        <div id="menu-screen">
+            <h1>JUMP PEEK</h1>
+            <p class="subtitle">Flick & Click - Jump, Shoot, Land</p>
+            <p class="instructions">
+                Wait for the countdown, then jump over the wall.<br>
+                Quick-flick to shoot the moving capsule before you land!<br>
+                Click to shoot.
+            </p>
+            
+            <div id="difficulty-grid">
+                <div class="diff-btn easy" data-diff="easy" onclick="selectDifficulty('easy')">
+                    <div class="diff-name">EASY</div>
+                    <div class="diff-desc">Slow jump<br>Large capsule<br>More time</div>
+                </div>
+                <div class="diff-btn medium" data-diff="medium" onclick="selectDifficulty('medium')">
+                    <div class="diff-name">MEDIUM</div>
+                    <div class="diff-desc">Medium jump<br>Medium capsule<br>Standard</div>
+                </div>
+                <div class="diff-btn hard" data-diff="hard" onclick="selectDifficulty('hard')">
+                    <div class="diff-name">HARD</div>
+                    <div class="diff-desc">Fast jump<br>Small capsule<br>Less time</div>
+                </div>
+            </div>
+            
+            <button id="start-btn" onclick="startGame()">START TRAINING</button>
+        </div>
+        
+        <!-- Click to Start Overlay -->
+        <div id="click-to-start" onclick="lockPointer()">
+            <h2>CLICK TO START</h2>
+            <p>Click to lock mouse and begin</p>
+        </div>
+        
+        <!-- Countdown -->
+        <div id="countdown"></div>
+        
+        <!-- HUD -->
+        <div id="hud">
+            <div>HITS: <span id="hits">0</span></div>
+            <div>HEADSHOTS: <span id="headshots">0</span></div>
+            <div>ATTEMPTS: <span id="attempts">0</span></div>
+            <div>ACCURACY: <span id="accuracy">0</span>%</div>
+        </div>
+        
+        <!-- Crosshair -->
+        <div id="crosshair">
+            <div class="dot"></div>
+            <div class="line top"></div>
+            <div class="line bottom"></div>
+            <div class="line left"></div>
+            <div class="line right"></div>
+        </div>
+        
+        <!-- Hit Marker -->
+        <div class="hit-marker" id="hit-marker"></div>
+        
+        <!-- Instructions -->
+        <div class="instructions" id="instructions">
+            <strong>Controls:</strong> Mouse to aim • Click to shoot • Jump and quick-flick to hit!
+        </div>
+        
+        <!-- Results Screen -->
+        <div id="results-screen">
+            <h2>ROUND COMPLETE</h2>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="final-hits">0</div>
+                    <div class="stat-label">Hits</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="final-headshots">0</div>
+                    <div class="stat-label">Headshots</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="final-attempts">0</div>
+                    <div class="stat-label">Attempts</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="final-accuracy">0%</div>
+                    <div class="stat-label">Accuracy</div>
+                </div>
+            </div>
+            <button onclick="returnToMenu()">RETURN TO MENU</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // ==================== GAME CONFIGURATION ====================
+        const DIFFICULTY = {
+            easy: {
+                capsuleSize: 0.6,
+                jumpHeight: 5,
+                jumpDuration: 1.2,
+                capsuleSpeed: 2,
+                capsuleRange: 4,
+                capsuleMoveX: false,
+                capsuleMoveZ: false,
+                points: 100,
+                rounds: 10
+            },
+            medium: {
+                capsuleSize: 0.45,
+                jumpHeight: 5.5,
+                jumpDuration: 1.0,
+                capsuleSpeed: 3.5,
+                capsuleRange: 5,
+                capsuleMoveX: true,
+                capsuleMoveZ: false,
+                points: 200,
+                rounds: 12
+            },
+            hard: {
+                capsuleSize: 0.35,
+                jumpHeight: 6,
+                jumpDuration: 0.8,
+                capsuleSpeed: 5,
+                capsuleRange: 6,
+                capsuleMoveX: true,
+                capsuleMoveZ: true,
+                points: 400,
+                rounds: 15
+            }
+        };
+
+        // ==================== GAME STATE ====================
+        let scene, camera, renderer;
+        let wall, platform, capsule = null;
+        let selectedDifficulty = null;
+        let gameState = 'menu';
+        let score = 0;
+        let hits = 0;
+        let headshots = 0;
+        let attempts = 0;
+        let currentRound = 0;
+        let isPointerLocked = false;
+        
+        // Camera rotation
+        let cameraRotationX = 0;
+        let cameraRotationY = 0;
+
+        // Jump state
+        let jumpState = {
+            isJumping: false,
+            jumpProgress: 0,
+            startY: 1.6,
+            targetY: 1.6
+        };
+
+        // Capsule movement
+        let capsuleState = {
+            direction: 1,
+            baseX: 0,
+            baseZ: -8
+        };
+
+        // ==================== INITIALIZATION ====================
+        function init() {
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x1a1a2e);
+            scene.fog = new THREE.Fog(0x1a1a2e, 20, 60);
+
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 1.6, 0);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            document.getElementById('game-container').appendChild(renderer.domElement);
+
+            setupLighting();
+            createEnvironment();
+            setupEvents();
+            animate();
+        }
+
+        function setupLighting() {
+            const ambient = new THREE.AmbientLight(0x404060, 0.6);
+            scene.add(ambient);
+
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            dirLight.position.set(10, 20, 10);
+            dirLight.castShadow = true;
+            dirLight.shadow.mapSize.width = 2048;
+            dirLight.shadow.mapSize.height = 2048;
+            scene.add(dirLight);
+
+            const pointLight1 = new THREE.PointLight(0x00ff88, 0.4, 30);
+            pointLight1.position.set(-10, 5, -10);
+            scene.add(pointLight1);
+
+            const pointLight2 = new THREE.PointLight(0xff4488, 0.3, 30);
+            pointLight2.position.set(10, 5, -10);
+            scene.add(pointLight2);
+        }
+
+        function createEnvironment() {
+            // Floor
+            const floorGeo = new THREE.PlaneGeometry(40, 40);
+            const floorMat = new THREE.MeshStandardMaterial({
+                color: 0x2a2a4a,
+                roughness: 0.8,
+                metalness: 0.2
+            });
+            const floor = new THREE.Mesh(floorGeo, floorMat);
+            floor.rotation.x = -Math.PI / 2;
+            floor.receiveShadow = true;
+            scene.add(floor);
+
+            // Grid
+            const grid = new THREE.GridHelper(40, 20, 0x444466, 0x333355);
+            grid.position.y = 0.01;
+            scene.add(grid);
+
+            // Wall in front of player (must jump over to see arena)
+            const wallGeo = new THREE.BoxGeometry(8, 3, 0.5);
+            const wallMat = new THREE.MeshStandardMaterial({
+                color: 0x3a3a5a,
+                roughness: 0.9
+            });
+            wall = new THREE.Mesh(wallGeo, wallMat);
+            wall.position.set(0, 1.5, -3);
+            wall.castShadow = true;
+            wall.receiveShadow = true;
+            scene.add(wall);
+
+            // Platform behind wall (where player stands)
+            const platformGeo = new THREE.BoxGeometry(4, 0.2, 4);
+            const platformMat = new THREE.MeshStandardMaterial({
+                color: 0x4a4a6a,
+                roughness: 0.7
+            });
+            platform = new THREE.Mesh(platformGeo, platformMat);
+            platform.position.set(0, 0.1, 0);
+            platform.receiveShadow = true;
+            scene.add(platform);
+
+            // Invisible wall behind player
+            const backWallGeo = new THREE.BoxGeometry(40, 10, 0.5);
+            const backWall = new THREE.Mesh(backWallGeo, wallMat);
+            backWall.position.set(0, 5, 3);
+            scene.add(backWall);
+
+            // Side walls
+            const sideWallGeo = new THREE.BoxGeometry(0.5, 10, 40);
+            const leftWall = new THREE.Mesh(sideWallGeo, wallMat);
+            leftWall.position.set(-20, 5, -15);
+            scene.add(leftWall);
+
+            const rightWall = new THREE.Mesh(sideWallGeo, wallMat);
+            rightWall.position.set(20, 5, -15);
+            scene.add(rightWall);
+
+            // Create arena box (where capsule moves)
+            createArena();
+        }
+
+        function createArena() {
+            // Arena box - wireframe
+            const boxGeo = new THREE.BoxGeometry(8, 3, 6);
+            const edges = new THREE.EdgesGeometry(boxGeo);
+            const line = new THREE.LineSegments(
+                edges,
+                new THREE.LineBasicMaterial({ color: 0x00ff88, transparent: true, opacity: 0.3 })
+            );
+            line.position.set(0, 2, -10);
+            scene.add(line);
+        }
+
+        function createCapsule(config) {
+            if (capsule) {
+                scene.remove(capsule.mesh);
+            }
+
+            const capsuleRadius = config.capsuleSize;
+            const capsuleLength = config.capsuleSize * 2;
+            
+            const group = new THREE.Group();
+            
+            // Main cylinder body (torso)
+            const cylinderGeo = new THREE.CylinderGeometry(capsuleRadius, capsuleRadius, capsuleLength, 16);
+            const material = new THREE.MeshStandardMaterial({
+                color: 0xff2244,
+                emissive: 0xff1122,
+                emissiveIntensity: 0.8,
+                roughness: 0.2,
+                metalness: 0.8
+            });
+            const cylinder = new THREE.Mesh(cylinderGeo, material);
+            cylinder.castShadow = true;
+            cylinder.name = 'body';
+            group.add(cylinder);
+            
+            // Bottom sphere cap
+            const sphereGeo = new THREE.SphereGeometry(capsuleRadius, 16, 16);
+            const bottomCap = new THREE.Mesh(sphereGeo, material);
+            bottomCap.position.y = -capsuleLength / 2;
+            group.add(bottomCap);
+            
+            // HEAD - sphere on top (this is the headshot zone)
+            const headGeo = new THREE.SphereGeometry(capsuleRadius, 16, 16);
+            const headMaterial = new THREE.MeshStandardMaterial({
+                color: 0xff2244,
+                emissive: 0xff1122,
+                emissiveIntensity: 0.8,
+                roughness: 0.2,
+                metalness: 0.8
+            });
+            const head = new THREE.Mesh(headGeo, headMaterial);
+            head.position.y = capsuleLength / 2 + capsuleRadius;
+            head.castShadow = true;
+            head.name = 'head';
+            group.add(head);
+            
+            // Glow effect around entire capsule
+            const glowGeo = new THREE.SphereGeometry(capsuleRadius * 2.5, 16, 16);
+            const glowMat = new THREE.MeshBasicMaterial({
+                color: 0xff2244,
+                transparent: true,
+                opacity: 0.2
+            });
+            const glowMesh = new THREE.Mesh(glowGeo, glowMat);
+            group.add(glowMesh);
+
+            // Random starting position within arena based on difficulty
+            const startX = (Math.random() - 0.5) * config.capsuleRange * 2;
+            const startZ = -10 + (Math.random() - 0.5) * (config.capsuleMoveZ ? 4 : 0);
+            
+            group.position.set(startX, 1.5, startZ);
+            scene.add(group);
+
+            capsule = {
+                mesh: group,
+                config: config,
+                material: material,
+                headMaterial: headMaterial,
+                glowMaterial: glowMat,
+                direction: Math.random() > 0.5 ? 1 : -1,
+                zDirection: Math.random() > 0.5 ? 1 : -1,
+                hit: false,
+                isHeadshot: false
+            };
+        }
+
+        function removeCapsule() {
+            if (capsule) {
+                scene.remove(capsule.mesh);
+                capsule = null;
+            }
+        }
+
+        function setupEvents() {
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mousedown', onMouseDown);
+            document.addEventListener('pointerlockchange', onPointerLockChange);
+            window.addEventListener('resize', onWindowResize);
+        }
+
+        // ==================== GAME CONTROLS ====================
+        function selectDifficulty(diff) {
+            selectedDifficulty = diff;
+            
+            document.querySelectorAll('.diff-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            document.querySelector(`[data-diff="${diff}"]`).classList.add('selected');
+            document.getElementById('start-btn').style.display = 'block';
+        }
+
+        function startGame() {
+            if (!selectedDifficulty) return;
+
+            document.getElementById('menu-screen').style.display = 'none';
+            document.getElementById('click-to-start').style.display = 'flex';
+            document.getElementById('hud').style.display = 'flex';
+            document.getElementById('instructions').style.display = 'block';
+            document.getElementById('crosshair').style.display = 'none';
+            document.getElementById('countdown').style.display = 'none';
+            document.getElementById('pause-btn').style.display = 'block';
+
+            // Reset stats
+            hits = 0;
+            headshots = 0;
+            attempts = 0;
+            currentRound = 0;
+            updateHUD();
+            
+            renderer.domElement.requestPointerLock();
+            gameState = 'waiting';
+        }
+
+        function lockPointer() {
+            renderer.domElement.requestPointerLock();
+        }
+
+        function onPointerLockChange() {
+            isPointerLocked = document.pointerLockElement === renderer.domElement;
+            
+            if (isPointerLocked && gameState === 'waiting') {
+                beginCountdown();
+            } else if (!isPointerLocked && gameState !== 'menu') {
+                // Paused
+            }
+        }
+
+        function beginCountdown() {
+            document.getElementById('click-to-start').style.display = 'none';
+            document.getElementById('countdown').style.display = 'block';
+            document.getElementById('crosshair').style.display = 'block';
+            
+            let count = 3;
+            const countdownEl = document.getElementById('countdown');
+            countdownEl.textContent = count;
+            countdownEl.classList.remove('go');
+            
+            const countInterval = setInterval(() => {
+                count--;
+                if (count > 0) {
+                    countdownEl.textContent = count;
+                } else if (count === 0) {
+                    countdownEl.textContent = 'GO!';
+                    countdownEl.classList.add('go');
+                } else {
+                    clearInterval(countInterval);
+                    countdownEl.style.display = 'none';
+                    startRound();
+                }
+            }, 1000);
+        }
+
+        function startRound() {
+            const config = DIFFICULTY[selectedDifficulty];
+            currentRound++;
+            
+            // Reset jump state
+            jumpState.isJumping = false;
+            jumpState.jumpProgress = 0;
+            jumpState.startY = 1.6;
+            jumpState.targetY = 1.6;
+            camera.position.y = 1.6;
+            
+            // Create capsule
+            createCapsule(config);
+            
+            // Start jump immediately
+            jumpState.isJumping = true;
+            jumpState.jumpProgress = 0;
+            jumpState.startY = 1.6;
+            jumpState.targetY = config.jumpHeight;
+            
+            gameState = 'playing';
+        }
+
+        function onMouseMove(event) {
+            if (!isPointerLocked) return;
+            
+            const sensitivity = 0.002;
+            
+            cameraRotationY -= event.movementX * sensitivity;
+            cameraRotationX -= event.movementY * sensitivity;
+            
+            cameraRotationX = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, cameraRotationX));
+            
+            camera.rotation.order = 'YXZ';
+            camera.rotation.y = cameraRotationY;
+            camera.rotation.x = cameraRotationX;
+        }
+
+        function onMouseDown(event) {
+            if (!isPointerLocked || gameState !== 'playing') return;
+            if (event.button !== 0) return;
+            
+            // Only allow shooting during jump (when above wall)
+            if (camera.position.y < 2.5) return;
+            
+            attempts++;
+            
+            // Raycast to check hit
+            const raycaster = new THREE.Raycaster();
+            raycaster.setFromCamera(new THREE.Vector2(0, 0), camera);
+            
+            if (capsule && !capsule.hit) {
+                const intersects = raycaster.intersectObject(capsule.mesh, true);
+                
+                if (intersects.length > 0) {
+                    // Check if hit was on head or body
+                    const hitObject = intersects[0].object;
+                    const isHeadshot = hitObject.name === 'head';
+                    
+                    // Hit!
+                    hits++;
+                    if (isHeadshot) {
+                        headshots++;
+                    }
+                    capsule.hit = true;
+                    capsule.isHeadshot = isHeadshot;
+                    
+                    // Visual feedback - yellow for headshot, green for body
+                    if (isHeadshot) {
+                        capsule.material.color.setHex(0xffff00);
+                        capsule.material.emissive.setHex(0xffaa00);
+                        capsule.headMaterial.color.setHex(0xffff00);
+                        capsule.headMaterial.emissive.setHex(0xffaa00);
+                        capsule.glowMaterial.color.setHex(0xffff00);
+                    } else {
+                        capsule.material.color.setHex(0x00ff88);
+                        capsule.material.emissive.setHex(0x00ff66);
+                        capsule.glowMaterial.color.setHex(0x00ff88);
+                    }
+                    
+                    // Show hit marker
+                    const hitMarker = document.getElementById('hit-marker');
+                    hitMarker.classList.add('show');
+                    setTimeout(() => hitMarker.classList.remove('show'), 150);
+                }
+            }
+            
+            updateHUD();
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function updateHUD() {
+            document.getElementById('hits').textContent = hits;
+            document.getElementById('headshots').textContent = headshots;
+            document.getElementById('attempts').textContent = attempts;
+            const acc = attempts > 0 ? Math.round((hits / attempts) * 100) : 0;
+            document.getElementById('accuracy').textContent = acc;
+        }
+
+        function endRound() {
+            removeCapsule();
+            
+            // Check if more rounds
+            const config = DIFFICULTY[selectedDifficulty];
+            if (currentRound < config.rounds) {
+                // Next round after short delay
+                setTimeout(() => {
+                    if (gameState === 'playing') {
+                        beginCountdown();
+                    }
+                }, 1000);
+            } else {
+                // End game
+                endGame();
+            }
+        }
+
+        function endGame() {
+            gameState = 'results';
+            document.exitPointerLock();
+            
+            const acc = attempts > 0 ? Math.round((hits / attempts) * 100) : 0;
+            
+            document.getElementById('hud').style.display = 'none';
+            document.getElementById('crosshair').style.display = 'none';
+            document.getElementById('instructions').style.display = 'none';
+            document.getElementById('countdown').style.display = 'none';
+            document.getElementById('pause-btn').style.display = 'none';
+
+            document.getElementById('final-hits').textContent = hits;
+            document.getElementById('final-headshots').textContent = headshots;
+            document.getElementById('final-attempts').textContent = attempts;
+            document.getElementById('final-accuracy').textContent = acc + '%';
+            
+            document.getElementById('results-screen').style.display = 'flex';
+
+            // Save score to localStorage (works even if parent page is closed)
+            const storageKey = 'aimtrainer_hard_jumppeek';
+            const currentBest = localStorage.getItem(storageKey);
+            const finalScore = hits * 100;
+            if (!currentBest || finalScore > parseInt(currentBest)) {
+                localStorage.setItem(storageKey, finalScore);
+            }
+
+            // Send score to parent window (index page) - use hits as score
+            if (window.opener) {
+                window.opener.postMessage({ type: 'gameScore', gameId: 'jumppeek', score: finalScore, difficulty: selectedDifficulty }, '*');
+            }
+        }
+
+        function returnToMenu() {
+            document.getElementById('results-screen').style.display = 'none';
+            document.getElementById('menu-screen').style.display = 'flex';
+            document.getElementById('pause-menu').style.display = 'none';
+            document.getElementById('pause-btn').style.display = 'none';
+
+            removeCapsule();
+
+            cameraRotationX = 0;
+            cameraRotationY = 0;
+            camera.rotation.set(0, 0, 0);
+            camera.position.y = 1.6;
+
+            gameState = 'menu';
+        }
+
+        // ==================== PAUSE MENU ====================
+function showPauseMenu() {
+if (gameState !== 'playing' && gameState !== 'waiting') return;
+            if (gameState === 'playing') {
+                document.exitPointerLock();
+                gameState = 'paused';
+            }
+            // Stop the timer when paused
+            clearInterval(timerInterval);
+            timerInterval = null;
+            document.getElementById('pause-menu').style.display = 'flex';
+            document.getElementById('pause-btn').style.display = 'none';
+        }
+
+        function resumeGame() {
+            document.getElementById('pause-menu').style.display = 'none';
+            document.getElementById('pause-btn').style.display = 'block';
+            if (gameState === 'paused') {
+                gameState = 'waiting';
+                // Restart the timer
+                timerInterval = setInterval(() => {
+                    timeRemaining--;
+                    updateHUD();
+                    if (timeRemaining <= 0) {
+                        endGame();
+                    }
+                }, 1000);
+                renderer.domElement.requestPointerLock();
+            }
+        }
+
+function goHome() {
+            window.location.href = 'index.html';
+        }
+
+        function restartGame() {
+            // Restart with the same difficulty
+            document.getElementById('pause-menu').style.display = 'none';
+            document.getElementById('pause-btn').style.display = 'block';
+            startGame();
+        }
+
+        // Handle ESC key for pause
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && (gameState === 'playing' || gameState === 'waiting')) {
+                showPauseMenu();
+            }
+        });
+
+        // ==================== ANIMATION ====================
+        let lastTime = 0;
+        
+        function animate(currentTime) {
+            requestAnimationFrame(animate);
+            
+            const deltaTime = lastTime ? (currentTime - lastTime) / 1000 : 1/60;
+            lastTime = currentTime;
+
+            if (gameState === 'playing') {
+                updateJump(deltaTime);
+                updateCapsule(deltaTime);
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        function updateJump(deltaTime) {
+            if (!jumpState.isJumping) return;
+            
+            const config = DIFFICULTY[selectedDifficulty];
+            
+            // Progress jump
+            jumpState.jumpProgress += deltaTime / config.jumpDuration;
+            
+            if (jumpState.jumpProgress >= 1) {
+                // Land
+                jumpState.jumpProgress = 1;
+                jumpState.isJumping = false;
+                camera.position.y = jumpState.startY;
+                
+                // End round after landing
+                setTimeout(() => endRound(), 300);
+            } else {
+                // Parabolic jump curve
+                const t = jumpState.jumpProgress;
+                const jumpY = jumpState.startY + (jumpState.targetY - jumpState.startY) * Math.sin(t * Math.PI);
+                camera.position.y = jumpY;
+            }
+        }
+
+        function updateCapsule(deltaTime) {
+            if (!capsule || capsule.hit) return;
+            
+            const config = capsule.config;
+            
+            // Move capsule based on difficulty settings
+            if (config.capsuleMoveX) {
+                // X movement - side to side
+                const movement = capsule.direction * config.capsuleSpeed * deltaTime;
+                capsule.mesh.position.x += movement;
+                
+                // Bounce off walls of arena
+                if (capsule.mesh.position.x > config.capsuleRange) {
+                    capsule.mesh.position.x = config.capsuleRange;
+                    capsule.direction = -1;
+                } else if (capsule.mesh.position.x < -config.capsuleRange) {
+                    capsule.mesh.position.x = -config.capsuleRange;
+                    capsule.direction = 1;
+                }
+            }
+            
+            if (config.capsuleMoveZ) {
+                // Z movement - toward/away
+                const zMovement = capsule.zDirection * config.capsuleSpeed * 0.5 * deltaTime;
+                capsule.mesh.position.z += zMovement;
+                
+                // Bounce off front/back of arena
+                if (capsule.mesh.position.z > -6) {
+                    capsule.mesh.position.z = -6;
+                    capsule.zDirection = -1;
+                } else if (capsule.mesh.position.z < -14) {
+                    capsule.mesh.position.z = -14;
+                    capsule.zDirection = 1;
+                }
+            }
+            
+            // Rotate capsule slightly for visual effect
+            capsule.mesh.rotation.y += 0.02;
+        }
+
+        // Start the game
+        init();
+    </script>
+</body>
+</html>

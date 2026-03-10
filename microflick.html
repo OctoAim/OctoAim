@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micro Flick Trainer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #000;
+            cursor: crosshair;
+        }
+
+        #game-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        /* Menu Screen */
+        #menu-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0f1a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        #menu-screen h1 {
+            font-size: 56px;
+            color: #00ff88;
+            text-shadow: 0 0 30px #00ff88, 0 0 60px #00ff8855;
+            margin-bottom: 10px;
+            letter-spacing: 4px;
+        }
+
+        #menu-screen .subtitle {
+            color: #888;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        #menu-screen .instructions {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 40px;
+            text-align: center;
+            line-height: 1.8;
+            max-width: 500px;
+        }
+
+        /* Difficulty Buttons */
+        #difficulty-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .diff-btn {
+            width: 200px;
+            padding: 30px 20px;
+            background: linear-gradient(145deg, #1a1a2e, #0f0f1a);
+            border: 2px solid #333;
+            border-radius: 12px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .diff-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,255,136,0.3);
+        }
+
+        .diff-btn.selected {
+            border-color: #00ff88;
+            box-shadow: 0 0 20px rgba(0,255,136,0.4);
+        }
+
+        .diff-btn .diff-name {
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .diff-btn .diff-desc {
+            font-size: 13px;
+            color: #888;
+        }
+
+        .diff-btn.easy .diff-name { color: #00ff88; }
+        .diff-btn.medium .diff-name { color: #ffaa00; }
+        .diff-btn.hard .diff-name { color: #ff4444; }
+
+        /* Start Button */
+        #start-btn {
+            padding: 18px 70px;
+            font-size: 22px;
+            background: #00ff88;
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: none;
+        }
+
+        #start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #00ff88;
+        }
+
+        /* Crosshair */
+        #crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        #crosshair .dot {
+            width: 6px;
+            height: 6px;
+            background: #00ff88;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px #00ff88;
+        }
+
+        #crosshair .line {
+            position: absolute;
+            background: #00ff88;
+            box-shadow: 0 0 8px #00ff88;
+        }
+
+        #crosshair .line.top {
+            width: 2px;
+            height: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 50%;
+        }
+
+        #crosshair .line.bottom {
+            width: 2px;
+            height: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 50%;
+        }
+
+        #crosshair .line.left {
+            height: 2px;
+            width: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 50%;
+        }
+
+        #crosshair .line.right {
+            height: 2px;
+            width: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 50%;
+        }
+
+        /* Laser */
+        #laser {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 45;
+            display: none;
+        }
+
+        #laser .beam {
+            position: absolute;
+            width: 3px;
+            background: linear-gradient(to bottom, #ff0000, #ff4444, #ff0000);
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+            box-shadow: 0 0 8px #ff0000, 0 0 15px #ff4444;
+            opacity: 0;
+            transition: opacity 0.1s;
+        }
+
+        #laser .beam.active {
+            opacity: 1;
+        }
+
+        /* HUD */
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 30px;
+            color: #00ff88;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00ff88;
+            display: none;
+            z-index: 50;
+        }
+
+        #hud div {
+            background: rgba(0,0,0,0.7);
+            padding: 12px 25px;
+            border-radius: 8px;
+            border: 1px solid #00ff8844;
+        }
+
+        /* Results Screen */
+        #results-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        #results-screen h2 {
+            font-size: 48px;
+            color: #00ff88;
+            text-shadow: 0 0 20px #00ff88;
+            margin-bottom: 30px;
+        }
+
+        #results-screen .stats {
+            display: flex;
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+
+        #results-screen .stat {
+            text-align: center;
+        }
+
+        #results-screen .stat-value {
+            font-size: 48px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        #results-screen .stat-label {
+            font-size: 16px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        #results-screen button {
+            padding: 15px 50px;
+            font-size: 20px;
+            background: #00ff88;
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        #results-screen button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #00ff88;
+        }
+
+        /* Instructions */
+        .instructions-div {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+            display: none;
+            z-index: 50;
+        }
+
+        /* Click to start overlay */
+        #click-to-start {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 80;
+            cursor: pointer;
+        }
+
+        #click-to-start h2 {
+            color: #00ff88;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        #click-to-start p {
+            color: #888;
+            font-size: 18px;
+        }
+
+        /* Hold progress indicator */
+        .hold-indicator {
+            position: absolute;
+            width: 40px;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+            pointer-events: none;
+            z-index: 55;
+            display: none;
+        }
+
+        .hold-indicator .progress {
+            height: 100%;
+            background: #00ff88;
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.05s linear;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <!-- Menu Screen -->
+        <div id="menu-screen">
+            <h1>MICRO FLICK TRAINER</h1>
+            <p class="subtitle">Precision & Control - Hold to Destroy</p>
+            <p class="instructions">
+                Hold your crosshair on each target for 500ms to destroy it.<br>
+                Targets will respawn in new positions.<br>
+                5 targets on screen at once.
+            </p>
+            
+            <div id="difficulty-grid">
+                <div class="diff-btn easy" data-diff="easy" onclick="selectDifficulty('easy')">
+                    <div class="diff-name">EASY</div>
+                    <div class="diff-desc">Static targets<br>45 seconds<br>More points</div>
+                </div>
+                <div class="diff-btn medium" data-diff="medium" onclick="selectDifficulty('medium')">
+                    <div class="diff-name">MEDIUM</div>
+                    <div class="diff-desc">Moving targets<br>35 seconds<br>Intermittent</div>
+                </div>
+                <div class="diff-btn hard" data-diff="hard" onclick="selectDifficulty('hard')">
+                    <div class="diff-name">HARD</div>
+                    <div class="diff-desc">Fast targets<br>30 seconds<br>More movement</div>
+                </div>
+            </div>
+            
+            <button id="start-btn" onclick="startGame()">START TRAINING</button>
+        </div>
+        
+        <!-- Click to Start Overlay -->
+        <div id="click-to-start" onclick="lockPointer()">
+            <h2>CLICK TO START</h2>
+            <p>Hold crosshair on targets for 500ms!</p>
+        </div>
+        
+        <!-- HUD -->
+        <div id="hud">
+            <div>SCORE: <span id="score">0</span></div>
+            <div>TIME: <span id="timer">60</span></div>
+            <div>DESTROYED: <span id="hits">0</span></div>
+            <div>AVG: <span id="avg-hold">0</span>ms</div>
+        </div>
+        
+        <!-- Crosshair -->
+        <div id="crosshair">
+            <div class="dot"></div>
+            <div class="line top"></div>
+            <div class="line bottom"></div>
+            <div class="line left"></div>
+            <div class="line right"></div>
+        </div>
+        
+        <!-- Laser -->
+        <div id="laser">
+            <div class="beam" id="laser-beam"></div>
+        </div>
+        
+        <!-- Instructions -->
+        <div class="instructions-div" id="instructions">
+            <strong>Controls:</strong> Mouse to aim • Hold crosshair on target for 500ms • ESC to pause
+        </div>
+        
+        <!-- Results Screen -->
+        <div id="results-screen">
+            <h2>ROUND COMPLETE</h2>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="final-score">0</div>
+                    <div class="stat-label">Score</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="final-destroyed">0</div>
+                    <div class="stat-label">Targets Destroyed</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="final-time">0s</div>
+                    <div class="stat-label">Time</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="final-avg">0ms</div>
+                    <div class="stat-label">Avg Hold Time</div>
+                </div>
+            </div>
+            <button onclick="returnToMenu()">RETURN TO MENU</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // ==================== GAME CONFIGURATION ====================
+        const DIFFICULTY = {
+            easy: {
+                targetSize: 0.25,
+                duration: 45,
+                points: 100,
+                moveSpeed: 0,
+                moveRange: 0,
+                pauseDuration: 0
+            },
+            medium: {
+                targetSize: 0.22,
+                duration: 35,
+                points: 200,
+                moveSpeed: 2,
+                moveRange: 4,
+                pauseDuration: 800
+            },
+            hard: {
+                targetSize: 0.18,
+                duration: 30,
+                points: 400,
+                moveSpeed: 4,
+                moveRange: 7,
+                pauseDuration: 500
+            }
+        };
+
+        const HOLD_TIME_REQUIRED = 500; // ms
+        const NUM_TARGETS = 5;
+        const MIN_DISTANCE_BETWEEN = 4; // Minimum distance between targets
+
+        // ==================== GAME STATE ====================
+        let scene, camera, renderer;
+        let targets = [];
+        let selectedDifficulty = null;
+        let gameState = 'menu';
+        let score = 0;
+        let timeRemaining = 0;
+        let hits = 0;
+        let holdTimes = [];
+        let gameStartTime = 0;
+        let timerInterval = null;
+        let isPointerLocked = false;
+        
+        // Camera rotation
+        let cameraRotationX = 0;
+        let cameraRotationY = 0;
+
+        // Current target being held
+        let currentHeldTarget = null;
+        let holdStartTime = 0;
+        let lastFrameTime = 0;
+
+        // ==================== INITIALIZATION ====================
+        function init() {
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x1a1a2e);
+            scene.fog = new THREE.Fog(0x1a1a2e, 30, 80);
+
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 1.6, 0);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            document.getElementById('game-container').appendChild(renderer.domElement);
+
+            setupLighting();
+            createEnvironment();
+            setupEvents();
+            animate();
+            lastFrameTime = performance.now();
+        }
+
+        function setupLighting() {
+            const ambient = new THREE.AmbientLight(0x404060, 0.6);
+            scene.add(ambient);
+
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            dirLight.position.set(10, 20, 10);
+            dirLight.castShadow = true;
+            dirLight.shadow.mapSize.width = 2048;
+            dirLight.shadow.mapSize.height = 2048;
+            scene.add(dirLight);
+
+            const pointLight1 = new THREE.PointLight(0x00ff88, 0.4, 40);
+            pointLight1.position.set(-15, 8, -15);
+            scene.add(pointLight1);
+
+            const pointLight2 = new THREE.PointLight(0xff4488, 0.3, 40);
+            pointLight2.position.set(15, 8, -15);
+            scene.add(pointLight2);
+            
+            const pointLight3 = new THREE.PointLight(0x4488ff, 0.3, 40);
+            pointLight3.position.set(0, 10, -30);
+            scene.add(pointLight3);
+        }
+
+        function createEnvironment() {
+            const floorGeometry = new THREE.PlaneGeometry(100, 100);
+            const floorMaterial = new THREE.MeshStandardMaterial({
+                color: 0x2a2a4a,
+                roughness: 0.8,
+                metalness: 0.2
+            });
+            const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+            floor.rotation.x = -Math.PI / 2;
+            floor.receiveShadow = true;
+            scene.add(floor);
+
+            const gridHelper = new THREE.GridHelper(100, 50, 0x444466, 0x333355);
+            gridHelper.position.y = 0.01;
+            scene.add(gridHelper);
+
+            const wallMaterial = new THREE.MeshStandardMaterial({
+                color: 0x3a3a5a,
+                roughness: 0.9,
+                transparent: true,
+                opacity: 0.5
+            });
+
+            const backWall = new THREE.Mesh(new THREE.PlaneGeometry(100, 25), wallMaterial);
+            backWall.position.set(0, 12.5, -50);
+            scene.add(backWall);
+
+            const leftWall = new THREE.Mesh(new THREE.PlaneGeometry(100, 25), wallMaterial);
+            leftWall.position.set(-50, 12.5, 0);
+            leftWall.rotation.y = Math.PI / 2;
+            scene.add(leftWall);
+
+            const rightWall = new THREE.Mesh(new THREE.PlaneGeometry(100, 25), wallMaterial);
+            rightWall.position.set(50, 12.5, 0);
+            rightWall.rotation.y = -Math.PI / 2;
+            scene.add(rightWall);
+        }
+
+        function setupEvents() {
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('pointerlockchange', onPointerLockChange);
+            document.addEventListener('keydown', onKeyDown);
+            window.addEventListener('resize', onWindowResize);
+        }
+
+        // ==================== GAME CONTROLS ====================
+        function selectDifficulty(diff) {
+            selectedDifficulty = diff;
+            
+            document.querySelectorAll('.diff-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            document.querySelector(`[data-diff="${diff}"]`).classList.add('selected');
+            document.getElementById('start-btn').style.display = 'block';
+        }
+
+        function startGame() {
+            if (!selectedDifficulty) return;
+            
+            // Clear targets
+            targets.forEach(t => scene.remove(t.mesh));
+            targets = [];
+
+            document.getElementById('menu-screen').style.display = 'none';
+            document.getElementById('click-to-start').style.display = 'flex';
+            document.getElementById('hud').style.display = 'flex';
+            document.getElementById('instructions').style.display = 'block';
+            document.getElementById('crosshair').style.display = 'none';
+            document.getElementById('laser').style.display = 'none';
+
+            const config = DIFFICULTY[selectedDifficulty];
+            score = 0;
+            timeRemaining = config.duration;
+            hits = 0;
+            holdTimes = [];
+            currentHeldTarget = null;
+            holdStartTime = 0;
+            
+            updateHUD();
+            renderer.domElement.requestPointerLock();
+            
+            gameState = 'waiting';
+        }
+
+        function lockPointer() {
+            renderer.domElement.requestPointerLock();
+        }
+
+        function beginGame() {
+            const config = DIFFICULTY[selectedDifficulty];
+            
+            document.getElementById('click-to-start').style.display = 'none';
+            document.getElementById('crosshair').style.display = 'block';
+            document.getElementById('laser').style.display = 'block';
+
+            // Create initial targets
+            for (let i = 0; i < NUM_TARGETS; i++) {
+                createTarget(config, i);
+            }
+
+            gameStartTime = Date.now();
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateHUD();
+                if (timeRemaining <= 0) {
+                    endGame();
+                }
+            }, 1000);
+
+            gameState = 'playing';
+            lastFrameTime = performance.now();
+        }
+
+        function createTarget(config, index) {
+            const geometry = new THREE.SphereGeometry(config.targetSize, 32, 32);
+            const material = new THREE.MeshStandardMaterial({
+                color: 0xff2244,
+                emissive: 0xff1122,
+                emissiveIntensity: 0.6,
+                roughness: 0.2,
+                metalness: 0.8
+            });
+            
+            const mesh = new THREE.Mesh(geometry, material);
+            mesh.castShadow = true;
+            
+            // Glow effect
+            const glowGeometry = new THREE.SphereGeometry(config.targetSize * 1.5, 16, 16);
+            const glowMaterial = new THREE.MeshBasicMaterial({
+                color: 0xff2244,
+                transparent: true,
+                opacity: 0.2
+            });
+            const glowMesh = new THREE.Mesh(glowGeometry, glowMaterial);
+            mesh.add(glowMesh);
+
+            // Find a good position
+            const position = findValidPosition(config);
+            mesh.position.copy(position);
+            scene.add(mesh);
+
+// Target state - always start with a brief pause before moving
+            const target = {
+                mesh,
+                config,
+                basePosition: position.clone(),
+                currentPosition: position.clone(),
+                // Movement state - start paused briefly
+                isPaused: false,
+                pauseTimer: -500, // Start with negative so first pause is shorter
+                moveDirection: new THREE.Vector3(
+                    Math.random() - 0.5,
+                    Math.random() - 0.5,
+                    Math.random() - 0.5
+                ).normalize(),
+                moveProgress: 0,
+                movePhase: 'idle', // Start idle, then move
+                index
+            };
+
+            targets.push(target);
+            return target;
+        }
+
+        function findValidPosition(config) {
+            const maxAttempts = 50;
+            const minY = 1;
+            const maxY = 6;
+            const minZ = -20;
+            const maxZ = -3;
+            const minX = -15;
+            const maxX = 15;
+            
+            for (let attempt = 0; attempt < maxAttempts; attempt++) {
+                const pos = new THREE.Vector3(
+                    minX + Math.random() * (maxX - minX),
+                    minY + Math.random() * (maxY - minY),
+                    minZ + Math.random() * (maxZ - minZ)
+                );
+                
+                // Check distance from all existing targets
+                let valid = true;
+                for (const target of targets) {
+                    if (pos.distanceTo(target.currentPosition) < MIN_DISTANCE_BETWEEN) {
+                        valid = false;
+                        break;
+                    }
+                }
+                
+                if (valid) return pos;
+            }
+            
+            // Fallback - just return random position
+            return new THREE.Vector3(
+                minX + Math.random() * (maxX - minX),
+                minY + Math.random() * (maxY - minY),
+                minZ + Math.random() * (maxZ - minZ)
+            );
+        }
+
+function respawnTarget(target) {
+            const config = DIFFICULTY[selectedDifficulty];
+            const newPos = findValidPosition(config);
+            
+            target.basePosition.copy(newPos);
+            target.currentPosition.copy(newPos);
+            target.mesh.position.copy(newPos);
+            target.isPaused = false;
+            target.pauseTimer = -500;
+            target.moveProgress = 0;
+            target.movePhase = 'idle';
+            target.moveDirection.set(
+                Math.random() - 0.5,
+                Math.random() - 0.5,
+                Math.random() - 0.5
+            ).normalize();
+        }
+
+        function onMouseMove(event) {
+            if (!isPointerLocked) return;
+            
+            const sensitivity = 0.002;
+            
+            cameraRotationY -= event.movementX * sensitivity;
+            cameraRotationX -= event.movementY * sensitivity;
+            
+            cameraRotationX = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, cameraRotationX));
+            
+            camera.rotation.order = 'YXZ';
+            camera.rotation.y = cameraRotationY;
+            camera.rotation.x = cameraRotationX;
+        }
+
+        function onPointerLockChange() {
+            isPointerLocked = document.pointerLockElement === renderer.domElement;
+            
+            if (!isPointerLocked && gameState === 'playing') {
+                gameState = 'paused';
+                document.getElementById('click-to-start').style.display = 'flex';
+                document.getElementById('click-to-start').querySelector('h2').textContent = 'PAUSED';
+                document.getElementById('laser').style.display = 'none';
+            } else if (isPointerLocked && gameState === 'waiting') {
+                beginGame();
+            } else if (isPointerLocked && gameState === 'paused') {
+                gameState = 'playing';
+                document.getElementById('click-to-start').style.display = 'none';
+                document.getElementById('laser').style.display = 'block';
+                lastFrameTime = performance.now();
+            }
+        }
+
+        function onKeyDown(event) {
+            if (event.key === 'Escape' && gameState === 'playing') {
+                document.exitPointerLock();
+            }
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function updateHUD() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('timer').textContent = timeRemaining;
+            document.getElementById('hits').textContent = hits;
+            if (holdTimes.length > 0) {
+                const avg = Math.round(holdTimes.reduce((a,b)=>a+b,0) / holdTimes.length);
+                document.getElementById('avg-hold').textContent = avg;
+            }
+        }
+
+        function endGame() {
+            gameState = 'results';
+            clearInterval(timerInterval);
+            document.exitPointerLock();
+
+            const actualTime = (Date.now() - gameStartTime) / 1000;
+            const finalTime = Math.round(actualTime);
+            const avgHold = holdTimes.length > 0 
+                ? Math.round(holdTimes.reduce((a,b)=>a+b,0) / holdTimes.length)
+                : 0;
+
+            document.getElementById('hud').style.display = 'none';
+            document.getElementById('crosshair').style.display = 'none';
+            document.getElementById('laser').style.display = 'none';
+            document.getElementById('instructions').style.display = 'none';
+
+            document.getElementById('final-score').textContent = score;
+            document.getElementById('final-destroyed').textContent = hits;
+            document.getElementById('final-time').textContent = finalTime + 's';
+            document.getElementById('final-avg').textContent = avgHold + 'ms';
+
+            document.getElementById('results-screen').style.display = 'flex';
+
+            // Save score to localStorage (works even if parent page is closed)
+            const storageKey = 'aimtrainer_hard_microflick';
+            const currentBest = localStorage.getItem(storageKey);
+            if (!currentBest || score > parseInt(currentBest)) {
+                localStorage.setItem(storageKey, score);
+            }
+
+            // Send score to parent window (index page)
+            if (window.opener) {
+                window.opener.postMessage({ type: 'gameScore', gameId: 'microflick', score: score, difficulty: selectedDifficulty }, '*');
+            }
+        }
+
+        function returnToMenu() {
+            document.getElementById('results-screen').style.display = 'none';
+            document.getElementById('menu-screen').style.display = 'flex';
+            
+            targets.forEach(t => scene.remove(t.mesh));
+            targets = [];
+            
+            cameraRotationX = 0;
+            cameraRotationY = 0;
+            camera.rotation.set(0, 0, 0);
+            
+            gameState = 'menu';
+        }
+
+        // ==================== ANIMATION ====================
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const currentTime = performance.now();
+            const deltaTime = (currentTime - lastFrameTime) / 1000;
+            lastFrameTime = currentTime;
+
+            if (gameState === 'playing') {
+                updateTargets(deltaTime * 1000); // Convert to ms
+                checkHolding(currentTime);
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        function updateTargets(deltaMs) {
+            const config = DIFFICULTY[selectedDifficulty];
+            
+            if (config.moveSpeed === 0) return; // Easy - no movement
+            
+            const dt = deltaMs / 1000; // Convert to seconds
+            
+            targets.forEach(target => {
+                if (target.movePhase === 'idle') {
+                    // Waiting to start moving
+                    target.pauseTimer += deltaMs;
+                    if (target.pauseTimer >= config.pauseDuration) {
+                        target.pauseTimer = 0;
+                        target.movePhase = 'moving';
+                        // Pick random direction
+                        target.moveDirection.set(
+                            Math.random() - 0.5,
+                            Math.random() - 0.5,
+                            Math.random() - 0.5
+                        ).normalize();
+                    }
+                } else if (target.movePhase === 'moving') {
+                    // Moving in direction
+                    const moveAmount = config.moveSpeed * dt;
+                    const movement = target.moveDirection.clone().multiplyScalar(moveAmount);
+                    
+                    target.currentPosition.add(movement);
+                    
+                    // Calculate distance from base
+                    const distFromBase = target.currentPosition.distanceTo(target.basePosition);
+                    
+                    if (distFromBase >= config.moveRange) {
+                        // Reached destination, pause again
+                        target.movePhase = 'idle';
+                        target.pauseTimer = 0;
+                        target.basePosition.copy(target.currentPosition);
+                    }
+                    
+                    // Keep within bounds
+                    target.currentPosition.x = Math.max(-15, Math.min(15, target.currentPosition.x));
+                    target.currentPosition.y = Math.max(1, Math.min(6, target.currentPosition.y));
+                    target.currentPosition.z = Math.max(-20, Math.min(-3, target.currentPosition.z));
+                    
+                    target.mesh.position.copy(target.currentPosition);
+                }
+                
+                // Rotate for visual effect
+                target.mesh.rotation.y += 0.01;
+            });
+        }
+
+        function checkHolding(currentTime) {
+            // Raycast from camera center
+            const raycaster = new THREE.Raycaster();
+            raycaster.setFromCamera(new THREE.Vector2(0, 0), camera);
+            
+            let hitTarget = null;
+            
+            // Check if crosshair is on any target
+            for (const target of targets) {
+                const intersects = raycaster.intersectObject(target.mesh, true);
+                if (intersects.length > 0) {
+                    hitTarget = target;
+                    break;
+                }
+            }
+            
+            const laserBeam = document.getElementById('laser-beam');
+            
+            if (hitTarget) {
+                // Show laser
+                laserBeam.classList.add('active');
+                
+                // Calculate laser length to reach target
+                const distance = camera.position.distanceTo(hitTarget.mesh.position);
+                laserBeam.style.height = distance + 'px';
+                laserBeam.style.top = -(distance / 2) + 'px';
+                
+                if (currentHeldTarget === hitTarget) {
+                    // Continue holding
+                    const holdDuration = currentTime - holdStartTime;
+                    
+                    // Update target glow based on hold progress
+                    const progress = Math.min(holdDuration / HOLD_TIME_REQUIRED, 1);
+                    hitTarget.mesh.material.emissiveIntensity = 0.6 + progress * 0.4;
+                    hitTarget.mesh.children[0].material.opacity = 0.2 + progress * 0.3;
+                    
+                    // Change color as hold progresses (red to green)
+                    const r = Math.round(255 - progress * 255);
+                    const g = Math.round(34 + progress * 221);
+                    hitTarget.mesh.material.color.setRGB(r/255, g/255, 0x34/255);
+                    hitTarget.mesh.material.emissive.setHex(g > 200 ? 0x00ff66 : 0xff1122);
+                    
+                    if (holdDuration >= HOLD_TIME_REQUIRED) {
+                        // Target destroyed!
+                        destroyTarget(hitTarget);
+                        currentHeldTarget = null;
+                        holdStartTime = currentTime;
+                    }
+                } else {
+                    // Started holding a new target
+                    currentHeldTarget = hitTarget;
+                    holdStartTime = currentTime;
+                }
+            } else {
+                // Not hitting any target
+                laserBeam.classList.remove('active');
+                
+                // Reset any target that was being held
+                if (currentHeldTarget) {
+                    currentHeldTarget.mesh.material.color.setHex(0xff2244);
+                    currentHeldTarget.mesh.material.emissive.setHex(0xff1122);
+                    currentHeldTarget.mesh.material.emissiveIntensity = 0.6;
+                    currentHeldTarget.mesh.children[0].material.opacity = 0.2;
+                    currentHeldTarget = null;
+                }
+            }
+        }
+
+        function destroyTarget(target) {
+            const config = DIFFICULTY[selectedDifficulty];
+            const holdDuration = performance.now() - holdStartTime;
+            holdTimes.push(holdDuration);
+            
+            // Calculate score based on difficulty and hold time
+            const holdBonus = Math.max(0, HOLD_TIME_REQUIRED - holdDuration);
+            const points = config.points + Math.round(holdBonus / 5);
+            score += points;
+            hits++;
+            
+            // Respawn at new location
+            respawnTarget(target);
+            
+            updateHUD();
+        }
+
+        // Start the game
+        init();
+    </script>
+</body>
+</html>
