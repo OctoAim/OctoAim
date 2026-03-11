@@ -478,9 +478,10 @@
         <button onclick="returnToMenu()">RETURN TO MENU</button>
     </div>
 
-    <script src="firebase-auth.js"></script>
+<script src="firebase-auth.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="sound-system.js"></script>
     <script>
         // ==================== CONFIG ====================
         const DIFFICULTY = {
@@ -704,7 +705,7 @@
             }
         }
 
-        function shoot() {
+function shoot() {
             if (!targetMesh) return;
             
             const ray = new THREE.Raycaster();
@@ -720,7 +721,17 @@
                 score += cfg.points + Math.round(bonus / 8);
                 hits++;
                 
+                // Play hit sound
+                if (typeof playHitSound === 'function') {
+                    playHitSound();
+                }
+                
                 spawnTarget();
+            } else {
+                // Play miss sound
+                if (typeof playMissSound === 'function') {
+                    playMissSound();
+                }
             }
             updateHUD();
         }
@@ -773,13 +784,17 @@
             document.getElementById('final-avg').textContent = avg + 'ms';
             document.getElementById('results-screen').style.display = 'flex';
 
-            // Save score to localStorage (works even if parent page is closed)
+// Save score to localStorage (works even if parent page is closed)
             const storageKey = 'aimtrainer_hard_flick';
             const currentBest = localStorage.getItem(storageKey);
             let isNewRecord = false;
             if (!currentBest || score > parseInt(currentBest)) {
                 localStorage.setItem(storageKey, score);
                 isNewRecord = true;
+                // Play new record sound
+                if (typeof playNewRecordSound === 'function') {
+                    playNewRecordSound();
+                }
             }
 
             // Save play to history for graphs

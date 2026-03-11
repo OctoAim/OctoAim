@@ -215,9 +215,10 @@
         <button onclick="returnToMenu()">RETURN TO MENU</button>
     </div>
 
-    <script src="firebase-auth.js"></script>
+<script src="firebase-auth.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="sound-system.js"></script>
     <script>
         const DIFFICULTY = {
             easy: { size: 0.8, duration: 60, points: 100, bounceSpeed: 3 },
@@ -488,10 +489,15 @@
                     const progress = Math.min(holdDuration / HOLD_DURATION, 1);
                     document.getElementById('progress-fill').style.width = (progress * 100) + '%';
                     
-                    if (holdDuration >= HOLD_DURATION) {
+if (holdDuration >= HOLD_DURATION) {
                         const cfg = DIFFICULTY[selectedDifficulty];
                         score += cfg.points;
                         hits++;
+                        
+                        // Play hit sound
+                        if (typeof playHitSound === 'function') {
+                            playHitSound();
+                        }
                         
                         isHolding = false;
                         holdStartTime = 0;
@@ -528,8 +534,12 @@
             // Save score to localStorage
             const storageKey = 'aimtrainer_hard_bounceTracker';
             const currentBest = localStorage.getItem(storageKey);
-            if (!currentBest || score > parseInt(currentBest)) {
+if (!currentBest || score > parseInt(currentBest)) {
                 localStorage.setItem(storageKey, score);
+                // Play new record sound
+                if (typeof playNewRecordSound === 'function') {
+                    playNewRecordSound();
+                }
             }
             
             // Save play to history for graphs

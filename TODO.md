@@ -1,35 +1,49 @@
-# TODO - Completed Tasks
+# TODO - Implementation Plan
 
-## Task 1: 1v1 Private Room Features (COMPLETED)
-- Removed difficulty option from private room creation
-- Added countdown when leader clicks Start
-- Added mini leaderboard during gameplay
-- Added final leaderboard after match
+## Task: Add Settings Tab, Sound Effects & Mini-Games
 
-## Task 2: Replace 1v1 with Monthly Leaderboard (COMPLETED)
-- Removed the 1V1 tab entirely
-- Added new "🏆 MONTHLY" tab
-- Created monthly-leaderboard.js with:
-  - Total points tracking for the month
-  - Monthly leaderboard (top players)
-  - Prize system: 1st: 1000 coins, 2nd: 500, 3rd: 250, 4th-10th: 10-100 coins
-  - Claim prize functionality
-- Added CSS styles for monthly leaderboard
-- Removed onevone-system.js (no longer needed)
+### 1. Settings Tab in index.html ✅ COMPLETED
+- Added "⚙️ SETTINGS" tab button in tabs section
+- Created Settings tab content with:
+  - Sound settings (volume sliders, toggles for hit/miss/UI sounds)
+  - Display settings (default difficulty, FPS/timer toggles)
+  - Theme selection 
+  - Sensitivity converter
+  - Account settings (view profile, sign out)
 
-## Summary of Changes:
-1. index.html:
-   - Removed 1V1 tab button and content
-   - Added "🏆 MONTHLY" tab
-   - Added monthly leaderboard styles
-   - Added monthly leaderboard rendering on tab switch
-   
-2. monthly-leaderboard.js (NEW FILE):
-   - Tracks total points for current month
-   - Displays monthly leaderboard
-   - Prize distribution system
-   - Claim prizes functionality
+### 2. Sound Effects System (sound-system.js) ✅ COMPLETED
+- Created sound-system.js with synthesized sound effects:
+  - Hit sound (high pitched ding)
+  - Miss sound (low thud)
+  - UI click sounds
+  - New record sound (triumphant fanfare)
+  - Game start/end sounds
+  - Countdown, coin, quest complete sounds
+- Volume controls (master & SFX)
+- Sound toggles for each type
+- Works without external audio files (synthesized)
 
-3. Deleted files:
-   - onevone-system.js (no longer needed)
+### 3. Mini-Games Section ✅ COMPLETED
+- Added new "🎮 MINI GAMES" tab
+- Created 4 mini-game HTML files:
+  - **Quick Click** - Click as many targets in 10 seconds
+  - **Precision Test** - Hit center of targets for max accuracy (20 targets)
+  - **Speed Run** - Complete 50 targets as fast as possible
+  - **Accuracy Arena** - Maintain 90%+ accuracy (3 misses allowed)
+- Each mini-game has:
+  - Start/end screens
+  - Score tracking
+  - Local high scores
+  - Sound effects integration
+  - Records saved to localStorage
+
+### Implementation Summary:
+1. index.html - Added SETTINGS and MINI GAMES tabs with full content
+2. sound-system.js - Created with 10+ synthesized sound effects
+3. mini-quickclick.html - Quick click mini-game
+4. mini-precision.html - Precision test mini-game  
+5. mini-speedrun.html - Speed run mini-game
+6. mini-accuracy.html - Accuracy arena mini-game
+
+## Status: COMPLETED ✅
 

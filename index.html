@@ -3353,13 +3353,14 @@
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab('scenarios')">SCENARIOS</button>
             <button class="tab-btn" onclick="switchTab('bests')">PERSONAL BESTS</button>
-<button class="tab-btn" onclick="switchTab('challenges')">CHALLENGES</button>
-<button class="tab-btn" onclick="switchTab('leaderboard')">LEADERBOARD</button>
-<button class="tab-btn" onclick="switchTab('skins')">SKINS</button>
+            <button class="tab-btn" onclick="switchTab('challenges')">CHALLENGES</button>
+            <button class="tab-btn" onclick="switchTab('leaderboard')">LEADERBOARD</button>
+            <button class="tab-btn" onclick="switchTab('skins')">SKINS</button>
             <button class="tab-btn" onclick="switchTab('stats')">STATS</button>
             <button class="tab-btn" onclick="switchTab('monthly')">🏆 MONTHLY</button>
+            <button class="tab-btn" onclick="switchTab('minigames')">🎮 MINI GAMES</button>
+            <button class="tab-btn" onclick="switchTab('settings')">⚙️ SETTINGS</button>
             <a href="analytics.html" class="tab-btn" style="text-decoration: none; display: inline-flex; align-items: center;">📊 ANALYTICS</a>
-            
         </div>
       
        <!-- Scenarios Tab -->
@@ -3761,11 +3762,215 @@
            <button class="clear-data-btn" onclick="clearAllData()">Clear All Data</button>
        </div>
 
-       <!-- Monthly Leaderboard Tab -->
+<!-- Monthly Leaderboard Tab -->
        <div id="monthly" class="tab-content">
            <div id="monthly-leaderboard-content">
                <!-- Monthly leaderboard will be rendered by JavaScript -->
                <p style="text-align: center; color: #666; padding: 40px;">Loading monthly leaderboard...</p>
+           </div>
+       </div>
+       
+       <!-- Mini Games Tab -->
+       <div id="minigames" class="tab-content">
+           <div style="text-align: center; margin-bottom: 40px;">
+               <h2 style="color: #00ff88; font-size: 32px; margin-bottom: 10px;">🎮 Mini Games</h2>
+               <p style="color: #888;">Quick challenges to test your skills!</p>
+           </div>
+           
+           <div class="games-grid">
+               <!-- Quick Click Challenge -->
+               <div class="game-card easy" onclick="openMiniGame('quickclick')">
+                   <div class="shine"></div>
+                   <div class="preview">
+                       <div class="preview-overlay"></div>
+                       <div class="preview-icon">👆</div>
+                   </div>
+                   <div class="card-content">
+                       <div class="badges">
+                           <span class="badge easy">10 Seconds</span>
+                       </div>
+                       <div class="card-title">Quick Click</div>
+                       <div class="card-desc">Click as many targets as possible in 10 seconds! Speed is key.</div>
+                   </div>
+               </div>
+               
+               <!-- Precision Test -->
+               <div class="game-card medium" onclick="openMiniGame('precision')">
+                   <div class="shine"></div>
+                   <div class="preview">
+                       <div class="preview-overlay"></div>
+                       <div class="preview-icon">🎯</div>
+                   </div>
+                   <div class="card-content">
+                       <div class="badges">
+                           <span class="badge medium">Accuracy</span>
+                       </div>
+                       <div class="card-title">Precision Test</div>
+                       <div class="card-desc">Hit the center of targets for maximum points. Every pixel counts!</div>
+                   </div>
+               </div>
+               
+               <!-- Speed Run -->
+               <div class="game-card hard" onclick="openMiniGame('speedrun')">
+                   <div class="shine"></div>
+                   <div class="preview">
+                       <div class="preview-overlay"></div>
+                       <div class="preview-icon">⚡</div>
+                   </div>
+                   <div class="card-content">
+                       <div class="badges">
+                           <span class="badge hard">Endurance</span>
+                       </div>
+                       <div class="card-title">Speed Run</div>
+                       <div class="card-desc">Complete 50 targets as fast as you can. Beat your best time!</div>
+                   </div>
+               </div>
+               
+               <!-- Accuracy Arena -->
+               <div class="game-card special" onclick="openMiniGame('accuracy')">
+                   <div class="shine"></div>
+                   <div class="preview">
+                       <div class="preview-overlay"></div>
+                       <div class="preview-icon">🏆</div>
+                   </div>
+                   <div class="card-content">
+                       <div class="badges">
+                           <span class="badge special">Challenge</span>
+                       </div>
+                       <div class="card-title">Accuracy Arena</div>
+                       <div class="card-desc">Maintain 90%+ accuracy over 30 targets to win. No misses allowed!</div>
+                   </div>
+               </div>
+           </div>
+           
+           <!-- Mini Game Stats -->
+           <div style="margin-top: 40px;">
+               <h3 style="color: #888; text-align: center; margin-bottom: 20px; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;">Your Mini Game Records</h3>
+               <div class="stats-dashboard" style="max-width: 800px; margin: 0 auto;">
+                   <div class="stat-box">
+                       <div class="stat-icon">👆</div>
+                       <div class="stat-value" id="mini-quickclick-best">0</div>
+                       <div class="stat-label">Quick Click (clicks)</div>
+                   </div>
+                   <div class="stat-box">
+                       <div class="stat-icon">🎯</div>
+                       <div class="stat-value" id="mini-precision-best">0</div>
+                       <div class="stat-label">Precision (accuracy %)</div>
+                   </div>
+                   <div class="stat-box">
+                       <div class="stat-icon">⚡</div>
+                       <div class="stat-value" id="mini-speedrun-best">0s</div>
+                       <div class="stat-label">Speed Run (seconds)</div>
+                   </div>
+               </div>
+           </div>
+       </div>
+       
+       <!-- Settings Tab -->
+       <div id="settings" class="tab-content">
+           <div style="text-align: center; margin-bottom: 40px;">
+               <h2 style="color: #00ff88; font-size: 32px; margin-bottom: 10px;">⚙️ Settings</h2>
+               <p style="color: #888;">Customize your experience</p>
+           </div>
+           
+           <!-- Sound Settings -->
+           <div class="settings-section" style="background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.9)); border: 2px solid #333; border-radius: 16px; padding: 30px; margin-bottom: 25px;">
+               <h3 style="color: #888; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">🔊 Sound Settings</h3>
+               
+               <div style="margin-bottom: 20px;">
+                   <label style="color: #fff; display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                       <span>Master Volume</span>
+                       <span id="master-vol-display" style="color: #00ff88;">100%</span>
+                   </label>
+                   <input type="range" id="master-volume" min="0" max="100" value="100" 
+                       oninput="updateVolumeDisplay('master', this.value)"
+                       style="width: 100%; height: 8px; border-radius: 4px; background: #333; outline: none; -webkit-appearance: none;">
+               </div>
+               
+               <div style="margin-bottom: 20px;">
+                   <label style="color: #fff; display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                       <span>SFX Volume</span>
+                       <span id="sfx-vol-display" style="color: #00ff88;">70%</span>
+                   </label>
+                   <input type="range" id="sfx-volume" min="0" max="100" value="70" 
+                       oninput="updateVolumeDisplay('sfx', this.value)"
+                       style="width: 100%; height: 8px; border-radius: 4px; background: #333; outline: none; -webkit-appearance: none;">
+               </div>
+               
+               <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                   <label style="color: #fff; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                       <input type="checkbox" id="sound-hit" checked onchange="toggleSoundSetting('hit', this.checked)" style="width: 20px; height: 20px; accent-color: #00ff88;">
+                       <span>Hit Sounds</span>
+                   </label>
+                   <label style="color: #fff; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                       <input type="checkbox" id="sound-miss" checked onchange="toggleSoundSetting('miss', this.checked)" style="width: 20px; height: 20px; accent-color: #00ff88;">
+                       <span>Miss Sounds</span>
+                   </label>
+                   <label style="color: #fff; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                       <input type="checkbox" id="sound-ui" checked onchange="toggleSoundSetting('ui', this.checked)" style="width: 20px; height: 20px; accent-color: #00ff88;">
+                       <span>UI Sounds</span>
+                   </label>
+                   <label style="color: #fff; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                       <input type="checkbox" id="sound-record" checked onchange="toggleSoundSetting('newRecord', this.checked)" style="width: 20px; height: 20px; accent-color: #00ff88;">
+                       <span>New Record Sound</span>
+                   </label>
+               </div>
+               
+               <button onclick="testSound()" style="margin-top: 20px; padding: 12px 30px; background: linear-gradient(135deg, #00ff88, #00cc6a); border: none; border-radius: 8px; color: #000; font-weight: bold; cursor: pointer;">
+                   🔊 Test Sound
+               </button>
+           </div>
+           
+           <!-- Display Settings -->
+           <div class="settings-section" style="background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.9)); border: 2px solid #333; border-radius: 16px; padding: 30px; margin-bottom: 25px;">
+               <h3 style="color: #888; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">🖥️ Display Settings</h3>
+               
+               <div style="margin-bottom: 20px;">
+                   <label style="color: #fff; display: block; margin-bottom: 10px;">Default Difficulty</label>
+                   <select id="default-difficulty" onchange="saveSetting('defaultDifficulty', this.value)" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 2px solid #333; border-radius: 10px; color: #fff; font-size: 14px;">
+                       <option value="easy">Easy</option>
+                       <option value="medium">Medium</option>
+                       <option value="hard" selected>Hard</option>
+                   </select>
+               </div>
+               
+               <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                   <label style="color: #fff; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                       <input type="checkbox" id="show-fps" checked onchange="saveSetting('showFPS', this.checked)" style="width: 20px; height: 20px; accent-color: #00ff88;">
+                       <span>Show FPS</span>
+                   </label>
+                   <label style="color: #fff; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                       <input type="checkbox" id="show-timer" checked onchange="saveSetting('showTimer', this.checked)" style="width: 20px; height: 20px; accent-color: #00ff88;">
+                       <span>Show Timer</span>
+                   </label>
+               </div>
+           </div>
+           
+           <!-- Theme Selection -->
+           <div class="settings-section" style="background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.9)); border: 2px solid #333; border-radius: 16px; padding: 30px; margin-bottom: 25px;">
+               <h3 style="color: #888; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">🎨 Theme</h3>
+               <div class="theme-grid" id="settings-theme-options">
+               </div>
+           </div>
+           
+           <!-- Sensitivity Converter -->
+           <div class="settings-section" style="background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.9)); border: 2px solid #333; border-radius: 16px; padding: 30px; margin-bottom: 25px;">
+               <h3 style="color: #888; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">🎯 Sensitivity Converter</h3>
+               <div id="settings-sens-converter">
+               </div>
+           </div>
+           
+           <!-- Account -->
+           <div class="settings-section" style="background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.9)); border: 2px solid #333; border-radius: 16px; padding: 30px;">
+               <h3 style="color: #888; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">👤 Account</h3>
+               <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                   <button onclick="showProfileCard()" style="flex: 1; min-width: 140px; padding: 14px 24px; background: linear-gradient(135deg, #00ff88, #00cc6a); border: none; border-radius: 12px; color: #0a0a0f; font-size: 14px; font-weight: 600; cursor: pointer;">
+                       👤 View Profile
+                   </button>
+                   <button onclick="handleLogout()" style="flex: 1; min-width: 140px; padding: 14px 24px; background: linear-gradient(135deg, #ff4444, #cc3333); border: none; border-radius: 12px; color: white; font-size: 14px; font-weight: 600; cursor: pointer;">
+                       🚪 Sign Out
+                   </button>
+               </div>
            </div>
        </div>
       
@@ -3792,10 +3997,11 @@
 
 
 
-   <script src="firebase-auth.js"></script>
+<script src="firebase-auth.js"></script>
    <script src="firebase-leaderboard.js"></script>
    <script src="admin-system.js"></script>
    <script src="feature-systems.js"></script>
+   <script src="sound-system.js"></script>
    <script src="monthly-leaderboard.js"></script>
    <script>
       // Session state
@@ -4749,6 +4955,16 @@
            if (tabId === 'monthly' && typeof renderMonthlyLeaderboard === 'function') {
                renderMonthlyLeaderboard();
            }
+           
+           // Initialize settings tab
+           if (tabId === 'settings') {
+               initSettingsTab();
+           }
+           
+           // Load mini game stats
+           if (tabId === 'minigames') {
+               loadMiniGameStats();
+           }
        }
 
 
@@ -5481,10 +5697,219 @@ function escapeHtml(text) {
           }
       }
 
-      // Initialize private room content on load
+// Initialize private room content on load
       document.addEventListener('DOMContentLoaded', () => {
           renderPrivateRoomContent();
       });
+      
+      // ==================== MINI GAMES FUNCTIONS ====================
+      function openMiniGame(gameType) {
+          // Initialize audio on first interaction
+          if (typeof initAudio === 'function') {
+              initAudio();
+          }
+          
+          switch(gameType) {
+              case 'quickclick':
+                  window.open('mini-quickclick.html', '_blank');
+                  break;
+              case 'precision':
+                  window.open('mini-precision.html', '_blank');
+                  break;
+              case 'speedrun':
+                  window.open('mini-speedrun.html', '_blank');
+                  break;
+              case 'accuracy':
+                  window.open('mini-accuracy.html', '_blank');
+                  break;
+          }
+      }
+      
+      function loadMiniGameStats() {
+          const quickclickBest = localStorage.getItem('aimtrainer_mini_quickclick') || 0;
+          const precisionBest = localStorage.getItem('aimtrainer_mini_precision') || 0;
+          const speedrunBest = localStorage.getItem('aimtrainer_mini_speedrun') || 0;
+          
+          document.getElementById('mini-quickclick-best').textContent = quickclickBest;
+          document.getElementById('mini-precision-best').textContent = precisionBest + '%';
+          document.getElementById('mini-speedrun-best').textContent = speedrunBest + 's';
+      }
+      
+      // ==================== SETTINGS TAB FUNCTIONS ====================
+      function initSettingsTab() {
+          // Load sound settings
+          loadSoundSettingsToUI();
+          
+          // Load other settings
+          const settings = JSON.parse(localStorage.getItem('aimtrainer_settings') || '{}');
+          
+          // Set difficulty dropdown
+          const diffSelect = document.getElementById('default-difficulty');
+          if (diffSelect) {
+              diffSelect.value = settings.defaultDifficulty || 'hard';
+          }
+          
+          // Set checkboxes
+          const showFPS = document.getElementById('show-fps');
+          if (showFPS) showFPS.checked = settings.showFPS !== false;
+          
+          const showTimer = document.getElementById('show-timer');
+          if (showTimer) showTimer.checked = settings.showTimer !== false;
+          
+          // Render theme options
+          renderSettingsThemeOptions();
+          
+          // Render sensitivity converter
+          renderSettingsSensConverter();
+      }
+      
+      function loadSoundSettingsToUI() {
+          const settings = JSON.parse(localStorage.getItem('aimtrainer_sound_settings') || '{"masterVolume":1,"sfxVolume":0.7,"hitSound":true,"missSound":true,"uiSounds":true,"newRecordSound":true}');
+          
+          const masterVol = document.getElementById('master-volume');
+          const sfxVol = document.getElementById('sfx-volume');
+          const masterDisplay = document.getElementById('master-vol-display');
+          const sfxDisplay = document.getElementById('sfx-vol-display');
+          
+          if (masterVol) {
+              masterVol.value = (settings.masterVolume || 1) * 100;
+              if (masterDisplay) masterDisplay.textContent = Math.round((settings.masterVolume || 1) * 100) + '%';
+          }
+          
+          if (sfxVol) {
+              sfxVol.value = (settings.sfxVolume || 0.7) * 100;
+              if (sfxDisplay) sfxDisplay.textContent = Math.round((settings.sfxVolume || 0.7) * 100) + '%';
+          }
+          
+          // Set checkboxes
+          const hitCheck = document.getElementById('sound-hit');
+          const missCheck = document.getElementById('sound-miss');
+          const uiCheck = document.getElementById('sound-ui');
+          const recordCheck = document.getElementById('sound-record');
+          
+          if (hitCheck) hitCheck.checked = settings.hitSound !== false;
+          if (missCheck) missCheck.checked = settings.missSound !== false;
+          if (uiCheck) uiCheck.checked = settings.uiSounds !== false;
+          if (recordCheck) recordCheck.checked = settings.newRecordSound !== false;
+      }
+      
+      function updateVolumeDisplay(type, value) {
+          const display = document.getElementById(type + '-vol-display');
+          if (display) {
+              display.textContent = value + '%';
+          }
+          
+          if (type === 'master') {
+              setMasterVolume(value / 100);
+          } else if (type === 'sfx') {
+              setSFXVolume(value / 100);
+          }
+      }
+      
+      function toggleSoundSetting(type, enabled) {
+          if (type === 'hit') {
+              SoundConfig.hitSound = enabled;
+          } else if (type === 'miss') {
+              SoundConfig.missSound = enabled;
+          } else if (type === 'ui') {
+              SoundConfig.uiSounds = enabled;
+          } else if (type === 'newRecord') {
+              SoundConfig.newRecordSound = enabled;
+          }
+          saveSoundSettings();
+      }
+      
+      function testSound() {
+          if (typeof initAudio === 'function') {
+              initAudio();
+          }
+          if (typeof playHitSound === 'function') {
+              playHitSound();
+              setTimeout(() => playMissSound(), 200);
+              setTimeout(() => playUIClick(), 400);
+          }
+      }
+      
+      function saveSetting(key, value) {
+          const settings = JSON.parse(localStorage.getItem('aimtrainer_settings') || '{}');
+          settings[key] = value;
+          localStorage.setItem('aimtrainer_settings', JSON.stringify(settings));
+      }
+      
+      function renderSettingsThemeOptions() {
+          const container = document.getElementById('settings-theme-options');
+          if (!container) return;
+          
+          const themes = [
+              { id: 'default', name: 'Default Dark', colors: ['#0a0a0f', '#1a1a2e', '#00ff88'] },
+              { id: 'ocean', name: 'Ocean Blue', colors: ['#0a192f', '#112240', '#64ffda'] },
+              { id: 'sunset', name: 'Sunset', colors: ['#1a0a0f1124', '#', '#2dff6b6b'] },
+              { id: 'forest', name: 'Forest', colors: ['#0a1f0a', '#1a2d1a', '#4ade80'] }
+          ];
+          
+          const currentTheme = localStorage.getItem('aimtrainer_theme') || 'default';
+          
+          container.innerHTML = themes.map(theme => `
+              <div class="theme-option ${theme.id === currentTheme ? 'active' : ''}" onclick="selectTheme('${theme.id}')">
+                  <div style="display: flex; gap: 5px; justify-content: center; margin-bottom: 8px;">
+                      ${theme.colors.map(c => `<div style="width: 20px; height: 20px; background: ${c}; border-radius: 4px;"></div>`).join('')}
+                  </div>
+                  <span class="theme-name">${theme.name}</span>
+              </div>
+          `).join('');
+      }
+      
+      function renderSettingsSensConverter() {
+          const container = document.getElementById('settings-sens-converter');
+          if (!container) return;
+          
+          container.innerHTML = `
+              <div style="margin-bottom: 16px;">
+                  <select id="settings-sens-from" onchange="convertSettingsSens()" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-size: 14px; margin-bottom: 12px;">
+                      <option value="valorant">Valorant</option>
+                      <option value="csgo">CS:GO</option>
+                      <option value="aimlab">Aim Lab</option>
+                      <option value="kovaaks">KovaaK's</option>
+                  </select>
+                  <input type="number" id="settings-sens-from-value" placeholder="Sensitivity" value="0.5" oninput="convertSettingsSens()" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-size: 14px;">
+              </div>
+              <div style="margin-bottom: 16px;">
+                  <select id="settings-sens-to" onchange="convertSettingsSens()" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-size: 14px; margin-bottom: 12px;">
+                      <option value="valorant">Valorant</option>
+                      <option value="csgo" selected>CS:GO</option>
+                      <option value="aimlab">Aim Lab</option>
+                      <option value="kovaaks">KovaaK's</option>
+                  </select>
+                  <input type="number" id="settings-sens-to-value" placeholder="Result" readonly style="width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-size: 14px;">
+              </div>
+              <div style="text-align: center; color: #00ff88; font-size: 18px; font-weight: 700; padding: 16px; background: rgba(0,255,136,0.1); border-radius: 12px;" id="settings-sens-result">CM/360: 0.00</div>
+          `;
+      }
+      
+      function convertSettingsSens() {
+          const conversionFactors = {
+              valorant: { csgo: 3.18181818, aimlab: 1.0, kovaaks: 1.0 },
+              csgo: { valorant: 0.314, aimlab: 0.314, kovaaks: 0.314 },
+              aimlab: { valorant: 1.0, csgo: 3.18181818, kovaaks: 1.0 },
+              kovaaks: { valorant: 1.0, csgo: 3.18181818, aimlab: 1.0 }
+          };
+          
+          const fromGame = document.getElementById('settings-sens-from')?.value || 'valorant';
+          const toGame = document.getElementById('settings-sens-to')?.value || 'csgo';
+          const value = parseFloat(document.getElementById('settings-sens-from-value')?.value) || 0;
+          
+          const factor = conversionFactors[fromGame]?.[toGame] || 1;
+          const result = value * factor;
+          
+          const toValueEl = document.getElementById('settings-sens-to-value');
+          if (toValueEl) toValueEl.value = result.toFixed(3);
+          
+          const sensResultEl = document.getElementById('settings-sens-result');
+          if (sensResultEl) {
+              const cmPer360 = value > 0 ? (3.18181818 / value).toFixed(2) : '0.00';
+              sensResultEl.textContent = `CM/360: ${cmPer360}`;
+          }
+      }
    </script>
 </body>
 </html>
