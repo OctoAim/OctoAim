@@ -1965,6 +1965,16 @@
            font-weight: bold;
        }
 
+       /* Offline Badge */
+       .offline-badge {
+           display: inline-flex;
+           align-items: center;
+           justify-content: center;
+           margin-left: 8px;
+           font-size: 12px;
+           opacity: 0.7;
+           cursor: help;
+       }
        /* Profile Modal */
        .profile-modal {
            position: fixed;
@@ -3111,8 +3121,471 @@
                font-size: 28px;
            }
        }
+
+       /* ==================== HAMBURGER MENU ==================== */
+       .hamburger-btn {
+           position: fixed;
+           top: 20px;
+           left: 20px;
+           width: 45px;
+           height: 45px;
+           background: rgba(26, 26, 46, 0.9);
+           border: 2px solid #333;
+           border-radius: 12px;
+           cursor: pointer;
+           z-index: 1000;
+           display: none;
+           flex-direction: column;
+           align-items: center;
+           justify-content: center;
+           gap: 5px;
+           transition: all 0.3s;
+       }
+
+       .hamburger-btn:hover {
+           border-color: #00ff88;
+           background: rgba(26, 26, 46, 1);
+       }
+
+       .hamburger-btn span {
+           width: 22px;
+           height: 2px;
+           background: #fff;
+           border-radius: 2px;
+           transition: all 0.3s;
+       }
+
+       .hamburger-btn.active span:nth-child(1) {
+           transform: rotate(45deg) translate(5px, 5px);
+       }
+
+       .hamburger-btn.active span:nth-child(2) {
+           opacity: 0;
+       }
+
+       .hamburger-btn.active span:nth-child(3) {
+           transform: rotate(-45deg) translate(5px, -5px);
+       }
+
+       /* Slide-out menu */
+       .slide-menu {
+           position: fixed;
+           top: 0;
+           left: -300px;
+           width: 280px;
+           height: 100%;
+           background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
+           border-right: 2px solid #333;
+           z-index: 999;
+           padding: 80px 20px 20px;
+           overflow-y: auto;
+           transition: left 0.3s ease;
+           box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+       }
+
+       .slide-menu.active {
+           left: 0;
+       }
+
+       .menu-overlay {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background: rgba(0,0,0,0.7);
+           z-index: 998;
+           opacity: 0;
+           pointer-events: none;
+           transition: opacity 0.3s;
+       }
+
+       .menu-overlay.active {
+           opacity: 1;
+           pointer-events: auto;
+       }
+
+       .menu-category {
+           margin-bottom: 20px;
+       }
+
+       .menu-category-title {
+           color: #666;
+           font-size: 11px;
+           font-weight: bold;
+           text-transform: uppercase;
+           letter-spacing: 2px;
+           margin-bottom: 10px;
+           padding-left: 10px;
+       }
+
+       .menu-btn {
+           width: 100%;
+           padding: 12px 16px;
+           background: rgba(255,255,255,0.05);
+           border: 1px solid #333;
+           border-radius: 10px;
+           color: #aaa;
+           font-size: 14px;
+           font-weight: 600;
+           cursor: pointer;
+           text-align: left;
+           margin-bottom: 8px;
+           transition: all 0.3s;
+           display: flex;
+           align-items: center;
+           gap: 10px;
+       }
+
+       .menu-btn:hover {
+           background: rgba(0,255,136,0.1);
+           border-color: #00ff88;
+           color: #fff;
+       }
+
+       .menu-btn.active {
+           background: rgba(0,255,136,0.15);
+           border-color: #00ff88;
+           color: #00ff88;
+       }
+
+       .menu-btn-icon {
+           font-size: 18px;
+       }
+
+       /* Hide regular tabs when using hamburger */
+       @media (max-width: 900px) {
+           .hamburger-btn {
+               display: flex;
+           }
+           .tabs {
+               display: none;
+           }
+           .header-auth {
+               right: 20px;
+               top: 20px;
+           }
+           .container {
+               padding-top: 80px;
+           }
+       }
+
+       /* ==================== LIGHT MODE THEME ==================== */
+       body.light-mode {
+           background: #f0f2f5;
+       }
+
+       body.light-mode .bg::before {
+           background:
+               radial-gradient(ellipse at 20% 20%, rgba(0, 200, 100, 0.08) 0%, transparent 50%),
+               radial-gradient(ellipse at 80% 80%, rgba(100, 100, 255, 0.08) 0%, transparent 50%),
+               radial-gradient(ellipse at 50% 50%, rgba(100, 200, 255, 0.05) 0%, transparent 70%);
+       }
+
+       body.light-mode .grid {
+           background-image:
+               linear-gradient(rgba(0, 200, 100, 0.08) 1px, transparent 1px),
+               linear-gradient(90deg, rgba(0, 200, 100, 0.08) 1px, transparent 1px);
+       }
+
+       body.light-mode h1 {
+           color: #00aa55;
+           text-shadow:
+               0 0 20px rgba(0, 170, 85, 0.4),
+               0 0 40px rgba(0, 170, 85, 0.2);
+       }
+
+       body.light-mode .subtitle {
+           color: #666;
+       }
+
+       body.light-mode .game-card {
+           background: linear-gradient(145deg, #ffffff, #f5f7fa);
+           border-color: #ddd;
+           box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+       }
+
+       body.light-mode .game-card:hover {
+           border-color: #00aa55;
+           box-shadow: 0 15px 35px rgba(0, 170, 85, 0.2);
+       }
+
+       body.light-mode .card-title {
+           color: #1a1a2e;
+       }
+
+       body.light-mode .card-desc {
+           color: #666;
+       }
+
+       body.light-mode .preview {
+           background: #e8eaed;
+       }
+
+       body.light-mode .preview-overlay {
+           background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.4) 100%);
+       }
+
+       body.light-mode .footer {
+           color: #888;
+       }
+
+       body.light-mode .stat-box,
+       body.light-mode .pb-card,
+       body.light-mode .quest-card,
+       body.light-mode .skin-card,
+       body.light-mode .session-stat {
+           background: linear-gradient(145deg, #ffffff, #f5f7fa);
+           border-color: #ddd;
+       }
+
+       body.light-mode .stat-box:hover {
+           border-color: #00aa55;
+       }
+
+       body.light-mode .stat-box .stat-value,
+       body.light-mode .pb-score {
+           color: #00aa55;
+       }
+
+       body.light-mode .stat-box .stat-label,
+       body.light-mode .game-name,
+       body.light-mode .pb-label {
+           color: #666;
+       }
+
+       body.light-mode .achievement {
+           background: linear-gradient(145deg, #ffffff, #f5f7fa);
+           border-color: #ddd;
+       }
+
+       body.light-mode .achievement .achievement-name {
+           color: #1a1a2e;
+       }
+
+       body.light-mode .achievement .achievement-desc {
+           color: #888;
+       }
+
+       body.light-mode .session-stat {
+           background: rgba(255,255,255,0.8);
+           border-color: #ddd;
+       }
+
+       body.light-mode .session-stat .session-value {
+           color: #00aa55;
+       }
+
+       body.light-mode .session-stat .session-label {
+           color: #666;
+       }
+
+       body.light-mode .clear-data-btn {
+           border-color: #ff4444;
+           color: #ff4444;
+       }
+
+       body.light-mode .clear-data-btn:hover {
+           background: #ff4444;
+           color: #fff;
+       }
+
+       body.light-mode .leaderboard-row,
+       body.light-mode .monthly-lb-row {
+           border-color: #eee;
+       }
+
+       body.light-mode .leaderboard-row:hover,
+       body.light-mode .monthly-lb-row:hover {
+           background: rgba(0, 170, 85, 0.1);
+       }
+
+       body.light-mode .leaderboard-row .username,
+       body.light-mode .monthly-username {
+           color: #1a1a2e;
+       }
+
+       body.light-mode .global-leaderboard,
+       body.light-mode .monthly-lb-list {
+           background: linear-gradient(145deg, #ffffff, #f5f7fa);
+           border-color: #ddd;
+       }
+
+       body.light-mode .leaderboard-tabs {
+           background: rgba(0,0,0,0.05);
+       }
+
+       body.light-mode .leaderboard-tab {
+           border-color: #ddd;
+           color: #666;
+       }
+
+       body.light-mode .leaderboard-tab.active {
+           background: #00aa55;
+           border-color: #00aa55;
+           color: #fff;
+       }
+
+       body.light-mode .leaderboard-header select {
+           background: #fff;
+           border-color: #ddd;
+           color: #1a1a2e;
+       }
+
+       body.light-mode .your-scores {
+           background: rgba(255,255,255,0.8);
+       }
+
+       body.light-mode .hamburger-btn {
+           background: rgba(255, 255, 255, 0.95);
+           border-color: #ddd;
+       }
+
+       body.light-mode .hamburger-btn span {
+           background: #1a1a2e;
+       }
+
+       body.light-mode .slide-menu {
+           background: linear-gradient(180deg, #ffffff 0%, #f5f7fa 100%);
+           border-color: #ddd;
+       }
+
+       body.light-mode .menu-category-title {
+           color: #888;
+       }
+
+       body.light-mode .menu-btn {
+           background: rgba(0,0,0,0.03);
+           border-color: #ddd;
+           color: #444;
+       }
+
+       body.light-mode .menu-btn:hover {
+           background: rgba(0, 170, 85, 0.1);
+           border-color: #00aa55;
+           color: #1a1a2e;
+       }
+
+       body.light-mode .menu-btn.active {
+           background: rgba(0, 170, 85, 0.15);
+           border-color: #00aa55;
+           color: #00aa55;
+       }
+
+       body.light-mode .coins-display {
+           background: rgba(255,255,255,0.9);
+           border-color: #ffaa00;
+       }
+
+       body.light-mode .coins-amount {
+           color: #cc8800;
+       }
+
+       /* Settings modal light mode */
+       body.light-mode .settings-box {
+           background: linear-gradient(165deg, #ffffff 0%, #f5f7fa 90%, #e8eaed 100%);
+           border-color: rgba(0, 170, 85, 0.3);
+       }
+
+       body.light-mode .settings-section {
+           background: rgba(255,255,255,0.8);
+           border-color: #ddd;
+       }
+
+       body.light-mode .settings-section h3 {
+           color: #666;
+       }
+
+       body.light-mode .theme-option {
+           background: rgba(0,0,0,0.03);
+           border-color: #ddd;
+       }
+
+       body.light-mode .theme-option:hover {
+           border-color: #aaa;
+       }
+
+       body.light-mode .theme-option.active {
+           border-color: #00aa55;
+           box-shadow: 0 0 25px rgba(0, 170, 85, 0.25);
+       }
+
+       body.light-mode .theme-name {
+           color: #1a1a2e;
+       }
+
+       /* Light mode theme colors for theme picker */
+       body.light-mode .theme-option[data-theme="light"] {
+           border-color: #00aa55;
+       }
    </style>
 <body>
+    <!-- Hamburger Menu Button -->
+    <button class="hamburger-btn" id="hamburger-btn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menu-overlay" onclick="closeMenu()"></div>
+    
+    <!-- Slide-out Menu -->
+    <div class="slide-menu" id="slide-menu">
+        <div class="menu-category">
+            <div class="menu-category-title">Play</div>
+            <button class="menu-btn active" onclick="switchTabFromMenu('scenarios', '🎯')">
+                <span class="menu-btn-icon">🎯</span> Scenarios
+            </button>
+            <button class="menu-btn" onclick="switchTabFromMenu('minigames', '🎮')">
+                <span class="menu-btn-icon">🎮</span> Mini Games
+            </button>
+        </div>
+        
+        <div class="menu-category">
+            <div class="menu-category-title">Progress</div>
+            <button class="menu-btn" onclick="switchTabFromMenu('bests', '⭐')">
+                <span class="menu-btn-icon">⭐</span> Personal Bests
+            </button>
+            <button class="menu-btn" onclick="switchTabFromMenu('stats', '📊')">
+                <span class="menu-btn-icon">📊</span> Stats
+            </button>
+        </div>
+        
+        <div class="menu-category">
+            <div class="menu-category-title">Compete</div>
+            <button class="menu-btn" onclick="switchTabFromMenu('leaderboard', '🏆')">
+                <span class="menu-btn-icon">🏆</span> Leaderboard
+            </button>
+            <button class="menu-btn" onclick="switchTabFromMenu('weekly', '🏅')">
+                <span class="menu-btn-icon">🏅</span> Weekly
+            </button>
+            <button class="menu-btn" onclick="switchTabFromMenu('monthly', '👑')">
+                <span class="menu-btn-icon">👑</span> Monthly
+            </button>
+        </div>
+        
+        <div class="menu-category">
+            <div class="menu-category-title">More</div>
+            <button class="menu-btn" onclick="switchTabFromMenu('challenges', '🎁')">
+                <span class="menu-btn-icon">🎁</span> Challenges
+            </button>
+            <button class="menu-btn" onclick="switchTabFromMenu('skins', '🎨')">
+                <span class="menu-btn-icon">🎨</span> Skins
+            </button>
+        </div>
+        
+        <div class="menu-category">
+            <div class="menu-category-title">Links</div>
+            <button class="menu-btn" onclick="switchTabFromMenu('settings', '⚙️')">
+                <span class="menu-btn-icon">⚙️</span> Settings
+            </button>
+            <a href="analytics.html" class="menu-btn" style="text-decoration: none;">
+                <span class="menu-btn-icon">📈</span> Analytics
+            </a>
+        </div>
+    </div>
+
     <!-- Loading Screen -->
     <div class="loading-screen" id="loading-screen">
         <h1>AIM TRAINER</h1>
@@ -3311,12 +3784,10 @@
                     <button onclick="showProfileCard()" style="flex: 1; min-width: 140px; padding: 14px 24px; background: linear-gradient(135deg, #00ff88, #00cc6a); border: none; border-radius: 12px; color: #0a0a0f; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
                         <span>👤</span> View Profile
                     </button>
-                    <button onclick="handleLogout()" style="flex: 1; min-width: 140px; padding: 14px 24px; background: linear-gradient(135deg, #ff4444, #cc3333); border: none; border-radius: 12px; color: white; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <button onclick="handleLogout()" style="flex: 1; min-width: 140px; padding: 14px 24px; background: linear-gradient(135deg, #ff4444, #cc3333); border: none; border-radius: 12px; color: white; font-size: 14px; font-weight: 600; cursor: pointer;">
                         <span>🚪</span> Sign Out
                     </button>
                 </div>
-            </div>
-</div>
             </div>
         </div>
     </div>
@@ -3358,6 +3829,7 @@
             <button class="tab-btn" onclick="switchTab('skins')">SKINS</button>
             <button class="tab-btn" onclick="switchTab('stats')">STATS</button>
             <button class="tab-btn" onclick="switchTab('monthly')">🏆 MONTHLY</button>
+            <button class="tab-btn" onclick="switchTab('weekly')">🏅 WEEKLY</button>
             <button class="tab-btn" onclick="switchTab('minigames')">🎮 MINI GAMES</button>
             <button class="tab-btn" onclick="switchTab('settings')">⚙️ SETTINGS</button>
             <a href="analytics.html" class="tab-btn" style="text-decoration: none; display: inline-flex; align-items: center;">📊 ANALYTICS</a>
@@ -3770,6 +4242,14 @@
            </div>
        </div>
        
+       <!-- Weekly Leaderboard Tab -->
+       <div id="weekly" class="tab-content">
+           <div id="weekly-leaderboard-content">
+               <!-- Weekly leaderboard will be rendered by JavaScript -->
+               <p style="text-align: center; color: #666; padding: 40px;">Loading weekly leaderboard...</p>
+           </div>
+       </div>
+       
        <!-- Mini Games Tab -->
        <div id="minigames" class="tab-content">
            <div style="text-align: center; margin-bottom: 40px;">
@@ -4092,14 +4572,25 @@
            // Initialize leaderboard
            initLeaderboard();
            
-           // Load weekly/monthly scores from localStorage
+           // Initialize weekly and monthly scores
            loadWeeklyMonthlyScores();
+           
+           // Initialize weekly leaderboard score tracking
+           if (typeof initWeeklyScore === 'function') {
+               initWeeklyScore();
+           }
+           if (typeof initMonthlyScore === 'function') {
+               initMonthlyScore();
+           }
            
            // Hide loading screen after everything is initialized
            updateLoadingText('Almost done...');
            setTimeout(() => {
                hideLoadingScreen();
            }, 500);
+           
+           // Apply saved theme
+           initTheme();
        });
 
        // Load weekly and monthly scores from localStorage
@@ -4177,12 +4668,20 @@
            if (score > currentWeekly) {
                localStorage.setItem(weeklyKey, score);
                window['weeklyScore_' + gameId] = score;
+               // Also update the weekly leaderboard
+               if (typeof addToWeeklyScore === 'function') {
+                   addToWeeklyScore(score);
+               }
            }
            
            // Update monthly score if higher
            if (score > currentMonthly) {
                localStorage.setItem(monthlyKey, score);
                window['monthlyScore_' + gameId] = score;
+               // Also update the monthly leaderboard
+               if (typeof addToMonthlyScore === 'function') {
+                   addToMonthlyScore(score);
+               }
            }
        }
 
@@ -4767,17 +5266,29 @@
               }
           }
           
-          // Try to load from Firebase
+          // Try to load from Firebase first, fallback to local data
           try {
               let scores = [];
+              let firebaseFailed = false;
               
-              // Use the correct functions from firebase-auth.js
-              if (currentLeaderboardPeriod === 'alltime' && typeof getAllTimeLeaderboard === 'function') {
-                  scores = await getAllTimeLeaderboard(gameId, 5);
-              } else if (currentLeaderboardPeriod === 'monthly' && typeof getMonthlyLeaderboard === 'function') {
-                  scores = await getMonthlyLeaderboard(gameId, 5);
-              } else if (currentLeaderboardPeriod === 'weekly' && typeof getWeeklyLeaderboard === 'function') {
-                  scores = await getWeeklyLeaderboard(gameId, 5);
+              // Try to get scores from Firebase
+              try {
+                  if (currentLeaderboardPeriod === 'alltime' && typeof getAllTimeLeaderboard === 'function') {
+                      scores = await getAllTimeLeaderboard(gameId, 5);
+                  } else if (currentLeaderboardPeriod === 'monthly' && typeof getMonthlyLeaderboard === 'function') {
+                      scores = await getMonthlyLeaderboard(gameId, 5);
+                  } else if (currentLeaderboardPeriod === 'weekly' && typeof getWeeklyLeaderboard === 'function') {
+                      scores = await getWeeklyLeaderboard(gameId, 5);
+                  }
+              } catch (fbError) {
+                  console.log('Firebase leaderboard error, using offline fallback:', fbError);
+                  firebaseFailed = true;
+              }
+              
+              // If Firebase failed or returned no scores, use localStorage + bots
+              if (firebaseFailed || !scores || scores.length === 0) {
+                  // Use offline bot players for display
+                  scores = getOfflineLeaderboardScores(gameId, currentLeaderboardPeriod);
               }
               
               if (!scores || scores.length === 0) {
@@ -4792,7 +5303,7 @@
                           <div class="leaderboard-row ${i < 3 ? 'top-3' : ''}">
                               <span class="rank ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''}">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '#' + (entry.rank || i + 1)}</span>
                               <span class="username">${escapeHtml(entry.username)}${entry.isMe ? ' (You)' : ''}</span>
-                              <span class="score ${i < 3 ? 'high' : ''}">${entry.score}</span>
+                              <span class="score ${i < 3 ? 'high' : ''}">${entry.score} pts</span>
                           </div>
                       `).join('')}
                   `;
@@ -4810,11 +5321,112 @@
               }
           } catch (e) {
               console.error('Leaderboard error:', e);
-              leaderboardEl.innerHTML = '<p class="no-leaderboard">Unable to load leaderboard. Make sure you\'re signed in.</p>';
+              // Use offline fallback
+              const scores = getOfflineLeaderboardScores(gameId, currentLeaderboardPeriod);
+              if (scores && scores.length > 0) {
+                  const gameName = gameNames[gameId] || gameId;
+                  const periodTitle = currentLeaderboardPeriod === 'alltime' ? 'All Time' : 
+                                      currentLeaderboardPeriod === 'monthly' ? 'This Month' : 'This Week';
+                  leaderboardEl.innerHTML = `
+                      <h3>🏆 ${gameName} - Top Players (${periodTitle})</h3>
+                      <p style="color:#666;font-size:12px;text-align:center;margin-bottom:15px;">Playing offline - showing simulated players</p>
+                      ${scores.map((entry, i) => `
+                          <div class="leaderboard-row ${i < 3 ? 'top-3' : ''}">
+                              <span class="rank ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''}">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '#' + (entry.rank || i + 1)}</span>
+                              <span class="username">${escapeHtml(entry.username)}${entry.isMe ? ' (You)' : ''}</span>
+                              <span class="score ${i < 3 ? 'high' : ''}">${entry.score} pts</span>
+                          </div>
+                      `).join('')}
+                  `;
+              } else {
+                  leaderboardEl.innerHTML = '<p class="no-leaderboard">Unable to load leaderboard. Play some games to get scores!</p>';
+              }
           }
       }
+      
+// Get realistic score ranges for each game type
+function getGameScoreRange(gameId) {
+    const scoreRanges = {
+        // Tracking games have lower scores (harder)
+        '360Aim': { min: 200, max: 1500 },
+        'glider': { min: 300, max: 2000 },
+        // Flick/speed games have higher scores
+        'flick': { min: 3000, max: 15000 },
+        'microflick': { min: 3000, max: 12000 },
+        'staticPrecision': { min: 4000, max: 18000 },
+        // Reaction/precision games
+        'reactionTrainer': { min: 2000, max: 8000 },
+        'bounceTracker': { min: 2500, max: 10000 },
+        'jumppeek': { min: 2500, max: 8000 }
+    };
+    return scoreRanges[gameId] || { min: 1000, max: 10000 };
+}
 
-      // Game names mapping for display
+// Generate a random realistic score for a game
+function generateRandomBotScore(gameId) {
+    const range = getGameScoreRange(gameId);
+    // Generate random score between min and max
+    return Math.floor(Math.random() * (range.max - range.min + 1)) + range.min;
+}
+
+// Generate random bot players with game-specific scores
+function generateBotPlayers(gameId, count = 5) {
+    const botNames = [
+        'ProGamer99', 'AimMaster', 'NightOwl', 'SpeedShot', 'TrackerKing',
+        'FlickLord', 'PrecisionPro', 'ReflexKing', 'ClickFast', 'AimTrainer',
+        'ShadowHunter', 'Velocity', 'PixelPerfect', 'TwitchAim', 'HeadshotHero'
+    ];
+    
+    const bots = [];
+    for (let i = 0; i < count; i++) {
+        bots.push({
+            username: botNames[i] || 'Bot_' + (i + 1),
+            score: generateRandomBotScore(gameId)
+        });
+    }
+    
+    // Sort by score descending
+    bots.sort((a, b) => b.score - a.score);
+    return bots;
+}
+
+// Get offline leaderboard scores with bot players
+function getOfflineLeaderboardScores(gameId, period) {
+    // Generate fresh random bot scores for this game
+    const botPlayers = generateBotPlayers(gameId, 5);
+    
+    // Get user's score if exists
+    const userId = localStorage.getItem('aimtrainer_userid') || 'guest';
+    let userScore = 0;
+    
+    if (period === 'weekly') {
+        userScore = window['weeklyScore_' + gameId] || parseInt(localStorage.getItem('aimtrainer_weekly_' + gameId) || 0);
+    } else if (period === 'monthly') {
+        userScore = window['monthlyScore_' + gameId] || parseInt(localStorage.getItem('aimtrainer_monthly_' + gameId) || 0);
+    } else {
+        userScore = parseInt(localStorage.getItem('aimtrainer_hard_' + gameId) || 0);
+    }
+    
+    // Combine user and bots
+    let allPlayers = [...botPlayers];
+    if (userScore > 0) {
+        const username = localStorage.getItem('aimtrainer_username') || 'Player';
+        allPlayers.push({ username: username, score: userScore, isMe: true });
+    }
+    
+    // Sort by score
+    allPlayers.sort((a, b) => b.score - a.score);
+    
+    // Return top 5
+    return allPlayers.slice(0, 5).map((p, i) => ({
+        rank: i + 1,
+        username: p.username,
+        score: p.score,
+isMe: p.isMe || false
+    }));
+}
+
+// Game names mapping for display
       const gameNames = {
           '360Aim': '360° Aim Tracker',
           'flick': '360° Flick Trainer',
@@ -4954,6 +5566,11 @@
            // Render monthly leaderboard when switching to monthly tab
            if (tabId === 'monthly' && typeof renderMonthlyLeaderboard === 'function') {
                renderMonthlyLeaderboard();
+           }
+           
+           // Render weekly leaderboard when switching to weekly tab
+           if (tabId === 'weekly' && typeof renderWeeklyLeaderboard === 'function') {
+               renderWeeklyLeaderboard();
            }
            
            // Initialize settings tab
@@ -5116,10 +5733,10 @@
       // ==================== SOCIAL FUNCTIONS ====================
       function initSocial() {
           // Generate or get user's unique ID
-          let userId = localStorage.getItem('aimtrainer_user_id');
+          let userId = localStorage.getItem('aimtrainer_userid');
           if (!userId) {
               userId = 'user_' + Math.random().toString(36).substr(2, 9);
-              localStorage.setItem('aimtrainer_user_id', userId);
+              localStorage.setItem('aimtrainer_userid', userId);
           }
           
           // Set up referral link
@@ -5316,6 +5933,7 @@ function escapeHtml(text) {
           
           const themes = [
               { id: 'default', name: 'Default Dark', colors: ['#0a0a0f', '#1a1a2e', '#00ff88'] },
+              { id: 'light', name: 'Light', colors: ['#f0f2f5', '#ffffff', '#00aa55'] },
               { id: 'ocean', name: 'Ocean Blue', colors: ['#0a192f', '#112240', '#64ffda'] },
               { id: 'sunset', name: 'Sunset', colors: ['#1a0a0f', '#2d1124', '#ff6b6b'] },
               { id: 'forest', name: 'Forest', colors: ['#0a1f0a', '#1a2d1a', '#4ade80'] }
@@ -5324,7 +5942,7 @@ function escapeHtml(text) {
           const currentTheme = localStorage.getItem('aimtrainer_theme') || 'default';
           
           container.innerHTML = themes.map(theme => `
-              <div class="theme-option ${theme.id === currentTheme ? 'active' : ''}" onclick="selectTheme('${theme.id}')">
+              <div class="theme-option ${theme.id === currentTheme ? 'active' : ''}" data-theme="${theme.id}" onclick="selectTheme('${theme.id}')">
                   <div style="display: flex; gap: 5px; justify-content: center; margin-bottom: 8px;">
                       ${theme.colors.map(c => `<div style="width: 20px; height: 20px; background: ${c}; border-radius: 4px;"></div>`).join('')}
                   </div>
@@ -5342,16 +5960,64 @@ function escapeHtml(text) {
       function applyTheme(themeId) {
           const themes = {
               default: { bg: '#0a0a0f', card: '#1a1a2e', accent: '#00ff88' },
+              light: { bg: '#f0f2f5', card: '#ffffff', accent: '#00aa55' },
               ocean: { bg: '#0a192f', card: '#112240', accent: '#64ffda' },
               sunset: { bg: '#1a0a0f', card: '#2d1124', accent: '#ff6b6b' },
               forest: { bg: '#0a1f0a', card: '#1a2d1a', accent: '#4ade80' }
           };
           
           const theme = themes[themeId] || themes.default;
+          
+          // Remove light mode class first
+          document.body.classList.remove('light-mode');
+          
+          if (themeId === 'light') {
+              document.body.classList.add('light-mode');
+          }
+          
           document.body.style.background = theme.bg;
           document.documentElement.style.setProperty('--theme-bg', theme.bg);
           document.documentElement.style.setProperty('--theme-card', theme.card);
           document.documentElement.style.setProperty('--theme-accent', theme.accent);
+      }
+
+      // ==================== HAMBURGER MENU FUNCTIONS ====================
+      function toggleMenu() {
+          const hamburger = document.getElementById('hamburger-btn');
+          const menu = document.getElementById('slide-menu');
+          const overlay = document.getElementById('menu-overlay');
+          
+          hamburger.classList.toggle('active');
+          menu.classList.toggle('active');
+          overlay.classList.toggle('active');
+      }
+
+      function closeMenu() {
+          const hamburger = document.getElementById('hamburger-btn');
+          const menu = document.getElementById('slide-menu');
+          const overlay = document.getElementById('menu-overlay');
+          
+          hamburger.classList.remove('active');
+          menu.classList.remove('active');
+          overlay.classList.remove('active');
+      }
+
+      function switchTabFromMenu(tabId, icon) {
+          // Close menu first
+          closeMenu();
+          
+          // Switch tab
+          switchTab(tabId);
+          
+          // Update menu button states
+          document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
+          event.target.closest('.menu-btn').classList.add('active');
+      }
+
+      // Apply saved theme on page load
+      function initTheme() {
+          const savedTheme = localStorage.getItem('aimtrainer_theme') || 'default';
+          applyTheme(savedTheme);
       }
 
       function renderSensitivityConverter() {

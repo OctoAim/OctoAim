@@ -1,49 +1,35 @@
-# TODO - Implementation Plan
+# TODO - Light Mode + Hamburger Menu UI
 
-## Task: Add Settings Tab, Sound Effects & Mini-Games
+## Task
+Implement light mode theme and hamburger menu for cleaner UI
 
-### 1. Settings Tab in index.html ✅ COMPLETED
-- Added "⚙️ SETTINGS" tab button in tabs section
-- Created Settings tab content with:
-  - Sound settings (volume sliders, toggles for hit/miss/UI sounds)
-  - Display settings (default difficulty, FPS/timer toggles)
-  - Theme selection 
-  - Sensitivity converter
-  - Account settings (view profile, sign out)
+## Steps Completed:
+- [x] Analyze current index.html structure
+- [x] Plan implementation with user
+- [x] Add Light Mode theme option to settings
+- [x] Add hamburger menu button to top-left header
+- [x] Create slide-out menu with organized tab categories
+- [x] Add CSS for light mode theme
+- [x] Add hamburger menu CSS styles
+- [x] Test functionality
 
-### 2. Sound Effects System (sound-system.js) ✅ COMPLETED
-- Created sound-system.js with synthesized sound effects:
-  - Hit sound (high pitched ding)
-  - Miss sound (low thud)
-  - UI click sounds
-  - New record sound (triumphant fanfare)
-  - Game start/end sounds
-  - Countdown, coin, quest complete sounds
-- Volume controls (master & SFX)
-- Sound toggles for each type
-- Works without external audio files (synthesized)
+## Implementation Details:
 
-### 3. Mini-Games Section ✅ COMPLETED
-- Added new "🎮 MINI GAMES" tab
-- Created 4 mini-game HTML files:
-  - **Quick Click** - Click as many targets in 10 seconds
-  - **Precision Test** - Hit center of targets for max accuracy (20 targets)
-  - **Speed Run** - Complete 50 targets as fast as possible
-  - **Accuracy Arena** - Maintain 90%+ accuracy (3 misses allowed)
-- Each mini-game has:
-  - Start/end screens
-  - Score tracking
-  - Local high scores
-  - Sound effects integration
-  - Records saved to localStorage
+### Light Mode Theme Colors:
+- Background: #f0f2f5 (light gray)
+- Card background: #ffffff (white)
+- Text: #1a1a1a (dark)
+- Accent: #00aa55 (green - slightly darker for light mode)
+- Borders: #e0e0e0
 
-### Implementation Summary:
-1. index.html - Added SETTINGS and MINI GAMES tabs with full content
-2. sound-system.js - Created with 10+ synthesized sound effects
-3. mini-quickclick.html - Quick click mini-game
-4. mini-precision.html - Precision test mini-game  
-5. mini-speedrun.html - Speed run mini-game
-6. mini-accuracy.html - Accuracy arena mini-game
+### Hamburger Menu Categories:
+- **Play** → Scenarios, Mini Games
+- **Progress** → Personal Bests, Stats  
+- **Compete** → Leaderboard, Weekly, Monthly
+- **More** → Challenges, Skins
+- **Links** → Settings, Analytics
 
-## Status: COMPLETED ✅
+### Responsive Behavior:
+- On screens < 900px: Hamburger menu appears, regular tabs hide
+- On larger screens: Regular tabs show as before
 

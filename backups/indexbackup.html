@@ -1750,7 +1750,7 @@
            color: #000;
        }
 
-       .skin-card .buy-btn {
+.skin-card .buy-btn {
            background: #ffaa00;
            color: #000;
        }
@@ -1767,6 +1767,202 @@
            text-align: center;
            color: #666;
            padding: 40px;
+       }
+
+       /* Monthly Leaderboard Styles */
+       .monthly-lb-header {
+           text-align: center;
+           margin-bottom: 30px;
+       }
+       
+       .monthly-lb-header h2 {
+           color: #00ff88;
+           font-size: 32px;
+           margin-bottom: 10px;
+           text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+       }
+       
+       .monthly-subtitle {
+           color: #888;
+           font-size: 16px;
+       }
+       
+       .monthly-prizes-info {
+           background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.9));
+           border: 2px solid #ffaa00;
+           border-radius: 16px;
+           padding: 20px;
+           margin-bottom: 25px;
+           text-align: center;
+       }
+       
+       .monthly-prizes-info h3 {
+           color: #ffaa00;
+           font-size: 18px;
+           margin-bottom: 15px;
+       }
+       
+.prizes-grid {
+           display: flex;
+           justify-content: center;
+           gap: 15px;
+           flex-wrap: wrap;
+       }
+       
+       .prize-item {
+           background: rgba(0, 0, 0, 0.5);
+           border: 1px solid #333;
+           border-radius: 10px;
+           padding: 12px 20px;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           gap: 5px;
+       }
+       
+       .prize-item.gold { border-color: #ffd700; }
+       .prize-item.silver { border-color: #c0c0c0; }
+       .prize-item.bronze { border-color: #cd7f32; }
+       
+       .prize-rank {
+           font-weight: bold;
+           font-size: 14px;
+           color: #fff;
+       }
+       
+       .prize-item.gold .prize-rank { color: #ffd700; }
+       .prize-item.silver .prize-rank { color: #c0c0c0; }
+       .prize-item.bronze .prize-rank { color: #cd7f32; }
+       
+       .prize-amount {
+           color: #ffaa00;
+           font-size: 13px;
+           font-weight: bold;
+       }
+       
+       .your-monthly-stats {
+           display: flex;
+           justify-content: center;
+           gap: 40px;
+           margin-bottom: 25px;
+       }
+       
+       .monthly-stat {
+           background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.9));
+           border: 2px solid #333;
+           border-radius: 12px;
+           padding: 20px 40px;
+           text-align: center;
+       }
+       
+       .monthly-stat-label {
+           color: #888;
+           font-size: 13px;
+           margin-bottom: 8px;
+           text-transform: uppercase;
+           letter-spacing: 1px;
+       }
+       
+       .monthly-stat-value {
+           color: #00ff88;
+           font-size: 36px;
+           font-weight: bold;
+       }
+       
+       .monthly-stat-value.top-10 {
+           color: #ffaa00;
+           text-shadow: 0 0 15px rgba(255, 170, 0, 0.5);
+       }
+       
+       .claim-prize-btn {
+           width: 100%;
+           max-width: 400px;
+           display: block;
+           margin: 0 auto 25px;
+           padding: 16px;
+           background: linear-gradient(135deg, #ffaa00, #ff8800);
+           border: none;
+           border-radius: 12px;
+           color: #000;
+           font-size: 16px;
+           font-weight: bold;
+           cursor: pointer;
+           transition: all 0.3s;
+       }
+       
+       .claim-prize-btn:hover {
+           transform: scale(1.02);
+           box-shadow: 0 0 25px rgba(255, 170, 0, 0.5);
+       }
+       
+       .monthly-lb-list {
+           background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.9));
+           border: 2px solid #333;
+           border-radius: 12px;
+           padding: 20px;
+       }
+       
+       .monthly-lb-list h3 {
+           color: #888;
+           font-size: 14px;
+           text-transform: uppercase;
+           letter-spacing: 2px;
+           margin-bottom: 15px;
+           text-align: center;
+       }
+       
+       .monthly-lb-row {
+           display: flex;
+           align-items: center;
+           padding: 12px 15px;
+           border-bottom: 1px solid #333;
+           transition: all 0.2s;
+       }
+       
+       .monthly-lb-row:last-child {
+           border-bottom: none;
+       }
+       
+       .monthly-lb-row:hover {
+           background: rgba(0, 255, 136, 0.1);
+       }
+       
+       .monthly-lb-row.current-user {
+           background: rgba(0, 255, 136, 0.15);
+           border: 1px solid #00ff88;
+       }
+       
+       .monthly-lb-row.top-3 {
+           background: rgba(255, 170, 0, 0.1);
+       }
+       
+       .monthly-rank {
+           width: 50px;
+           font-size: 18px;
+           font-weight: bold;
+       }
+       
+       .monthly-rank.gold { color: #ffd700; }
+       .monthly-rank.silver { color: #c0c0c0; }
+       .monthly-rank.bronze { color: #cd7f32; }
+       
+       .monthly-username {
+           flex: 1;
+           color: #fff;
+           font-size: 15px;
+       }
+       
+       .monthly-score {
+           color: #00ff88;
+           font-size: 18px;
+           font-weight: bold;
+           margin-right: 15px;
+       }
+       
+       .monthly-prize {
+           color: #ffaa00;
+           font-size: 12px;
+           font-weight: bold;
        }
 
        /* Profile Modal */
@@ -2320,8 +2516,602 @@
            padding: 30px;
            color: #666;
        }
+
+       /* Admin Panel Styles */
+       .admin-modal {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background: rgba(0,0,0,0.95);
+           display: none;
+           align-items: center;
+           justify-content: center;
+           z-index: 3000;
+           backdrop-filter: blur(10px);
+       }
+
+       .admin-modal.active {
+           display: flex;
+       }
+
+       .admin-box {
+           background: linear-gradient(160deg, #1a1a2e 0%, #0f0f1a 50%, #16213e 100%);
+           border: 2px solid #ff4444;
+           border-radius: 20px;
+           padding: 40px;
+           width: 90%;
+           max-width: 900px;
+           max-height: 85vh;
+           overflow-y: auto;
+           animation: slideUp 0.3s ease;
+       }
+
+       .admin-box h2 {
+           color: #ff4444;
+           font-size: 28px;
+           margin-bottom: 10px;
+           display: flex;
+           align-items: center;
+           gap: 10px;
+       }
+
+       .admin-box .admin-subtitle {
+           color: #888;
+           font-size: 14px;
+           margin-bottom: 30px;
+       }
+
+       .admin-login-box {
+           background: linear-gradient(160deg, #1a1a2e 0%, #0f0f1a 50%, #16213e 100%);
+           border: 2px solid #ff4444;
+           border-radius: 20px;
+           padding: 40px;
+           width: 400px;
+           max-width: 95%;
+           text-align: center;
+           animation: slideUp 0.3s ease;
+       }
+
+       .admin-login-box h2 {
+           color: #ff4444;
+           font-size: 28px;
+           margin-bottom: 10px;
+       }
+
+       .admin-login-box input {
+           width: 100%;
+           padding: 14px 16px;
+           background: rgba(0,0,0,0.5);
+           border: 2px solid #333;
+           border-radius: 10px;
+           color: #fff;
+           font-size: 15px;
+           margin-bottom: 15px;
+           box-sizing: border-box;
+       }
+
+       .admin-login-box input:focus {
+           outline: none;
+           border-color: #ff4444;
+       }
+
+       .admin-login-box button {
+           width: 100%;
+           padding: 14px;
+           background: #ff4444;
+           border: none;
+           border-radius: 10px;
+           color: #fff;
+           font-size: 16px;
+           font-weight: bold;
+           cursor: pointer;
+           transition: all 0.3s;
+           margin-bottom: 10px;
+       }
+
+       .admin-login-box button:hover {
+           background: #ff6666;
+           box-shadow: 0 0 20px rgba(255,68,68,0.5);
+       }
+
+       .admin-login-box .close-admin {
+           position: absolute;
+           top: 15px;
+           right: 20px;
+           background: none;
+           border: none;
+           color: #666;
+           font-size: 28px;
+           cursor: pointer;
+       }
+
+       .admin-stats {
+           display: grid;
+           grid-template-columns: repeat(3, 1fr);
+           gap: 20px;
+           margin-bottom: 30px;
+       }
+
+       .admin-stat-box {
+           background: rgba(0,0,0,0.5);
+           border: 1px solid #333;
+           border-radius: 12px;
+           padding: 20px;
+           text-align: center;
+       }
+
+       .admin-stat-box .stat-value {
+           font-size: 36px;
+           font-weight: bold;
+           color: #ff4444;
+       }
+
+       .admin-stat-box .stat-label {
+           color: #888;
+           font-size: 13px;
+           margin-top: 5px;
+       }
+
+       .admin-table {
+           width: 100%;
+           border-collapse: collapse;
+           margin-top: 15px;
+       }
+
+       .admin-table th,
+       .admin-table td {
+           padding: 12px;
+           text-align: left;
+           border-bottom: 1px solid #333;
+       }
+
+       .admin-table th {
+           color: #888;
+           font-size: 12px;
+           text-transform: uppercase;
+           letter-spacing: 1px;
+       }
+
+       .admin-table td {
+           color: #fff;
+           font-size: 14px;
+       }
+
+       .admin-table tr:hover {
+           background: rgba(255,68,68,0.1);
+       }
+
+       .status-banned {
+           color: #ff4444;
+           font-weight: bold;
+       }
+
+       .status-active {
+           color: #00ff88;
+           font-weight: bold;
+       }
+
+       .admin-btn {
+           padding: 6px 12px;
+           background: #333;
+           border: none;
+           border-radius: 6px;
+           color: #fff;
+           font-size: 12px;
+           cursor: pointer;
+           margin-right: 5px;
+           transition: all 0.3s;
+       }
+
+       .admin-btn:hover {
+           background: #444;
+       }
+
+       .admin-btn-red {
+           background: #ff4444;
+       }
+
+       .admin-btn-red:hover {
+           background: #ff6666;
+       }
+
+       .admin-btn-green {
+           background: #00ff88;
+           color: #000;
+       }
+
+       .admin-btn-green:hover {
+           background: #00cc6a;
+       }
+
+       .admin-btn-gold {
+           background: #ffaa00;
+           color: #000;
+       }
+
+       .admin-btn-gold:hover {
+           background: #ffcc00;
+       }
+
+       .admin-player-profile {
+           padding: 20px;
+       }
+
+       .admin-player-profile h3 {
+           color: #ff4444;
+           margin-bottom: 20px;
+       }
+
+       .profile-details {
+           background: rgba(0,0,0,0.5);
+           border: 1px solid #333;
+           border-radius: 12px;
+           padding: 20px;
+           margin-bottom: 20px;
+       }
+
+       .profile-details p {
+           color: #ccc;
+           margin-bottom: 10px;
+       }
+
+       .profile-details strong {
+           color: #fff;
+       }
+
+       .admin-score-item {
+           display: flex;
+           justify-content: space-between;
+           padding: 10px;
+           background: rgba(0,0,0,0.3);
+           border-radius: 6px;
+           margin-bottom: 8px;
+       }
+
+       .admin-score-item span {
+           color: #ccc;
+       }
+
+       .admin-score-item span:first-child {
+           color: #00ff88;
+       }
+
+       .admin-score-item span:nth-child(2) {
+           color: #ffaa00;
+           font-weight: bold;
+       }
+
+/* Hidden admin access button */
+       .admin-access-link {
+           position: fixed;
+           bottom: 10px;
+           right: 10px;
+           color: #333;
+           font-size: 10px;
+           text-decoration: none;
+           opacity: 0.3;
+           transition: opacity 0.3s;
+       }
+
+       .admin-access-link:hover {
+           opacity: 1;
+       }
+
+       /* Settings Button */
+       .header-auth .settings-btn {
+           width: 40px;
+           height: 40px;
+           border-radius: 50%;
+           overflow: hidden;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           background: linear-gradient(135deg, #ffaa00, #ff8800);
+           cursor: pointer;
+           transition: all 0.3s;
+           border: none;
+           font-size: 18px;
+       }
+
+       .header-auth .settings-btn:hover {
+           transform: scale(1.1);
+           box-shadow: 0 0 15px #ffaa00;
+       }
+
+       /* Settings Modal */
+       .settings-modal {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           background: rgba(0, 0, 0, 0.85);
+           backdrop-filter: blur(20px);
+           display: none;
+           align-items: center;
+           justify-content: center;
+           z-index: 2500;
+           padding: 20px;
+       }
+
+       .settings-modal.active {
+           display: flex;
+       }
+
+       .settings-box {
+           background: linear-gradient(165deg, rgba(26, 26, 46, 0.95) 0%, rgba(15, 15, 26, 0.9) 50%, rgba(22, 33, 62, 0.95) 100%);
+           border: 2px solid rgba(0, 255, 136, 0.3);
+           border-radius: 24px;
+           padding: 40px;
+           width: 100%;
+           max-width: 520px;
+           max-height: 85vh;
+           overflow-y: auto;
+           box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 255, 136, 0.1);
+       }
+
+       .settings-box:hover {
+           border-color: rgba(0, 255, 136, 0.6);
+       }
+
+       .settings-section {
+           margin-bottom: 32px;
+       }
+
+       .settings-section h3 {
+           color: #888;
+           font-size: 12px;
+           font-weight: 600;
+           text-transform: uppercase;
+           letter-spacing: 2px;
+           margin-bottom: 16px;
+       }
+
+       .theme-grid {
+           display: grid;
+           grid-template-columns: repeat(2, 1fr);
+           gap: 12px;
+       }
+
+       .theme-option {
+           background: rgba(255, 255, 255, 0.05);
+           border: 2px solid rgba(255, 255, 255, 0.1);
+           border-radius: 16px;
+           padding: 16px;
+           cursor: pointer;
+           text-align: center;
+           transition: all 0.3s;
+       }
+
+       .theme-option:hover {
+           border-color: rgba(255, 255, 255, 0.3);
+           transform: translateY(-2px);
+       }
+
+       .theme-option.active {
+           border-color: #00ff88;
+           box-shadow: 0 0 25px rgba(0, 255, 136, 0.25);
+       }
+
+       .theme-name {
+           color: #fff;
+           font-size: 13px;
+           font-weight: 500;
+           display: block;
+           margin-top: 8px;
+       }
+
+       /* 1V1 Tab Styles */
+       .onevone-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+           gap: 25px;
+           width: 100%;
+           max-width: 1000px;
+       }
+
+       .onevone-card {
+           background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.9));
+           border: 2px solid #333;
+           border-radius: 16px;
+           padding: 30px;
+           transition: all 0.3s;
+       }
+
+       .onevone-card:hover {
+           transform: translateY(-5px);
+       }
+
+       .onevone-card.private-room {
+           border-color: #64ffda;
+       }
+
+       .onevone-card.private-room:hover {
+           box-shadow: 0 10px 30px rgba(100, 255, 218, 0.3);
+       }
+
+       .onevone-card.quick-match {
+           border-color: #ff6b6b;
+       }
+
+       .onevone-card.quick-match:hover {
+           box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+       }
+
+       .onevone-card h3 {
+           font-size: 22px;
+           margin-bottom: 10px;
+           display: flex;
+           align-items: center;
+           gap: 10px;
+       }
+
+       .onevone-card.private-room h3 {
+           color: #64ffda;
+       }
+
+       .onevone-card.quick-match h3 {
+           color: #ff6b6b;
+       }
+
+       .onevone-card p {
+           color: #888;
+           font-size: 14px;
+           margin-bottom: 20px;
+       }
+
+       .onevone-card select {
+           width: 100%;
+           padding: 14px;
+           background: rgba(0, 0, 0, 0.4);
+           border: 1px solid rgba(255, 255, 255, 0.15);
+           border-radius: 10px;
+           color: #fff;
+           font-size: 14px;
+           margin-bottom: 12px;
+           cursor: pointer;
+       }
+
+       .onevone-card select:focus {
+           outline: none;
+           border-color: #00ff88;
+       }
+
+       .onevone-card button {
+           width: 100%;
+           padding: 16px;
+           border: none;
+           border-radius: 12px;
+           font-size: 16px;
+           font-weight: 700;
+           cursor: pointer;
+           transition: all 0.3s;
+           text-transform: uppercase;
+           letter-spacing: 1px;
+       }
+
+       .onevone-card.private-room button {
+           background: linear-gradient(135deg, #64ffda, #4fd1c5);
+           color: #0a0a0f;
+       }
+
+       .onevone-card.private-room button:hover {
+           box-shadow: 0 8px 25px rgba(100, 255, 218, 0.4);
+           transform: translateY(-2px);
+       }
+
+       .onevone-card.quick-match button {
+           background: linear-gradient(135deg, #ff6b6b, #ff4444);
+           color: #fff;
+       }
+
+       .onevone-card.quick-match button:hover {
+           box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+           transform: translateY(-2px);
+       }
+
+       .room-code-display {
+           font-size: 42px;
+           font-weight: 800;
+           color: #64ffda;
+           letter-spacing: 6px;
+           background: rgba(0, 0, 0, 0.4);
+           border: 2px solid #64ffda;
+           border-radius: 16px;
+           padding: 28px;
+           margin: 20px 0;
+           text-align: center;
+           font-family: 'Courier New', monospace;
+       }
+
+       /* 1v1 Live Score UI */
+       .onevone-live-score {
+           position: fixed;
+           top: 20px;
+           left: 50%;
+           transform: translateX(-50%);
+           background: linear-gradient(165deg, rgba(26, 26, 46, 0.95) 0%, rgba(15, 15, 26, 0.95) 100%);
+           border: 2px solid rgba(0, 255, 136, 0.3);
+           border-radius: 20px;
+           padding: 20px 40px;
+           display: none;
+           align-items: center;
+           gap: 40px;
+           z-index: 2000;
+           box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+       }
+
+       .onevone-live-score.active {
+           display: flex;
+       }
+
+       .onevone-live-score .score-section {
+           text-align: center;
+       }
+
+       .onevone-live-score .player-name {
+           font-size: 14px;
+           color: #888;
+           margin-bottom: 5px;
+       }
+
+       .onevone-live-score .score-value {
+           font-size: 36px;
+           font-weight: 800;
+       }
+
+       .onevone-live-score .player-you .score-value {
+           color: #00ff88;
+           text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+       }
+
+       .onevone-live-score .player-their .score-value {
+           color: #ff4444;
+           text-shadow: 0 0 20px rgba(255, 68, 68, 0.5);
+       }
+
+       .onevone-live-score .vs-divider {
+           font-size: 24px;
+           color: #666;
+           font-weight: bold;
+       }
+
+       .onevone-live-score .match-info {
+           font-size: 12px;
+           color: #666;
+       }
+
+       .onevone-live-score .close-match {
+           position: absolute;
+           top: 10px;
+           right: 10px;
+           background: none;
+           border: none;
+           color: #666;
+           font-size: 20px;
+           cursor: pointer;
+       }
+
+       .onevone-live-score .close-match:hover {
+           color: #ff4444;
+       }
+
+       @media (max-width: 600px) {
+           .onevone-grid {
+               grid-template-columns: 1fr;
+           }
+           .onevone-live-score {
+               width: 90%;
+               padding: 15px 20px;
+               gap: 20px;
+           }
+           .onevone-live-score .score-value {
+               font-size: 28px;
+           }
+       }
    </style>
-</head>
 <body>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loading-screen">
@@ -2424,7 +3214,8 @@
     </div>
 
     <!-- Header Auth Section -->
-    <div class="header-auth" id="auth-section">
+<div class="header-auth" id="auth-section">
+        <button class="settings-btn" onclick="showSettingsModal()" title="Settings">⚙️</button>
         <button class="social-btn" onclick="showSocialModal()" title="Friends">👥</button>
         <button class="auth-btn" onclick="showAuthModal()">Sign In</button>
     </div>
@@ -2466,6 +3257,88 @@
         </div>
     </div>
 
+    <!-- Admin Login Modal -->
+    <div class="admin-modal" id="admin-login-modal">
+        <div class="admin-login-box">
+            <h2>🔐 Admin Login</h2>
+            <p style="color: #666; margin-bottom: 20px;">Enter admin credentials</p>
+            <input type="text" id="admin-username" placeholder="Admin Username">
+            <input type="password" id="admin-password" placeholder="Admin Password">
+            <button onclick="handleAdminLogin()">Login</button>
+            <button class="btn-secondary" onclick="closeAdminLogin()" style="width: 100%; margin-top: 10px;">Cancel</button>
+        </div>
+    </div>
+
+<!-- Admin Panel Modal -->
+    <div class="admin-modal" id="admin-panel-modal">
+        <div class="admin-box">
+            <h2>🔧 Admin Panel</h2>
+            <p class="admin-subtitle">Manage players, view stats, and moderate the game</p>
+            <button class="admin-btn admin-btn-red" onclick="handleAdminLogout()" style="position: absolute; top: 20px; right: 20px;">Logout</button>
+            <div id="admin-dashboard-content">
+                <p>Loading admin dashboard...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="settings-modal" id="settings-modal">
+        <div class="settings-box">
+            <button class="modal-close" onclick="closeSettingsModal()" aria-label="Close settings" style="position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #888; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s ease;">×</button>
+            
+            <div class="modal-header" style="text-align: center; margin-bottom: 30px;">
+                <h2 style="color: #00ff88; font-size: 32px; font-weight: 700;">⚙️ Settings</h2>
+            </div>
+            
+            <!-- Theme Selection -->
+            <div class="settings-section">
+                <h3>🎨 Theme</h3>
+                <div class="theme-grid" id="theme-options" role="radiogroup" aria-label="Select theme">
+                </div>
+            </div>
+            
+            <!-- Sensitivity Converter -->
+            <div class="settings-section">
+                <h3>🎯 Sensitivity Converter</h3>
+                <div id="sens-converter">
+                </div>
+            </div>
+            
+            <!-- Account Settings -->
+            <div class="settings-section">
+                <h3>👤 Account</h3>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <button onclick="showProfileCard()" style="flex: 1; min-width: 140px; padding: 14px 24px; background: linear-gradient(135deg, #00ff88, #00cc6a); border: none; border-radius: 12px; color: #0a0a0f; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <span>👤</span> View Profile
+                    </button>
+                    <button onclick="handleLogout()" style="flex: 1; min-width: 140px; padding: 14px 24px; background: linear-gradient(135deg, #ff4444, #cc3333); border: none; border-radius: 12px; color: white; font-size: 14px; font-weight: 600; cursor: pointer;">
+                        <span>🚪</span> Sign Out
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 1v1 Live Score UI -->
+    <div class="onevone-live-score" id="onevone-live-score">
+        <button class="close-match" onclick="hideLiveScoreUI()">×</button>
+        <div class="score-section player-you">
+            <div class="player-name">YOU</div>
+            <div class="score-value" id="your-live-score">0</div>
+        </div>
+        <div class="vs-divider">VS</div>
+        <div class="score-section player-their">
+            <div class="player-name" id="opponent-live-name">THEM</div>
+            <div class="score-value" id="their-live-score">0</div>
+        </div>
+        <div class="match-info">
+            <div id="match-timer">60s</div>
+        </div>
+    </div>
+
+    <!-- Hidden Admin Access Link -->
+    <a href="#" class="admin-access-link" onclick="showAdminLogin(); return false;">.</a>
+
     <div class="bg">
         <div class="grid"></div>
     </div>
@@ -2474,7 +3347,7 @@
         <h1>AIM TRAINER</h1>
         <p class="subtitle">Choose your training module</p>
       
-        <!-- Tabs -->
+<!-- Tabs -->
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab('scenarios')">SCENARIOS</button>
             <button class="tab-btn" onclick="switchTab('bests')">PERSONAL BESTS</button>
@@ -2482,9 +3355,12 @@
             <button class="tab-btn" onclick="switchTab('leaderboard')">LEADERBOARD</button>
             <button class="tab-btn" onclick="switchTab('skins')">SKINS</button>
             <button class="tab-btn" onclick="switchTab('stats')">STATS</button>
+            <button class="tab-btn" onclick="switchTab('monthly')">🏆 MONTHLY</button>
+            <button class="tab-btn" onclick="switchTab('weekly')">🏅 WEEKLY</button>
+            <button class="tab-btn" onclick="switchTab('minigames')">🎮 MINI GAMES</button>
+            <button class="tab-btn" onclick="switchTab('settings')">⚙️ SETTINGS</button>
             <a href="analytics.html" class="tab-btn" style="text-decoration: none; display: inline-flex; align-items: center;">📊 ANALYTICS</a>
-            
-        </div> 
+        </div>
       
        <!-- Scenarios Tab -->
        <div id="scenarios" class="tab-content active">
@@ -2789,7 +3665,7 @@
            </div>
        </div>
        
-       <!-- Stats Tab -->
+<!-- Stats Tab -->
        <div id="stats" class="tab-content">
            <!-- Session Stats -->
            <div class="session-stats">
@@ -2822,7 +3698,7 @@
                    </div>
                </div>
            </div>
-          
+         
            <!-- Stats Dashboard -->
            <div class="stats-dashboard">
                <div class="stat-box">
@@ -2846,7 +3722,7 @@
                    <div class="stat-label">Rank</div>
                </div>
            </div>
-          
+         
            <!-- Achievements -->
            <h3 style="color: #888; text-align: center; margin: 30px 0 20px; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;">Achievements</h3>
            <div class="achievements-grid">
@@ -2881,15 +3757,236 @@
                    <div class="achievement-desc">Score over 10,000 in any game</div>
                </div>
            </div>
-          
+         
            <button class="clear-data-btn" onclick="clearAllData()">Clear All Data</button>
        </div>
+
+<!-- Monthly Leaderboard Tab -->
+       <div id="monthly" class="tab-content">
+           <div id="monthly-leaderboard-content">
+               <!-- Monthly leaderboard will be rendered by JavaScript -->
+               <p style="text-align: center; color: #666; padding: 40px;">Loading monthly leaderboard...</p>
+           </div>
+       </div>
+       
+       <!-- Weekly Leaderboard Tab -->
+       <div id="weekly" class="tab-content">
+           <div id="weekly-leaderboard-content">
+               <!-- Weekly leaderboard will be rendered by JavaScript -->
+               <p style="text-align: center; color: #666; padding: 40px;">Loading weekly leaderboard...</p>
+           </div>
+       </div>
+       
+       <!-- Mini Games Tab -->
+       <div id="minigames" class="tab-content">
+           <div style="text-align: center; margin-bottom: 40px;">
+               <h2 style="color: #00ff88; font-size: 32px; margin-bottom: 10px;">🎮 Mini Games</h2>
+               <p style="color: #888;">Quick challenges to test your skills!</p>
+           </div>
+           
+           <div class="games-grid">
+               <!-- Quick Click Challenge -->
+               <div class="game-card easy" onclick="openMiniGame('quickclick')">
+                   <div class="shine"></div>
+                   <div class="preview">
+                       <div class="preview-overlay"></div>
+                       <div class="preview-icon">👆</div>
+                   </div>
+                   <div class="card-content">
+                       <div class="badges">
+                           <span class="badge easy">10 Seconds</span>
+                       </div>
+                       <div class="card-title">Quick Click</div>
+                       <div class="card-desc">Click as many targets as possible in 10 seconds! Speed is key.</div>
+                   </div>
+               </div>
+               
+               <!-- Precision Test -->
+               <div class="game-card medium" onclick="openMiniGame('precision')">
+                   <div class="shine"></div>
+                   <div class="preview">
+                       <div class="preview-overlay"></div>
+                       <div class="preview-icon">🎯</div>
+                   </div>
+                   <div class="card-content">
+                       <div class="badges">
+                           <span class="badge medium">Accuracy</span>
+                       </div>
+                       <div class="card-title">Precision Test</div>
+                       <div class="card-desc">Hit the center of targets for maximum points. Every pixel counts!</div>
+                   </div>
+               </div>
+               
+               <!-- Speed Run -->
+               <div class="game-card hard" onclick="openMiniGame('speedrun')">
+                   <div class="shine"></div>
+                   <div class="preview">
+                       <div class="preview-overlay"></div>
+                       <div class="preview-icon">⚡</div>
+                   </div>
+                   <div class="card-content">
+                       <div class="badges">
+                           <span class="badge hard">Endurance</span>
+                       </div>
+                       <div class="card-title">Speed Run</div>
+                       <div class="card-desc">Complete 50 targets as fast as you can. Beat your best time!</div>
+                   </div>
+               </div>
+               
+               <!-- Accuracy Arena -->
+               <div class="game-card special" onclick="openMiniGame('accuracy')">
+                   <div class="shine"></div>
+                   <div class="preview">
+                       <div class="preview-overlay"></div>
+                       <div class="preview-icon">🏆</div>
+                   </div>
+                   <div class="card-content">
+                       <div class="badges">
+                           <span class="badge special">Challenge</span>
+                       </div>
+                       <div class="card-title">Accuracy Arena</div>
+                       <div class="card-desc">Maintain 90%+ accuracy over 30 targets to win. No misses allowed!</div>
+                   </div>
+               </div>
+           </div>
+           
+           <!-- Mini Game Stats -->
+           <div style="margin-top: 40px;">
+               <h3 style="color: #888; text-align: center; margin-bottom: 20px; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;">Your Mini Game Records</h3>
+               <div class="stats-dashboard" style="max-width: 800px; margin: 0 auto;">
+                   <div class="stat-box">
+                       <div class="stat-icon">👆</div>
+                       <div class="stat-value" id="mini-quickclick-best">0</div>
+                       <div class="stat-label">Quick Click (clicks)</div>
+                   </div>
+                   <div class="stat-box">
+                       <div class="stat-icon">🎯</div>
+                       <div class="stat-value" id="mini-precision-best">0</div>
+                       <div class="stat-label">Precision (accuracy %)</div>
+                   </div>
+                   <div class="stat-box">
+                       <div class="stat-icon">⚡</div>
+                       <div class="stat-value" id="mini-speedrun-best">0s</div>
+                       <div class="stat-label">Speed Run (seconds)</div>
+                   </div>
+               </div>
+           </div>
+       </div>
+       
+       <!-- Settings Tab -->
+       <div id="settings" class="tab-content">
+           <div style="text-align: center; margin-bottom: 40px;">
+               <h2 style="color: #00ff88; font-size: 32px; margin-bottom: 10px;">⚙️ Settings</h2>
+               <p style="color: #888;">Customize your experience</p>
+           </div>
+           
+           <!-- Sound Settings -->
+           <div class="settings-section" style="background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.9)); border: 2px solid #333; border-radius: 16px; padding: 30px; margin-bottom: 25px;">
+               <h3 style="color: #888; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">🔊 Sound Settings</h3>
+               
+               <div style="margin-bottom: 20px;">
+                   <label style="color: #fff; display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                       <span>Master Volume</span>
+                       <span id="master-vol-display" style="color: #00ff88;">100%</span>
+                   </label>
+                   <input type="range" id="master-volume" min="0" max="100" value="100" 
+                       oninput="updateVolumeDisplay('master', this.value)"
+                       style="width: 100%; height: 8px; border-radius: 4px; background: #333; outline: none; -webkit-appearance: none;">
+               </div>
+               
+               <div style="margin-bottom: 20px;">
+                   <label style="color: #fff; display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                       <span>SFX Volume</span>
+                       <span id="sfx-vol-display" style="color: #00ff88;">70%</span>
+                   </label>
+                   <input type="range" id="sfx-volume" min="0" max="100" value="70" 
+                       oninput="updateVolumeDisplay('sfx', this.value)"
+                       style="width: 100%; height: 8px; border-radius: 4px; background: #333; outline: none; -webkit-appearance: none;">
+               </div>
+               
+               <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                   <label style="color: #fff; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                       <input type="checkbox" id="sound-hit" checked onchange="toggleSoundSetting('hit', this.checked)" style="width: 20px; height: 20px; accent-color: #00ff88;">
+                       <span>Hit Sounds</span>
+                   </label>
+                   <label style="color: #fff; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                       <input type="checkbox" id="sound-miss" checked onchange="toggleSoundSetting('miss', this.checked)" style="width: 20px; height: 20px; accent-color: #00ff88;">
+                       <span>Miss Sounds</span>
+                   </label>
+                   <label style="color: #fff; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                       <input type="checkbox" id="sound-ui" checked onchange="toggleSoundSetting('ui', this.checked)" style="width: 20px; height: 20px; accent-color: #00ff88;">
+                       <span>UI Sounds</span>
+                   </label>
+                   <label style="color: #fff; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                       <input type="checkbox" id="sound-record" checked onchange="toggleSoundSetting('newRecord', this.checked)" style="width: 20px; height: 20px; accent-color: #00ff88;">
+                       <span>New Record Sound</span>
+                   </label>
+               </div>
+               
+               <button onclick="testSound()" style="margin-top: 20px; padding: 12px 30px; background: linear-gradient(135deg, #00ff88, #00cc6a); border: none; border-radius: 8px; color: #000; font-weight: bold; cursor: pointer;">
+                   🔊 Test Sound
+               </button>
+           </div>
+           
+           <!-- Display Settings -->
+           <div class="settings-section" style="background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.9)); border: 2px solid #333; border-radius: 16px; padding: 30px; margin-bottom: 25px;">
+               <h3 style="color: #888; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">🖥️ Display Settings</h3>
+               
+               <div style="margin-bottom: 20px;">
+                   <label style="color: #fff; display: block; margin-bottom: 10px;">Default Difficulty</label>
+                   <select id="default-difficulty" onchange="saveSetting('defaultDifficulty', this.value)" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 2px solid #333; border-radius: 10px; color: #fff; font-size: 14px;">
+                       <option value="easy">Easy</option>
+                       <option value="medium">Medium</option>
+                       <option value="hard" selected>Hard</option>
+                   </select>
+               </div>
+               
+               <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                   <label style="color: #fff; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                       <input type="checkbox" id="show-fps" checked onchange="saveSetting('showFPS', this.checked)" style="width: 20px; height: 20px; accent-color: #00ff88;">
+                       <span>Show FPS</span>
+                   </label>
+                   <label style="color: #fff; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                       <input type="checkbox" id="show-timer" checked onchange="saveSetting('showTimer', this.checked)" style="width: 20px; height: 20px; accent-color: #00ff88;">
+                       <span>Show Timer</span>
+                   </label>
+               </div>
+           </div>
+           
+           <!-- Theme Selection -->
+           <div class="settings-section" style="background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.9)); border: 2px solid #333; border-radius: 16px; padding: 30px; margin-bottom: 25px;">
+               <h3 style="color: #888; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">🎨 Theme</h3>
+               <div class="theme-grid" id="settings-theme-options">
+               </div>
+           </div>
+           
+           <!-- Sensitivity Converter -->
+           <div class="settings-section" style="background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.9)); border: 2px solid #333; border-radius: 16px; padding: 30px; margin-bottom: 25px;">
+               <h3 style="color: #888; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">🎯 Sensitivity Converter</h3>
+               <div id="settings-sens-converter">
+               </div>
+           </div>
+           
+           <!-- Account -->
+           <div class="settings-section" style="background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(15, 15, 26, 0.9)); border: 2px solid #333; border-radius: 16px; padding: 30px;">
+               <h3 style="color: #888; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">👤 Account</h3>
+               <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                   <button onclick="showProfileCard()" style="flex: 1; min-width: 140px; padding: 14px 24px; background: linear-gradient(135deg, #00ff88, #00cc6a); border: none; border-radius: 12px; color: #0a0a0f; font-size: 14px; font-weight: 600; cursor: pointer;">
+                       👤 View Profile
+                   </button>
+                   <button onclick="handleLogout()" style="flex: 1; min-width: 140px; padding: 14px 24px; background: linear-gradient(135deg, #ff4444, #cc3333); border: none; border-radius: 12px; color: white; font-size: 14px; font-weight: 600; cursor: pointer;">
+                       🚪 Sign Out
+                   </button>
+               </div>
+           </div>
+       </div>
       
-       <div class="footer">
+      <div class="footer">
            Click on any card to open the trainer in a new tab
            <br><br>
-           <button onclick="reportBug()" style="background: transparent; border: 1px solid #444; color: #666; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-right: 10px;">🐛 Report a Bug</button>
-           <button onclick="shareReferral()" style="background: transparent; border: 1px solid #00ff88; color: #00ff88; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 12px;">📤 Share & Earn Coins</button>
+<button onclick="reportBug()" style="background: transparent; border: 1px solid #444; color: #666; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-right: 10px;">🐛 Report a Bug</button>
+           <button onclick="shareReferral()" style="background: transparent; border: 1px solid #00ff88; color: #00ff88; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-right: 10px;">📤 Share & Earn Coins</button>
+           <button onclick="showAdminLogin()" style="background: transparent; border: 1px solid #ff4444; color: #ff4444; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 12px;">🔧 Admin</button>
        </div>
    </div>
 
@@ -2907,14 +4004,30 @@
 
 
 
-   <script src="firebase-auth.js"></script>
+<script src="firebase-auth.js"></script>
    <script src="firebase-leaderboard.js"></script>
+   <script src="admin-system.js"></script>
+   <script src="feature-systems.js"></script>
+   <script src="sound-system.js"></script>
+   <script src="monthly-leaderboard.js"></script>
    <script>
       // Session state
       let sessionGames = 0;
       let sessionHardRuns = 0;
       let sessionRecords = 0;
       let sessionCoins = 0;
+
+      // 1v1 match state
+      let onevoneMatchState = {
+          isHost: false,
+          opponentName: 'Friend',
+          roomCode: '',
+          game: '',
+          yourScore: 0,
+          theirScore: 0,
+          timeLeft: 60,
+          isPlaying: false
+      };
 
       // Auth tab state
       let authMode = 'login';
@@ -2986,8 +4099,16 @@
            // Initialize leaderboard
            initLeaderboard();
            
-           // Load weekly/monthly scores from localStorage
+           // Initialize weekly and monthly scores
            loadWeeklyMonthlyScores();
+           
+           // Initialize weekly leaderboard score tracking
+           if (typeof initWeeklyScore === 'function') {
+               initWeeklyScore();
+           }
+           if (typeof initMonthlyScore === 'function') {
+               initMonthlyScore();
+           }
            
            // Hide loading screen after everything is initialized
            updateLoadingText('Almost done...');
@@ -3071,12 +4192,20 @@
            if (score > currentWeekly) {
                localStorage.setItem(weeklyKey, score);
                window['weeklyScore_' + gameId] = score;
+               // Also update the weekly leaderboard
+               if (typeof addToWeeklyScore === 'function') {
+                   addToWeeklyScore(score);
+               }
            }
            
            // Update monthly score if higher
            if (score > currentMonthly) {
                localStorage.setItem(monthlyKey, score);
                window['monthlyScore_' + gameId] = score;
+               // Also update the monthly leaderboard
+               if (typeof addToMonthlyScore === 'function') {
+                   addToMonthlyScore(score);
+               }
            }
        }
 
@@ -3190,6 +4319,7 @@
            }
            
            authSection.innerHTML = `
+               <button class="settings-btn" onclick="showSettingsModal()" title="Settings">⚙️</button>
                <button class="social-btn" onclick="showSocialModal()" title="Friends">👥</button>
                <div class="user-avatar" onclick="showProfileCard()" title="Click to view profile: ${displayName}">
                    ${avatarHTML}
@@ -3660,17 +4790,29 @@
               }
           }
           
-          // Try to load from Firebase
+          // Try to load from Firebase first, fallback to local data
           try {
               let scores = [];
+              let firebaseFailed = false;
               
-              // Use the correct functions from firebase-auth.js
-              if (currentLeaderboardPeriod === 'alltime' && typeof getAllTimeLeaderboard === 'function') {
-                  scores = await getAllTimeLeaderboard(gameId, 5);
-              } else if (currentLeaderboardPeriod === 'monthly' && typeof getMonthlyLeaderboard === 'function') {
-                  scores = await getMonthlyLeaderboard(gameId, 5);
-              } else if (currentLeaderboardPeriod === 'weekly' && typeof getWeeklyLeaderboard === 'function') {
-                  scores = await getWeeklyLeaderboard(gameId, 5);
+              // Try to get scores from Firebase
+              try {
+                  if (currentLeaderboardPeriod === 'alltime' && typeof getAllTimeLeaderboard === 'function') {
+                      scores = await getAllTimeLeaderboard(gameId, 5);
+                  } else if (currentLeaderboardPeriod === 'monthly' && typeof getMonthlyLeaderboard === 'function') {
+                      scores = await getMonthlyLeaderboard(gameId, 5);
+                  } else if (currentLeaderboardPeriod === 'weekly' && typeof getWeeklyLeaderboard === 'function') {
+                      scores = await getWeeklyLeaderboard(gameId, 5);
+                  }
+              } catch (fbError) {
+                  console.log('Firebase leaderboard error, using offline fallback:', fbError);
+                  firebaseFailed = true;
+              }
+              
+              // If Firebase failed or returned no scores, use localStorage + bots
+              if (firebaseFailed || !scores || scores.length === 0) {
+                  // Use offline bot players for display
+                  scores = getOfflineLeaderboardScores(gameId, currentLeaderboardPeriod);
               }
               
               if (!scores || scores.length === 0) {
@@ -3685,7 +4827,7 @@
                           <div class="leaderboard-row ${i < 3 ? 'top-3' : ''}">
                               <span class="rank ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''}">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '#' + (entry.rank || i + 1)}</span>
                               <span class="username">${escapeHtml(entry.username)}${entry.isMe ? ' (You)' : ''}</span>
-                              <span class="score ${i < 3 ? 'high' : ''}">${entry.score}</span>
+                              <span class="score ${i < 3 ? 'high' : ''}">${entry.score} pts</span>
                           </div>
                       `).join('')}
                   `;
@@ -3703,8 +4845,69 @@
               }
           } catch (e) {
               console.error('Leaderboard error:', e);
-              leaderboardEl.innerHTML = '<p class="no-leaderboard">Unable to load leaderboard. Make sure you\'re signed in.</p>';
+              // Use offline fallback
+              const scores = getOfflineLeaderboardScores(gameId, currentLeaderboardPeriod);
+              if (scores && scores.length > 0) {
+                  const gameName = gameNames[gameId] || gameId;
+                  const periodTitle = currentLeaderboardPeriod === 'alltime' ? 'All Time' : 
+                                      currentLeaderboardPeriod === 'monthly' ? 'This Month' : 'This Week';
+                  leaderboardEl.innerHTML = `
+                      <h3>🏆 ${gameName} - Top Players (${periodTitle})</h3>
+                      <p style="color:#666;font-size:12px;text-align:center;margin-bottom:15px;">Playing offline - showing simulated players</p>
+                      ${scores.map((entry, i) => `
+                          <div class="leaderboard-row ${i < 3 ? 'top-3' : ''}">
+                              <span class="rank ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''}">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '#' + (entry.rank || i + 1)}</span>
+                              <span class="username">${escapeHtml(entry.username)}${entry.isMe ? ' (You)' : ''}</span>
+                              <span class="score ${i < 3 ? 'high' : ''}">${entry.score} pts</span>
+                          </div>
+                      `).join('')}
+                  `;
+              } else {
+                  leaderboardEl.innerHTML = '<p class="no-leaderboard">Unable to load leaderboard. Play some games to get scores!</p>';
+              }
           }
+      }
+      
+      // Get offline leaderboard scores with bot players
+      function getOfflineLeaderboardScores(gameId, period) {
+          // Bot players for offline mode
+          const botPlayers = [
+              { username: 'ProGamer99', score: 12500 },
+              { username: 'AimMaster', score: 9800 },
+              { username: 'NightOwl', score: 8700 },
+              { username: 'SpeedShot', score: 7600 },
+              { username: 'TrackerKing', score: 6500 }
+          ];
+          
+          // Get user's score if exists
+          const userId = localStorage.getItem('aimtrainer_user_id') || 'guest';
+          let userScore = 0;
+          
+          if (period === 'weekly') {
+              userScore = window['weeklyScore_' + gameId] || parseInt(localStorage.getItem('aimtrainer_weekly_' + gameId) || 0);
+          } else if (period === 'monthly') {
+              userScore = window['monthlyScore_' + gameId] || parseInt(localStorage.getItem('aimtrainer_monthly_' + gameId) || 0);
+          } else {
+              userScore = parseInt(localStorage.getItem('aimtrainer_hard_' + gameId) || 0);
+          }
+          
+          // Combine user and bots
+          let allPlayers = [...botPlayers];
+          if (userScore > 0) {
+              const username = localStorage.getItem('aimtrainer_username') || 'Player';
+              allPlayers.push({ username: username, score: userScore, isMe: true });
+          }
+          
+          // Sort by score
+          allPlayers.sort((a, b) => b.score - a.score);
+          
+          // Return top 5
+          return allPlayers.slice(0, 5).map((p, i) => ({
+              rank: i + 1,
+              username: p.username,
+              score: p.score,
+              isMe: p.isMe || false
+          }));
       }
 
       // Game names mapping for display
@@ -3831,17 +5034,37 @@
 
 
 
-       // Tab switching
+// Tab switching
        function switchTab(tabId) {
            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-          
+
            document.querySelector(`[onclick="switchTab('${tabId}')"]`).classList.add('active');
            document.getElementById(tabId).classList.add('active');
-          
+
            // Refresh stats when switching to stats tab
            if (tabId === 'stats') {
                initStats();
+           }
+           
+           // Render monthly leaderboard when switching to monthly tab
+           if (tabId === 'monthly' && typeof renderMonthlyLeaderboard === 'function') {
+               renderMonthlyLeaderboard();
+           }
+           
+           // Render weekly leaderboard when switching to weekly tab
+           if (tabId === 'weekly' && typeof renderWeeklyLeaderboard === 'function') {
+               renderWeeklyLeaderboard();
+           }
+           
+           // Initialize settings tab
+           if (tabId === 'settings') {
+               initSettingsTab();
+           }
+           
+           // Load mini game stats
+           if (tabId === 'minigames') {
+               loadMiniGameStats();
            }
        }
 
@@ -4165,10 +5388,628 @@
           });
       }
 
-      function escapeHtml(text) {
+function escapeHtml(text) {
           const div = document.createElement('div');
           div.textContent = text;
           return div.innerHTML;
+      }
+
+      // ==================== SETTINGS FUNCTIONS ====================
+      function showSettingsModal() {
+          const modal = document.getElementById('settings-modal');
+          if (modal) {
+              modal.classList.add('active');
+              renderThemeOptions();
+              renderSensitivityConverter();
+          }
+      }
+
+      function closeSettingsModal() {
+          const modal = document.getElementById('settings-modal');
+          if (modal) {
+              modal.classList.remove('active');
+          }
+      }
+
+      function renderThemeOptions() {
+          const container = document.getElementById('theme-options');
+          if (!container) return;
+          
+          const themes = [
+              { id: 'default', name: 'Default Dark', colors: ['#0a0a0f', '#1a1a2e', '#00ff88'] },
+              { id: 'ocean', name: 'Ocean Blue', colors: ['#0a192f', '#112240', '#64ffda'] },
+              { id: 'sunset', name: 'Sunset', colors: ['#1a0a0f', '#2d1124', '#ff6b6b'] },
+              { id: 'forest', name: 'Forest', colors: ['#0a1f0a', '#1a2d1a', '#4ade80'] }
+          ];
+          
+          const currentTheme = localStorage.getItem('aimtrainer_theme') || 'default';
+          
+          container.innerHTML = themes.map(theme => `
+              <div class="theme-option ${theme.id === currentTheme ? 'active' : ''}" onclick="selectTheme('${theme.id}')">
+                  <div style="display: flex; gap: 5px; justify-content: center; margin-bottom: 8px;">
+                      ${theme.colors.map(c => `<div style="width: 20px; height: 20px; background: ${c}; border-radius: 4px;"></div>`).join('')}
+                  </div>
+                  <span class="theme-name">${theme.name}</span>
+              </div>
+          `).join('');
+      }
+
+      function selectTheme(themeId) {
+          localStorage.setItem('aimtrainer_theme', themeId);
+          renderThemeOptions();
+          applyTheme(themeId);
+      }
+
+      function applyTheme(themeId) {
+          const themes = {
+              default: { bg: '#0a0a0f', card: '#1a1a2e', accent: '#00ff88' },
+              ocean: { bg: '#0a192f', card: '#112240', accent: '#64ffda' },
+              sunset: { bg: '#1a0a0f', card: '#2d1124', accent: '#ff6b6b' },
+              forest: { bg: '#0a1f0a', card: '#1a2d1a', accent: '#4ade80' }
+          };
+          
+          const theme = themes[themeId] || themes.default;
+          document.body.style.background = theme.bg;
+          document.documentElement.style.setProperty('--theme-bg', theme.bg);
+          document.documentElement.style.setProperty('--theme-card', theme.card);
+          document.documentElement.style.setProperty('--theme-accent', theme.accent);
+      }
+
+      function renderSensitivityConverter() {
+          const container = document.getElementById('sens-converter');
+          if (!container) return;
+          
+          container.innerHTML = `
+              <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 24px;">
+                  <div style="margin-bottom: 16px;">
+                      <select id="sens-from-game" onchange="convertSensitivity()" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-size: 14px; margin-bottom: 12px;">
+                          <option value="valorant">Valorant</option>
+                          <option value="csgo">CS:GO</option>
+                          <option value="aimlab">Aim Lab</option>
+                          <option value="kovaaks">KovaaK's</option>
+                      </select>
+                      <input type="number" id="sens-from-value" placeholder="Sensitivity" value="0.5" oninput="convertSensitivity()" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-size: 14px;">
+                  </div>
+                  <div style="margin-bottom: 16px;">
+                      <select id="sens-to-game" onchange="convertSensitivity()" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-size: 14px; margin-bottom: 12px;">
+                          <option value="valorant">Valorant</option>
+                          <option value="csgo" selected>CS:GO</option>
+                          <option value="aimlab">Aim Lab</option>
+                          <option value="kovaaks">KovaaK's</option>
+                      </select>
+                      <input type="number" id="sens-to-value" placeholder="Result" readonly style="width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-size: 14px;">
+                  </div>
+                  <div style="text-align: center; color: #00ff88; font-size: 18px; font-weight: 700; padding: 16px; background: rgba(0,255,136,0.1); border-radius: 12px;" id="sens-result">CM/360: 0.00</div>
+              </div>
+          `;
+      }
+
+      function convertSensitivity() {
+          const conversionFactors = {
+              valorant: { csgo: 3.18181818, aimlab: 1.0, kovaaks: 1.0 },
+              csgo: { valorant: 0.314, aimlab: 0.314, kovaaks: 0.314 },
+              aimlab: { valorant: 1.0, csgo: 3.18181818, kovaaks: 1.0 },
+              kovaaks: { valorant: 1.0, csgo: 3.18181818, aimlab: 1.0 }
+          };
+          
+          const fromGame = document.getElementById('sens-from-game')?.value || 'valorant';
+          const toGame = document.getElementById('sens-to-game')?.value || 'csgo';
+          const value = parseFloat(document.getElementById('sens-from-value')?.value) || 0;
+          
+          const factor = conversionFactors[fromGame]?.[toGame] || 1;
+          const result = value * factor;
+          
+          const toValueEl = document.getElementById('sens-to-value');
+          if (toValueEl) toValueEl.value = result.toFixed(3);
+          
+          const sensResultEl = document.getElementById('sens-result');
+          if (sensResultEl) {
+              const cmPer360 = value > 0 ? (3.18181818 / value).toFixed(2) : '0.00';
+              sensResultEl.textContent = `CM/360: ${cmPer360}`;
+          }
+      }
+
+      // ==================== 1V1 HELPER FUNCTIONS ====================
+      function getGameDisplayName(gameId) {
+          const names = {'360Aim':'360° Aim Tracker','flick':'360° Flick Trainer','bounceTracker':'Bounce Tracker','reactionTrainer':'Reaction Trainer','microflick':'Micro Flick Trainer','staticPrecision':'Static Precision'};
+          return names[gameId] || gameId;
+      }
+
+      // Countdown overlay
+      function showCountdownOverlay() {
+          const existing = document.getElementById('countdown-overlay');
+          if (existing) existing.remove();
+          const overlay = document.createElement('div');
+          overlay.id = 'countdown-overlay';
+          overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;';
+          overlay.innerHTML = '<h1 style="color:#00ff88;font-size:120px;text-shadow:0 0 50px #00ff88;">3</h1><p style="color:#888;font-size:24px;margin-top:20px;">Get Ready!</p>';
+          document.body.appendChild(overlay);
+          return overlay;
+      }
+
+      function startCountdown(callback) {
+          const overlay = showCountdownOverlay();
+          let count = 3;
+          const countInterval = setInterval(() => {
+              count--;
+              if (count > 0) overlay.querySelector('h1').textContent = count;
+              else if (count === 0) { overlay.querySelector('h1').textContent = 'GO!'; overlay.querySelector('h1').style.color = '#ffaa00'; }
+              else { clearInterval(countInterval); overlay.remove(); if (callback) callback(); }
+          }, 1000);
+      }
+
+      // Mini leaderboard during gameplay
+      function showMiniLeaderboard() {
+          let miniLb = document.getElementById('mini-leaderboard');
+          if (!miniLb) {
+              miniLb = document.createElement('div');
+              miniLb.id = 'mini-leaderboard';
+              miniLb.style.cssText = 'position:fixed;top:80px;left:50%;transform:translateX(-50%);background:linear-gradient(165deg,rgba(26,26,46,0.95),rgba(15,15,26,0.95));border:2px solid rgba(0,255,136,0.3);border-radius:16px;padding:15px 30px;display:flex;align-items:center;gap:30px;z-index:1500;';
+              const username = localStorage.getItem('aimtrainer_username') || 'You';
+              miniLb.innerHTML = '<div style="text-align:center;"><div style="color:#888;font-size:12px;">YOU</div><div id="mini-your-score" style="color:#00ff88;font-size:28px;font-weight:800;">0</div></div><div style="color:#666;font-size:20px;font-weight:bold;">VS</div><div style="text-align:center;"><div style="color:#888;font-size:12px;">FRIEND</div><div id="mini-their-score" style="color:#ff4444;font-size:28px;font-weight:800;">0</div></div><div style="color:#ffaa00;font-size:14px;font-weight:bold;margin-left:10px;" id="mini-timer">60s</div>';
+              document.body.appendChild(miniLb);
+          }
+          miniLb.style.display = 'flex';
+          window.addEventListener('message', handleScoreUpdate);
+      }
+
+      function hideMiniLeaderboard() {
+          const miniLb = document.getElementById('mini-leaderboard');
+          if (miniLb) miniLb.style.display = 'none';
+          window.removeEventListener('message', handleScoreUpdate);
+      }
+
+      function handleScoreUpdate(event) {
+          if (event.data && event.data.type === 'gameScore') {
+              onevoneMatchState.yourScore = event.data.score;
+              const miniYourScore = document.getElementById('mini-your-score');
+              if (miniYourScore) miniYourScore.textContent = event.data.score;
+              const liveYourScore = document.getElementById('your-live-score');
+              if (liveYourScore) liveYourScore.textContent = event.data.score;
+          }
+      }
+
+      let matchTimerInterval = null;
+      
+      function startMatchTimer() {
+          if (matchTimerInterval) clearInterval(matchTimerInterval);
+          let timeLeft = 60;
+          onevoneMatchState.timeLeft = timeLeft;
+          matchTimerInterval = setInterval(() => {
+              timeLeft--;
+              onevoneMatchState.timeLeft = timeLeft;
+              const miniTimer = document.getElementById('mini-timer');
+              const mainTimer = document.getElementById('match-timer');
+              if (miniTimer) miniTimer.textContent = timeLeft + 's';
+              if (mainTimer) mainTimer.textContent = timeLeft + 's';
+              if (timeLeft <= 0) { clearInterval(matchTimerInterval); matchTimerInterval = null; endMatchAndShowResults(); }
+          }, 1000);
+      }
+
+      // Final leaderboard after match
+      function showFinalLeaderboard() {
+          hideMiniLeaderboard();
+          const finalLb = document.createElement('div');
+          finalLb.id = 'final-leaderboard';
+          finalLb.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;';
+          const username = localStorage.getItem('aimtrainer_username') || 'You';
+          const yourScore = onevoneMatchState.yourScore;
+          const theirScore = onevoneMatchState.theirScore;
+          let resultText = '', resultColor = '';
+          if (yourScore > theirScore) { resultText = '🎉 YOU WIN!'; resultColor = '#00ff88'; }
+          else if (yourScore < theirScore) { resultText = '💔 YOU LOST'; resultColor = '#ff4444'; }
+          else { resultText = '🤝 IT\'S A TIE!'; resultColor = '#ffaa00'; }
+          finalLb.innerHTML = `<h1 style="color:${resultColor};font-size:48px;margin-bottom:30px;text-shadow:0 0 30px ${resultColor};">${resultText}</h1><div style="background:linear-gradient(145deg,rgba(26,26,46,0.9),rgba(15,15,26,0.9));border:2px solid #333;border-radius:16px;padding:30px 50px;margin-bottom:30px;"><h2 style="color:#888;font-size:14px;text-transform:uppercase;margin-bottom:20px;text-align:center;">Final Scores</h2><div style="display:flex;align-items:center;gap:40px;"><div style="text-align:center;"><div style="color:#888;font-size:14px;">${escapeHtml(username)}</div><div style="color:#00ff88;font-size:48px;font-weight:800;">${yourScore}</div></div><div style="color:#666;font-size:24px;font-weight:bold;">VS</div><div style="text-align:center;"><div style="color:#888;font-size:14px;">Friend</div><div style="color:#ff4444;font-size:48px;font-weight:800;">${theirScore}</div></div></div></div><button onclick="closeFinalLeaderboard()" style="padding:16px 50px;background:linear-gradient(135deg,#00ff88,#00cc6a);border:none;border-radius:12px;color:#000;font-size:18px;font-weight:bold;cursor:pointer;">Return to Home</button>`;
+          document.body.appendChild(finalLb);
+      }
+
+      function closeFinalLeaderboard() {
+          const finalLb = document.getElementById('final-leaderboard');
+          if (finalLb) finalLb.remove();
+          const matchDisplay = document.getElementById('active-match-display');
+          if (matchDisplay) matchDisplay.style.display = 'none';
+          hideLiveScoreUI();
+          window.location.href = 'index.html';
+      }
+
+      function endMatchAndShowResults() {
+          if (matchTimerInterval) { clearInterval(matchTimerInterval); matchTimerInterval = null; }
+          onevoneMatchState.isPlaying = false;
+          onevoneMatchState.theirScore = Math.floor(Math.random() * (onevoneMatchState.yourScore + 500));
+          showFinalLeaderboard();
+          if (onevoneMatchState.yourScore > onevoneMatchState.theirScore) {
+              const coins = parseInt(localStorage.getItem('aimtrainer_coins') || '0');
+              localStorage.setItem('aimtrainer_coins', coins + 50);
+          }
+      }
+
+      // ==================== 1V1 FUNCTIONS ====================
+      function createPrivateRoom() {
+          const game = document.getElementById('private-game-select').value;
+          const difficulty = document.getElementById('private-difficulty-select').value;
+          
+          const code = 'P' + Math.random().toString(36).substr(2, 5).toUpperCase();
+          
+          localStorage.setItem('aimtrainer_private_room', code);
+          localStorage.setItem('aimtrainer_private_room_game', game);
+          localStorage.setItem('aimtrainer_private_room_difficulty', difficulty);
+          
+          renderPrivateRoomContent();
+          alert(`Private room created! Code: ${code}\nShare this code with your friend!`);
+      }
+
+      function renderPrivateRoomContent() {
+          const container = document.getElementById('private-room-content');
+          if (!container) return;
+          
+          const roomCode = localStorage.getItem('aimtrainer_private_room');
+          
+          if (roomCode) {
+              const game = localStorage.getItem('aimtrainer_private_room_game') || 'Custom';
+              container.innerHTML = `
+                  <div class="room-code-display">${roomCode}</div>
+                  <p style="color: #888; margin-bottom: 15px;">Game: ${game}</p>
+                  <button onclick="startPrivateMatch()" style="background: linear-gradient(135deg, #64ffda, #4fd1c5); color: #0a0a0f; width: 100%; padding: 16px; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;">Start Match</button>
+                  <button onclick="closePrivateRoom()" style="background: #ff4444; color: #fff; width: 100%; padding: 14px; border: none; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 10px;">Close Room</button>
+              `;
+          } else {
+              container.innerHTML = `
+                  <select id="private-game-select">
+                      <option value="360Aim">360° Aim Tracker</option>
+                      <option value="flick">360° Flick Trainer</option>
+                      <option value="bounceTracker">Bounce Tracker</option>
+                      <option value="reactionTrainer">Reaction Trainer</option>
+                      <option value="microflick">Micro Flick Trainer</option>
+                      <option value="staticPrecision">Static Precision</option>
+                  </select>
+                  <select id="private-difficulty-select">
+                      <option value="easy">Easy</option>
+                      <option value="medium">Medium</option>
+                      <option value="hard" selected>Hard</option>
+                  </select>
+                  <button onclick="createPrivateRoom()">Create Room</button>
+              `;
+          }
+      }
+
+      function closePrivateRoom() {
+          localStorage.removeItem('aimtrainer_private_room');
+          localStorage.removeItem('aimtrainer_private_room_game');
+          localStorage.removeItem('aimtrainer_private_room_difficulty');
+          renderPrivateRoomContent();
+      }
+
+      function startPrivateMatch() {
+          const game = localStorage.getItem('aimtrainer_private_room_game');
+          const roomCode = localStorage.getItem('aimtrainer_private_room');
+          
+          if (!game) {
+              alert('Please select a game first!');
+              return;
+          }
+          
+          // Show active match
+          const matchDisplay = document.getElementById('active-match-display');
+          if (matchDisplay) {
+              matchDisplay.style.display = 'block';
+          }
+          
+          // Open the game
+          window.open(game + '.html', '_blank');
+          
+          // Show live score UI
+          showLiveScoreUI();
+      }
+
+      function startQuickMatch() {
+          const game = document.getElementById('quick-match-game').value;
+          
+          alert('Searching for opponent... (Demo mode)');
+          
+          // Simulate finding a match
+          setTimeout(() => {
+              const opponents = ['ProGamer123', 'AimLord', 'NightOwl', 'SpeedShot'];
+              const opponent = opponents[Math.floor(Math.random() * opponents.length)];
+              
+              document.getElementById('match-opponent').textContent = 'Playing against: ' + opponent;
+              document.getElementById('opponent-live-name').textContent = opponent.substring(0, 4).toUpperCase();
+              
+              const matchDisplay = document.getElementById('active-match-display');
+              if (matchDisplay) {
+                  matchDisplay.style.display = 'block';
+              }
+              
+              // Open the game
+              window.open(game + '.html', '_blank');
+              
+              // Show live score UI
+              showLiveScoreUI();
+              
+              alert(`Match found! Playing against ${opponent}!`);
+          }, 2000);
+      }
+
+      let liveScoreInterval = null;
+
+      function showLiveScoreUI() {
+          const liveScoreEl = document.getElementById('onevone-live-score');
+          if (liveScoreEl) {
+              liveScoreEl.classList.add('active');
+          }
+          
+          // Start score simulation
+          if (liveScoreInterval) clearInterval(liveScoreInterval);
+          
+          let yourScore = 0;
+          let theirScore = 0;
+          let timeLeft = 60;
+          
+          liveScoreInterval = setInterval(() => {
+              yourScore += Math.floor(Math.random() * 3);
+              theirScore += Math.floor(Math.random() * 3);
+              timeLeft--;
+              
+              const yourScoreEl = document.getElementById('your-live-score');
+              const theirScoreEl = document.getElementById('their-live-score');
+              const timerEl = document.getElementById('match-timer');
+              
+              if (yourScoreEl) yourScoreEl.textContent = yourScore;
+              if (theirScoreEl) theirScoreEl.textContent = theirScore;
+              if (timerEl) timerEl.textContent = timeLeft + 's';
+              
+              if (timeLeft <= 0) {
+                  endCurrentMatch();
+              }
+          }, 1000);
+      }
+
+      function hideLiveScoreUI() {
+          const liveScoreEl = document.getElementById('onevone-live-score');
+          if (liveScoreEl) {
+              liveScoreEl.classList.remove('active');
+          }
+      }
+
+      function endCurrentMatch() {
+          if (liveScoreInterval) {
+              clearInterval(liveScoreInterval);
+              liveScoreInterval = null;
+          }
+          
+          hideLiveScoreUI();
+          
+          const matchDisplay = document.getElementById('active-match-display');
+          if (matchDisplay) {
+              matchDisplay.style.display = 'none';
+          }
+          
+          const yourScore = parseInt(document.getElementById('your-live-score')?.textContent || '0');
+          const theirScore = parseInt(document.getElementById('their-live-score')?.textContent || '0');
+          
+          if (yourScore > theirScore) {
+              alert(`🎉 You won!\nYour score: ${yourScore}\nOpponent: ${theirScore}\n+50 coins!`);
+              const coins = parseInt(localStorage.getItem('aimtrainer_coins') || '0');
+              localStorage.setItem('aimtrainer_coins', coins + 50);
+              updateCoinsDisplay(coins + 50);
+          } else if (yourScore < theirScore) {
+              alert(`💔 You lost!\nYour score: ${yourScore}\nOpponent: ${theirScore}`);
+          } else {
+              alert(`🤝 It's a tie!\nYour score: ${yourScore}\nOpponent: ${theirScore}`);
+          }
+      }
+
+// Initialize private room content on load
+      document.addEventListener('DOMContentLoaded', () => {
+          renderPrivateRoomContent();
+      });
+      
+      // ==================== MINI GAMES FUNCTIONS ====================
+      function openMiniGame(gameType) {
+          // Initialize audio on first interaction
+          if (typeof initAudio === 'function') {
+              initAudio();
+          }
+          
+          switch(gameType) {
+              case 'quickclick':
+                  window.open('mini-quickclick.html', '_blank');
+                  break;
+              case 'precision':
+                  window.open('mini-precision.html', '_blank');
+                  break;
+              case 'speedrun':
+                  window.open('mini-speedrun.html', '_blank');
+                  break;
+              case 'accuracy':
+                  window.open('mini-accuracy.html', '_blank');
+                  break;
+          }
+      }
+      
+      function loadMiniGameStats() {
+          const quickclickBest = localStorage.getItem('aimtrainer_mini_quickclick') || 0;
+          const precisionBest = localStorage.getItem('aimtrainer_mini_precision') || 0;
+          const speedrunBest = localStorage.getItem('aimtrainer_mini_speedrun') || 0;
+          
+          document.getElementById('mini-quickclick-best').textContent = quickclickBest;
+          document.getElementById('mini-precision-best').textContent = precisionBest + '%';
+          document.getElementById('mini-speedrun-best').textContent = speedrunBest + 's';
+      }
+      
+      // ==================== SETTINGS TAB FUNCTIONS ====================
+      function initSettingsTab() {
+          // Load sound settings
+          loadSoundSettingsToUI();
+          
+          // Load other settings
+          const settings = JSON.parse(localStorage.getItem('aimtrainer_settings') || '{}');
+          
+          // Set difficulty dropdown
+          const diffSelect = document.getElementById('default-difficulty');
+          if (diffSelect) {
+              diffSelect.value = settings.defaultDifficulty || 'hard';
+          }
+          
+          // Set checkboxes
+          const showFPS = document.getElementById('show-fps');
+          if (showFPS) showFPS.checked = settings.showFPS !== false;
+          
+          const showTimer = document.getElementById('show-timer');
+          if (showTimer) showTimer.checked = settings.showTimer !== false;
+          
+          // Render theme options
+          renderSettingsThemeOptions();
+          
+          // Render sensitivity converter
+          renderSettingsSensConverter();
+      }
+      
+      function loadSoundSettingsToUI() {
+          const settings = JSON.parse(localStorage.getItem('aimtrainer_sound_settings') || '{"masterVolume":1,"sfxVolume":0.7,"hitSound":true,"missSound":true,"uiSounds":true,"newRecordSound":true}');
+          
+          const masterVol = document.getElementById('master-volume');
+          const sfxVol = document.getElementById('sfx-volume');
+          const masterDisplay = document.getElementById('master-vol-display');
+          const sfxDisplay = document.getElementById('sfx-vol-display');
+          
+          if (masterVol) {
+              masterVol.value = (settings.masterVolume || 1) * 100;
+              if (masterDisplay) masterDisplay.textContent = Math.round((settings.masterVolume || 1) * 100) + '%';
+          }
+          
+          if (sfxVol) {
+              sfxVol.value = (settings.sfxVolume || 0.7) * 100;
+              if (sfxDisplay) sfxDisplay.textContent = Math.round((settings.sfxVolume || 0.7) * 100) + '%';
+          }
+          
+          // Set checkboxes
+          const hitCheck = document.getElementById('sound-hit');
+          const missCheck = document.getElementById('sound-miss');
+          const uiCheck = document.getElementById('sound-ui');
+          const recordCheck = document.getElementById('sound-record');
+          
+          if (hitCheck) hitCheck.checked = settings.hitSound !== false;
+          if (missCheck) missCheck.checked = settings.missSound !== false;
+          if (uiCheck) uiCheck.checked = settings.uiSounds !== false;
+          if (recordCheck) recordCheck.checked = settings.newRecordSound !== false;
+      }
+      
+      function updateVolumeDisplay(type, value) {
+          const display = document.getElementById(type + '-vol-display');
+          if (display) {
+              display.textContent = value + '%';
+          }
+          
+          if (type === 'master') {
+              setMasterVolume(value / 100);
+          } else if (type === 'sfx') {
+              setSFXVolume(value / 100);
+          }
+      }
+      
+      function toggleSoundSetting(type, enabled) {
+          if (type === 'hit') {
+              SoundConfig.hitSound = enabled;
+          } else if (type === 'miss') {
+              SoundConfig.missSound = enabled;
+          } else if (type === 'ui') {
+              SoundConfig.uiSounds = enabled;
+          } else if (type === 'newRecord') {
+              SoundConfig.newRecordSound = enabled;
+          }
+          saveSoundSettings();
+      }
+      
+      function testSound() {
+          if (typeof initAudio === 'function') {
+              initAudio();
+          }
+          if (typeof playHitSound === 'function') {
+              playHitSound();
+              setTimeout(() => playMissSound(), 200);
+              setTimeout(() => playUIClick(), 400);
+          }
+      }
+      
+      function saveSetting(key, value) {
+          const settings = JSON.parse(localStorage.getItem('aimtrainer_settings') || '{}');
+          settings[key] = value;
+          localStorage.setItem('aimtrainer_settings', JSON.stringify(settings));
+      }
+      
+      function renderSettingsThemeOptions() {
+          const container = document.getElementById('settings-theme-options');
+          if (!container) return;
+          
+          const themes = [
+              { id: 'default', name: 'Default Dark', colors: ['#0a0a0f', '#1a1a2e', '#00ff88'] },
+              { id: 'ocean', name: 'Ocean Blue', colors: ['#0a192f', '#112240', '#64ffda'] },
+              { id: 'sunset', name: 'Sunset', colors: ['#1a0a0f1124', '#', '#2dff6b6b'] },
+              { id: 'forest', name: 'Forest', colors: ['#0a1f0a', '#1a2d1a', '#4ade80'] }
+          ];
+          
+          const currentTheme = localStorage.getItem('aimtrainer_theme') || 'default';
+          
+          container.innerHTML = themes.map(theme => `
+              <div class="theme-option ${theme.id === currentTheme ? 'active' : ''}" onclick="selectTheme('${theme.id}')">
+                  <div style="display: flex; gap: 5px; justify-content: center; margin-bottom: 8px;">
+                      ${theme.colors.map(c => `<div style="width: 20px; height: 20px; background: ${c}; border-radius: 4px;"></div>`).join('')}
+                  </div>
+                  <span class="theme-name">${theme.name}</span>
+              </div>
+          `).join('');
+      }
+      
+      function renderSettingsSensConverter() {
+          const container = document.getElementById('settings-sens-converter');
+          if (!container) return;
+          
+          container.innerHTML = `
+              <div style="margin-bottom: 16px;">
+                  <select id="settings-sens-from" onchange="convertSettingsSens()" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-size: 14px; margin-bottom: 12px;">
+                      <option value="valorant">Valorant</option>
+                      <option value="csgo">CS:GO</option>
+                      <option value="aimlab">Aim Lab</option>
+                      <option value="kovaaks">KovaaK's</option>
+                  </select>
+                  <input type="number" id="settings-sens-from-value" placeholder="Sensitivity" value="0.5" oninput="convertSettingsSens()" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-size: 14px;">
+              </div>
+              <div style="margin-bottom: 16px;">
+                  <select id="settings-sens-to" onchange="convertSettingsSens()" style="width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-size: 14px; margin-bottom: 12px;">
+                      <option value="valorant">Valorant</option>
+                      <option value="csgo" selected>CS:GO</option>
+                      <option value="aimlab">Aim Lab</option>
+                      <option value="kovaaks">KovaaK's</option>
+                  </select>
+                  <input type="number" id="settings-sens-to-value" placeholder="Result" readonly style="width: 100%; padding: 14px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-size: 14px;">
+              </div>
+              <div style="text-align: center; color: #00ff88; font-size: 18px; font-weight: 700; padding: 16px; background: rgba(0,255,136,0.1); border-radius: 12px;" id="settings-sens-result">CM/360: 0.00</div>
+          `;
+      }
+      
+      function convertSettingsSens() {
+          const conversionFactors = {
+              valorant: { csgo: 3.18181818, aimlab: 1.0, kovaaks: 1.0 },
+              csgo: { valorant: 0.314, aimlab: 0.314, kovaaks: 0.314 },
+              aimlab: { valorant: 1.0, csgo: 3.18181818, kovaaks: 1.0 },
+              kovaaks: { valorant: 1.0, csgo: 3.18181818, aimlab: 1.0 }
+          };
+          
+          const fromGame = document.getElementById('settings-sens-from')?.value || 'valorant';
+          const toGame = document.getElementById('settings-sens-to')?.value || 'csgo';
+          const value = parseFloat(document.getElementById('settings-sens-from-value')?.value) || 0;
+          
+          const factor = conversionFactors[fromGame]?.[toGame] || 1;
+          const result = value * factor;
+          
+          const toValueEl = document.getElementById('settings-sens-to-value');
+          if (toValueEl) toValueEl.value = result.toFixed(3);
+          
+          const sensResultEl = document.getElementById('settings-sens-result');
+          if (sensResultEl) {
+              const cmPer360 = value > 0 ? (3.18181818 / value).toFixed(2) : '0.00';
+              sensResultEl.textContent = `CM/360: ${cmPer360}`;
+          }
       }
    </script>
 </body>
