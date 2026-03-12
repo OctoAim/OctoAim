@@ -6505,11 +6505,12 @@ function escapeHtml(text) {
       function renderSettingsThemeOptions() {
           const container = document.getElementById('settings-theme-options');
           if (!container) return;
-          
+
           const themes = [
               { id: 'default', name: 'Default Dark', colors: ['#0a0a0f', '#1a1a2e', '#00ff88'] },
+              { id: 'light', name: 'Light', colors: ['#f0f2f5', '#ffffff', '#00aa55'] },
               { id: 'ocean', name: 'Ocean Blue', colors: ['#0a192f', '#112240', '#64ffda'] },
-              { id: 'sunset', name: 'Sunset', colors: ['#1a0a0f1124', '#', '#2dff6b6b'] },
+              { id: 'sunset', name: 'Sunset', colors: ['#1a0a0f', '#2d1124', '#ff6b6b'] },
               { id: 'forest', name: 'Forest', colors: ['#0a1f0a', '#1a2d1a', '#4ade80'] }
           ];
           
