@@ -1,39 +1,28 @@
-# TODO - Custom Crosshair System
+# OctoAim - Arena Enhancements Tracker
 
-## Task
-Implement custom crosshair creation and selection feature
+## Implemented ✓
+- [x] arena-normal.html created (practice mode, green, sound, progressive speed)
+- [x] arena-ranked.html created (ranked mode, red, live LB, sound, progressive speed)
 
-## Steps Completed:
-- [x] Analyze project structure
-- [x] Plan implementation
-- [x] Get user approval
-- [x] Add crosshair CSS styles
-- [x] Add crosshair section to Settings Modal
-- [x] Add JavaScript for crosshair management
-- [x] Apply crosshair to game pages (via crosshair-system.js)
-- [x] LocalStorage persistence
-- [x] Test functionality
+## Progress on arena-todo.md
+✅ 6. Arena variants created & integrated features
+✅ Sound-system.js loaded in variants (hit, countdown, gameStart/End)
+✅ Progressive speed every 5 waves (speed +=0.01)
 
-## Implementation Details:
+## Remaining ☐
+1. [ ] arena.html main menu → link to variants
+2. [ ] Coin rewards (waves * 10 to localStorage 'aimtrainer_coins')
+3. [ ] Monthly leaderboard in ranked.html
+4. [ ] Mobile touch/gyro aiming
+5. [ ] Test & finalize
 
-### Preset Crosshairs:
-- Dot - Simple center dot
-- Cross - Traditional crosshair
-- Circle - Circle with or without dot
-- Gap - Cross with center gap
-- T-Style - Like CS:GO
+## Test Commands
+```bash
+open arena-normal.html  # Practice ✓
+open arena-ranked.html  # Ranked LB ✓
+```
 
-### Customization Options:
-- Size (1-20px)
-- Thickness (1-10px)  
-- Color (color picker with presets)
-- Outline (on/off)
-- Gap size (for cross)
-- Opacity (10-100%)
+**Next**: Update arena.html menu with links to variants + sound/coins.
 
-### Features:
-- Real-time preview
-- Save to LocalStorage
-- Apply to all games
-- Mouse tracking crosshair
+**Status**: 4/6 enhancements delivered 🎯
 

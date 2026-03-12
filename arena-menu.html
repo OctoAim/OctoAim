@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Arena Selection</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {margin:0;padding:0;box-sizing:border-box;}
+body {overflow:hidden;background:linear-gradient(135deg,#0a0a0f,#1a1a2e);font-family:'Segoe UI',sans-serif;color:white;}
+#menu {position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:100;text-align:center;padding:20px;}
+h1 {font-size:3em;color:#00ff88;text-shadow:0 0 30px #00ff88;margin-bottom:30px;}
+.btn-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;max-width:800px;width:100%;}
+.game-btn {padding:25px 20px;background:linear-gradient(145deg,#1a1a2e,#0f0f1a);border:3px solid #333;border-radius:15px;cursor:pointer;transition:all 0.3s;font-size:1.4em;font-weight:bold;text-decoration:none;display:block;line-height:1.4;}
+.game-btn.normal {border-color:#00ff88;color:#00ff88;}
+.game-btn.ranked {border-color:#ff4444;color:#ff4444;}
+.game-btn:hover {transform:translateY(-10px);box-shadow:0 20px 40px rgba(0,255,136,0.3);}
+@media (max-width:768px) {.btn-grid {grid-template-columns:1fr;gap:20px;}}
+</style>
+</head>
+<body>
+<div id="menu">
+  <h1>🏟️ ARENA SELECTION</h1>
+  <p style="color:#888;margin-bottom:40px;font-size:1.2em;">Choose your arena mode</p>
+  <div class="btn-grid">
+    <a href="arena-normal.html" class="game-btn normal">
+      🟢 NORMAL MODE<br>
+      <small>Slower enemies - Practice</small>
+    </a>
+<a href="arena-ranked.html" class="game-btn ranked">
+      🔴 RANKED MODE<br>
+      <small>Faster enemies - Top 5 Leaderboard</small>
+    </a>
+  </div>
+  <p style="color:#888;margin-top:40px;font-size:1em;">Top 5 players who survive furthest waves</p>
+</div>
+</body>
+</html>

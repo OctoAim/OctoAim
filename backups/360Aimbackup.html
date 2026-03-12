@@ -1077,43 +1077,69 @@
 
 
 
-function updateTarget(deltaTime) {
+       function updateTarget(deltaTime) {
            if (!target) return;
           
            const config = target.config;
            target.time += deltaTime;
-           target.directionChangeTimer += deltaTime * 0.5;
+           target.directionChangeTimer += deltaTime;
           
            const speed = config.baseSpeed;
-           const erratic = config.erraticness * 0.6;
+           const erratic = target.erraticness;
           
-           // Occasional smooth direction changes - less frequent, smaller changes
-           if (target.directionChangeTimer > (3 + erratic * 2)) {
+           // Less predictable - random direction changes at random intervals
+           const changeInterval = 0.8 + Math.random() * 1.2;
+           if (target.directionChangeTimer > changeInterval) {
                target.directionChangeTimer = 0;
-               target.currentDirection *= (Math.random() > 0.5 ? 1 : -1);
-               target.horizAngle += (Math.random() - 0.5) * 0.5;
+               target.currentDirection *= -1;
+              
+               // Randomize vertical angle for unpredictable vertical movement
+               target.vertAngle = (Math.random() - 0.5) * 2.5;
+              
+               // Occasionally do a sudden jump
+               if (Math.random() > 0.6) {
+                   target.vertAngle += (Math.random() - 0.5) * 2;
+               }
            }
           
-           // Horizontal orbit with occasional speed/direction variation
-           const horizSpeed = speed * target.currentDirection * (0.8 + erratic * 0.4);
-           target.horizAngle += horizSpeed * deltaTime;
+           // Horizontal movement - less regular orbit
+           target.horizAngle += speed * deltaTime * target.currentDirection * (0.7 + Math.random() * 0.6);
           
-           // Smooth vertical movement with two gentle waves
-           target.verticalPhase += speed * 1.2 * deltaTime;
-           const verticalWave1 = Math.sin(target.verticalPhase * 0.6) * 1.8 * erratic;
-           const verticalWave2 = Math.sin(target.verticalPhase * 1.4 + 2) * 0.8 * erratic;
-           const verticalMovement = verticalWave1 + verticalWave2;
+           // Much MORE vertical movement - multiple overlapping sine waves
+           target.verticalPhase += speed * 2 * deltaTime;
           
-           // Orbit with smooth radius variation and figure-8
-           const orbitRadius = (5.5 + Math.sin(target.time * 0.2) * 1 * erratic);
-           const figure8Offset = Math.sin(target.horizAngle * 0.4) * 1.2 * erratic;
-           
-           let x = Math.sin(target.horizAngle) * orbitRadius + figure8Offset;
-           let z = Math.cos(target.horizAngle) * orbitRadius * 0.7 - 2.5;
-           let y = 2.5 + verticalMovement;
+           // Primary vertical oscillation - big slow wave
+           const verticalWave1 = Math.sin(target.verticalPhase * 0.7) * 3;
           
-           // Smoother lerp
-           const lerpSpeed = 3 + erratic * 2;
+           // Secondary vertical - faster smaller wave
+           const verticalWave2 = Math.sin(target.verticalPhase * 1.8 + 1.5) * 1.5;
+          
+           // Tertiary - quick flutter
+           const verticalWave3 = Math.sin(target.verticalPhase * 4) * 0.8;
+          
+           // Combine waves with erratic multiplier - MORE VERTICAL
+           const verticalMovement = (verticalWave1 + verticalWave2 + verticalWave3) * erratic * 1.5;
+          
+           // Calculate target position - orbit around camera
+           const orbitRadius = 6 - erratic * 1.5;
+          
+           // Base orbit position
+           let x = Math.sin(target.horizAngle) * orbitRadius;
+           let z = Math.cos(target.horizAngle) * orbitRadius - 2;
+          
+           // Vertical position - MORE dramatic up and down (0.5 to 8 height range)
+           let y = 3 + verticalMovement + target.vertAngle * erratic * 4;
+          
+           // Clamp vertical - can go higher now
+           y = Math.max(0.5, Math.min(8, y));
+          
+           // Erratic horizontal "drift" - unpredictable side movement
+           const driftPhase = target.time * (1.5 + Math.random() * 2);
+           const drift = Math.sin(driftPhase) * 3 * erratic;
+           x += drift;
+          
+           // Lerp toward target - responsive but smooth
+           const lerpSpeed = 4 + erratic * 4;
            target.currentX += (x - target.currentX) * lerpSpeed * deltaTime;
            target.currentY += (y - target.currentY) * lerpSpeed * deltaTime;
            target.currentZ += (z - target.currentZ) * lerpSpeed * deltaTime;

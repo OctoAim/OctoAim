@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>3D Arena - Aim Trainer</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+body { margin: 0; overflow: hidden; background: #111; font-family: Arial; color: white; cursor: crosshair; }
+#hud { position: absolute; top: 10px; left: 10px; z-index: 100; }
+#menu { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 200; }
+#menu.hidden { display: none; }
+button { padding: 15px 30px; font-size: 20px; margin: 10px; background: #00ff88; color: black; border: none; border-radius: 10px; cursor: pointer; }
+#gameover { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 150; display: none; background: rgba(0,0,0,0.9); padding: 30px; border-radius: 15px; }
+.leaderboard { max-height: 300px; overflow-y: auto; margin: 20px 0; }
+.lb-row { padding: 8px; border-bottom: 1px solid #444; }
+.lb-row.me { background: #00ff88; color: black; }
+.stats { display: flex; gap: 30px; margin: 20px 0; justify-content: center; }
+.stat { text-align: center; }
+.stat-value { font-size: 24px; font-weight: bold; }
+.difficulty { font-size: 18px; color: #00ff88; margin-bottom: 20px; }
+</style>
+</head>
+<body>
+<div id="hud">
+  <div>Wave: <span id="wave">1</span> | Kills: <span id="kills">0</span> | Survived: <span id="survived">0</span>s</div>
+  <div id="difficulty-display"></div>
+</div>
+<div id="menu">
+  <h1>3D ARENA SURVIVAL</h1>
+  <p>Click humanoids before they reach you!</p>
+  <div>
+    <button onclick="startGame('easy')">🟢 EASY (5 enemies, slow)</button>
+    <button onclick="startGame('medium')">🟡 MEDIUM (8 enemies, medium)</button>
+    <button onclick="startGame('hard')">🔴 HARD (12 enemies, fast) <br><small>Leaderboard on waves survived</small></button>
+  </div>
+</div>
+<div id="gameover">
+  <h1 id="gameover-title">GAME OVER</h1>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-value" id="final-wave">0</div>
+      <div>Waves Survived</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="final-kills">0</div>
+      <div>Total Kills</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="final-survived">0</div>
+      <div>Survival Time</div>
+    </div>
+  </div>
+  <div id="hard-leaderboard" class="leaderboard" style="display:none;"></div>
+  <div>
+    <button onclick="location.reload()">Play Again</button>
+  </div>
+</div>
+
+<script>
+// Game state
+let scene, camera, renderer, humanoidMeshes = [];
+let gameStarted = false, currentDifficulty = '';
+let wave = 1, kills = 0, startTime = 0;
+let spawnRadius = 12, reachDistance = 1.5;
+
+// Difficulty config
+const difficulties = {
+  easy: { enemiesPerWave: 5, speed: 0.08, color: 0x88ff88 },
+  medium: { enemiesPerWave: 8, speed: 0.12, color: 0xffff88 },
+  hard: { enemiesPerWave: 12, speed: 0.15, color: 0xff8888 }
+};
+
+// Init 3D
+function init3D() {
+  scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(0x111111, 10, 50);
+  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 5;
+
+  const light = new THREE.AmbientLight(0x404040, 0.6);
+  scene.add(light);
+  const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+  dirLight.position.set(1, 1, 1);
+  scene.add(dirLight);
+
+  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x111111);
+  document.body.appendChild(renderer.domElement);
+
+  window.addEventListener('click', onClick);
+  window.addEventListener('resize', onResize);
+}
+
+// Resize handler
+function onResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+// Create humanoid model
+function createHumanoid(x, z, color = 0xff4444) {
+  const group = new THREE.Group();
+
+  // Body
+  const bodyGeo = new THREE.CapsuleGeometry(0.5, 1.5, 4, 8);
+  const bodyMat = new THREE.MeshPhongMaterial({ color });
+  const body = new THREE.Mesh(bodyGeo, bodyMat);
+  body.position.y = 1;
+  group.add(body);
+
+  // Head
+  const headGeo = new THREE.SphereGeometry(0.4);
+  const headMat = new THREE.MeshPhongMaterial({ color: color * 1.3 });
+  const head = new THREE.Mesh(headGeo, headMat);
+  head.position.y = 2.2;
+  group.add(head);
+
+  // Eyes
+  const eyeGeo = new THREE.SphereGeometry(0.08);
+  const eyeMat = new THREE.MeshPhongMaterial({ color: 0xffffff });
+  const leftEye = new THREE.Mesh(eyeGeo, eyeMat);
+  leftEye.position.set(-0.2, 2.25, 0.35);
+  group.add(leftEye);
+  const rightEye = new THREE.Mesh(eyeGeo, eyeMat);
+  rightEye.position.set(0.2, 2.25, 0.35);
+  group.add(rightEye);
+
+  // Arms
+  const armGeo = new THREE.CapsuleGeometry(0.15, 1, 4, 8);
+  const leftArm = new THREE.Mesh(armGeo, bodyMat);
+  leftArm.position.set(-0.8, 1, 0);
+  leftArm.rotation.z = 0.3;
+  group.add(leftArm);
+  const rightArm = new THREE.Mesh(armGeo, bodyMat);
+  rightArm.position.set(0.8, 1, 0);
+  rightArm.rotation.z = -0.3;
+  group.add(rightArm);
+
+  // Legs
+  const legGeo = new THREE.CapsuleGeometry(0.2, 1.2, 4, 8);
+  const leftLeg = new THREE.Mesh(legGeo, bodyMat);
+  leftLeg.position.set(-0.3, -0.6, 0);
+  group.add(leftLeg);
+  const rightLeg = new THREE.Mesh(legGeo, bodyMat);
+  rightLeg.position.set(0.3, -0.6, 0);
+  group.add(rightLeg);
+
+  group.position.set(x, 0, z);
+  group.userData = { alive: true };
+  scene.add(group);
+  return group;
+}
+
+// Spawn wave with random angles
+function spawnWave() {
+  const config = difficulties[currentDifficulty];
+  spawnRadius = Math.max(8, spawnRadius - 0.2); // Slight shrink
+  
+  for (let i = 0; i < config.enemiesPerWave + (wave - 1) * 0.5; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const x = Math.cos(angle) * spawnRadius;
+    const z = Math.sin(angle) * spawnRadius;
+    humanoidMeshes.push(createHumanoid(x, z, config.color));
+  }
+  document.getElementById('wave').textContent = wave;
+}
+
+// Raycast click to kill
+function onClick() {
+  if (!gameStarted) return;
+
+  const raycaster = new THREE.Raycaster();
+  raycaster.setFromCamera(new THREE.Vector2(0, 0), camera);
+  const intersects = raycaster.intersectObjects(scene.children, true);
+
+  for (let intersect of intersects) {
+    const obj = intersect.object.parent;
+    if (obj.userData?.alive) {
+      obj.userData.alive = false;
+      kills++;
+      document.getElementById('kills').textContent = kills;
+      // Explode effect
+      obj.scale.multiplyScalar(1.2);
+      setTimeout(() => scene.remove(obj), 200);
+      playSound('hit'); // Sound hook
+      break;
+    }
+  }
+}
+
+// Update loop
+function update() {
+  requestAnimationFrame(update);
+
+  if (!gameStarted) return;
+
+  // Camera rotation
+  camera.rotation.y += 0.003;
+
+  // Update HUD
+  const survived = Math.floor((Date.now() - startTime) / 1000);
+  document.getElementById('survived').textContent = survived;
+
+  // Update enemies
+  humanoidMeshes = humanoidMeshes.filter(mesh => {
+    if (!mesh.userData.alive) {
+      scene.remove(mesh);
+      return false;
+    }
+
+    // Move toward center
+    const config = difficulties[currentDifficulty];
+    const dir = new THREE.Vector3(0 - mesh.position.x, 0, 0 - mesh.position.z).normalize();
+    mesh.position.add(dir.multiplyScalar(config.speed));
+
+    // Face center
+    mesh.rotation.y = Math.atan2(mesh.position.x, mesh.position.z) + Math.PI;
+
+    // Walk animation
+    const time = Date.now() * 0.01;
+    mesh.children[4].rotation.x = Math.sin(time) * 0.3; // left arm
+    mesh.children[5].rotation.x = -Math.sin(time) * 0.3; // right arm
+    mesh.position.y = Math.sin(time * 2) * 0.05;
+
+    // Check collision
+    if (mesh.position.distanceTo(new THREE.Vector3()) < reachDistance) {
+      gameOver();
+      return false;
+    }
+    return true;
+  });
+
+  // Next wave
+  if (humanoidMeshes.length === 0 && gameStarted) {
+    wave++;
+    spawnWave();
+  }
+}
+
+// Start game
+async function startGame(difficulty) {
+  currentDifficulty = difficulty;
+  gameStarted = true;
+  wave = 1;
+  kills = 0;
+  humanoidMeshes = [];
+  startTime = Date.now();
+  spawnRadius = 12;
+
+  document.getElementById('menu').classList.add('hidden');
+  document.getElementById('difficulty-display').textContent = difficulty.toUpperCase();
+  document.getElementById('wave').textContent = wave;
+  document.getElementById('kills').textContent = kills;
+  document.getElementById('survived').textContent = '0';
+
+  playSound('start'); // Sound hook
+
+  if (difficulty === 'hard') {
+    // Init Firebase for leaderboard
+    await initFirebaseLeaderboard();
+  }
+}
+
+// Game over
+async function gameOver() {
+  gameStarted = false;
+  const survived = Math.floor((Date.now() - startTime) / 1000);
+
+  document.getElementById('final-wave').textContent = wave - 1;
+  document.getElementById('final-kills').textContent = kills;
+  document.getElementById('final-survived').textContent = survived + 's';
+  document.getElementById('gameover').style.display = 'block';
+  document.getElementById('gameover-title').textContent = 'GAME OVER';
+
+  playSound('gameover'); // Sound hook
+
+  // Hard mode leaderboard
+  if (currentDifficulty === 'hard') {
+    const finalWaves = wave - 1;
+    const submitted = await submitScore('arena', finalWaves, 'hard');
+    if (submitted) {
+      const topScores = await getTopScores('arena', 10);
+      let lbHtml = '<h3>🏆 Arena Waves Leaderboard</h3>';
+      topScores.forEach(entry => {
+        const rowClass = entry.isMe ? 'lb-row me' : 'lb-row';
+        lbHtml += `<div class="${rowClass}">#${entry.rank} ${entry.username}: ${entry.score} waves</div>`;
+      });
+      document.getElementById('hard-leaderboard').innerHTML = lbHtml;
+      document.getElementById('hard-leaderboard').style.display = 'block';
+    }
+  }
+}
+
+// Sound placeholders (to be integrated with sound-system.js)
+function playSound(sound) {
+  // Will be overridden by sound-system.js if loaded
+  console.log(`Sound: ${sound}`);
+}
+
+// Firebase functions (from firebase-leaderboard.js - copied for standalone)
+let db = null, firebaseReady = false;
+async function initFirebaseLeaderboard() {
+  try {
+    const { initializeApp } = await import("https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js");
+    const { getFirestore, collection, addDoc, query, orderBy, limit, where, getDocs } = await import("https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js");
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyBLnHaXUJsxsimqH1o6KJ8TEEGqRQ0Wcak",
+      authDomain: "octoaim.firebaseapp.com",
+      projectId: "octoaim",
+      storageBucket: "octoaim.firebasestorage.app",
+      messagingSenderId: "629745818659",
+      appId: "1:629745818659:web:eb0f7be2f095dd0284a596"
+    };
+    
+    const app = initializeApp(firebaseConfig);
+    db = getFirestore(app);
+    
+    const userId = localStorage.getItem('aimtrainer_userid') || ('user_' + Math.random().toString(36).substr(2, 9));
+    localStorage.setItem('aimtrainer_userid', userId);
+    const username = localStorage.getItem('aimtrainer_username') || 'Player';
+    
+    firebaseReady = true;
+    return true;
+  } catch (e) {
+    console.error('Firebase error:', e);
+    return false;
+  }
+}
+
+async function submitScore(gameId, score, difficulty) {
+  if (!firebaseReady || difficulty !== 'hard') return false;
+  try {
+    const { collection, addDoc } = await import("https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js");
+    await addDoc(collection(db, 'leaderboard'), {
+      gameId, score: parseInt(score), userId: localStorage.getItem('aimtrainer_userid'),
+      username: localStorage.getItem('aimtrainer_username') || 'Player',
+      timestamp: Date.now()
+    });
+    return true;
+  } catch (e) {
+    console.error('Submit error:', e);
+    return false;
+  }
+}
+
+async function getTopScores(gameId, count = 10) {
+  if (!firebaseReady) return [];
+  try {
+    const { collection, query, orderBy, limit, where, getDocs } = await import("https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js");
+    const q = query(collection(db, 'leaderboard'), where('gameId', '==', gameId), orderBy('score', 'desc'), limit(count));
+    const snapshot = await getDocs(q);
+    const results = [];
+    let rank = 1;
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      results.push({ rank: rank++, username: data.username || 'Anonymous', score: data.score, isMe: data.userId === localStorage.getItem('aimtrainer_userid') });
+    });
+    return results;
+  } catch (e) {
+    console.error('Top scores error:', e);
+    return [];
+  }
+}
+
+init3D();
+update();
+</script>
+<script src="sound-system.js"></script>
+<script src="crosshair-system.js"></script>
+</body>
+</html>
